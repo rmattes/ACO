@@ -1,0 +1,88 @@
+inf_parent_no_folder#:#Objekt wurde direkt in die Gruppen verlinkt
+obj_link#:#Verlinkung
+link_desc#:#Hier k�nnen Objekte in Gruppen verlinkt werden
+link_selected#:#in bestimmte Gruppen verlinken
+link_all#:#in alle Gruppen verlinken
+link_type#:#Verlinkungsoptionen
+movedSuccessful#:#&nbsp;wurde erfolgreich von&nbsp;
+movedTo#:#&nbsp;nach&nbsp;
+moved#:#&nbsp;verschoben.
+group_folder_name_checkbox#:#Ordnerstruktur f&uuml;r Aufgabenverteilung
+group_folder_name#:#Ordnername
+folder_name#:#Ordnername
+folder_name_checkbox#:#Ordner in jeder Gruppe
+tab_link#:#Verlinkung
+save_link#:#Verlinken
+link_exercise#:#&Uuml;bung verlinken
+ref_id#:#Referenz-ID in der Datenbank
+save_groups#:#&Auml;nderungen speichern
+group_name#:#Gruppenname
+destination_title#:#neue Gruppe
+password#:#Passwort
+grp_reg_period#:#Anmelde-Zeitraum
+cal_start#:#Anfang
+cal_end#:#Ende
+grp_reg_limited#:#Zeitlich begrenzter Beitritt
+grp_reg_passwd_info_screen#:#&Ouml;ffentliche Gruppe
+grp_reg_direct_info_screen#:#Geschlossene Gruppe
+grp_registration_type#:#Typ
+userInGroupNotExistent#:#Benutzer existiert in gew&auml;hlter Gruppe nicht.
+userInGroupExistent#:#Benuter existiert in gew&uuml;nschter Gruppe bereits.
+groupNotExistent#:#Gruppe existiert nicht.
+tab_course_import#:#Excel-/XML-Kursimport
+tab_course_management#:#Gruppen verwalten
+tab_course_management_tbl#:#Kurse und Gruppen verwalten
+course_search#:#Kurs suchen
+course_edit#:#Kurs bearbeiten
+course_title#:#Kursname
+group_create#:#Gruppen erstellen
+group_create_title#:#Gruppen erstellen
+create_groups#:#Erstellen
+group_count#:#Anzahl der Gruppen
+members#:#Maximale Mitgliederanzahl
+group_title#:#bisherige Gruppe
+group_description#:#Raum und Uhrzeit
+group_tutor#:#Tutor
+group_max_members#:#Max. Mitglieder
+group_password#:#Gruppenpasswort
+grp_reg_passwd_info_screen#:# Gruppenbeitritt mit Passwort
+grp_reg_direct_info_screen#:# Direkter Gruppenbeitritt
+member_edit#:#Mitglieder verschieben
+move_member#:#Verschieben
+member_login#:#Benutzername
+member_description#:#Geben Sie hier den Benutzername des Benutzers sowie den Namen der Gruppe in die der Benutzer verschoben werden soll an.
+save_settings#:#Speichern
+name_input#:#Titel
+id_input#:#Kurs-ID
+back#:#Zurück
+form_title#:#Excel-/XML-Kursimport
+form_title_management#:#Kurs-Administration
+file_input#:#Excel-/XML-Datei Hochladen
+import_courses#:#Kurse Importieren
+error_xsd#:#XSD Validierung: <br>%s<br>Line: %s<br><br>
+error_ilias#:#ILIAS Validierung: <br>
+error_admin#:#Admin nicht gefunden: %s<br>
+error_ref_id#:#Ref-ID nicht gefunden: %s<br>
+error_obj_type#:#Falscher Objekttyp der Ref-ID: %s, %s<br>
+error_parent#:#Parent Ref-ID (hierarchy) nicht gefunden: %s<br>
+error_parent_ref#:#Parent Ref-ID (references) nicht gefunden: %s<br>
+error_timeframe#:#Aktivierungszeitfenster unvollständig bei Kurs: %s<br>
+error_inscription#:#Anmeldungszeitfenster unvollständig bei Kurs: %s<br>
+error_not_category#:#Objekt mit Ref-ID (hierarchy) ist nicht vom Typ "Kategorie": %s<br>
+error_container_ref#:#Objekt mit Ref-ID (references) ist nicht vom Typ "Container": %s<br>
+error_large_file#:#Die hochgeladene Datei ist ungewöhnlich gross. Bitte überprüfen Sie, ob sich nach den gefüllte Zeilen der Excel-Datei noch leere Zeilen befinden und löschen Sie diese gegebenfalls.
+import_succeeded#:#Kurse neu angelegt:<br>%s<br>Kurse aktualisiert:<br>%s<br>Kurs-Referenzen angelegt:<br>%s<br>Kurs-Referenzen gelöscht:<br>%s
+import_failed#:#Importieren der Kurse fehlgeschlagen. Die Validierung ergab folgende Fehlermeldungen:<br><br>
+creation_succeeded#:#Gruppen neu angelegt:<br>%s<br>
+creation_failed#:#Erstellen der Gruppen fehlgeschlagen, überprüfen Sie ihre Eingaben.
+obj_acop#:#AdminContainer Plugin
+obj_acop_desc#:#Hier können sie einfach Gruppen erstellen und bearbeiten.
+obj_extu_desc#:#Hier können sie Abgaben nach Gruppen und Übung filtern, sowie Punkte eintragen und Abgaben herunterladen.
+obj_extu#:#Abgaben und Noten
+exc_select_ass_grp#:#Gruppe und Übungseinheit anzeigen
+tab_tutor#:#Gruppenfilter
+obj_link#:#Objekt Verlinken
+obj_link_desc#:#Wählen sie die Gruppen in die das Objekt verlinkt werden soll.
+exc_no_submission_in_group#:#Keine Abgabe in Gruppe: 
+exc_save_all_and_total#:#Alle Speichern und Gesamtnote aktualisieren
+only_in#:#Benutzer existiert nur in Gruppe(n): 

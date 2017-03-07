@@ -1,0 +1,86 @@
+inf_parent_no_folder#:#Object was linked directly to the groups.
+obj_link#:#Link
+link_desc#:#Here it is possible to link several objects into groups
+link_selected#:#link in selected groups
+link_all#:#link in all groups
+link_type#:#link options
+movedSuccessful#:#&nbsp;was moved successfully from&nbsp;
+movedTo#:#&nbsp;to&nbsp;
+moved#:#&nbsp;.
+group_folder_name_checkbox#:#Folder structure for exercise distribution
+group_folder_name#:#Folder name
+tab_link#:#Link
+save_link#:#Link
+link_exercise#:#Link exercise
+ref_id#:#Reference-ID from the database
+save_groups#:#Save changes
+group_name#:#Group name
+destination_title#:#New group
+password#:#Password
+grp_reg_period#:#Self-Registration Period
+cal_start#:#Start
+cal_end#:#End
+grp_reg_limited#:#Limited Registration Period
+grp_reg_passwd_info_screen#:#Public Group
+grp_reg_direct_info_screen#:#Closed Group
+grp_registration_type#:#Group Type
+userInGroupNotExistent#:#User doesn't exist in selected group.
+userInGroupExistent#:#User already exists in the group you try to move the user.
+groupNotExistent#:#Group is not existing.
+tab_course_import#:#Excel-/XML-Course-Import
+tab_course_management#:#Manage groups
+tab_course_management_tbl#:#Manage courses and groups
+course_search#:#Search course
+course_edit#:#Edit course
+course_title#:#Course name
+group_create#:#Create groups
+group_create_title#:#Create groups
+create_groups#:#Create
+group_count#:#Number of groups
+members#:#Limited Number of Members
+group_title#:#Current group
+group_description#:#Room and time
+group_tutor#:#Tutor
+group_max_members#:#Limited Number of Members
+group_password#:#Group password
+grp_reg_passwd_info_screen#:#Join With Group Password
+grp_reg_direct_info_screen#:#Direct Registration
+member_edit#:#Move a group member
+move_member#:#Move
+member_login#:#Username
+member_description#:#Please enter the username of the user, as well as the group name of the group you want to move the user.
+save_settings#:#Save
+name_input#:#Title
+id_input#:#Course ID
+back#:#Back
+form_title#:#Excel-/XML-Course-Import
+form_title_management#:#Course administration
+file_input#:#Upload Excel-/XML-file
+import_courses#:#Import Courses
+error_xsd#:#XSD validation: <br>%s<br>Line: %s<br><br>
+error_ilias#:#ILIAS validation: <br>
+error_admin#:#Admin not found: %s<br>
+error_ref_id#:#Ref-ID not found: %s<br>
+error_obj_type#:#Wrong Object type of Ref-ID: %s, %s<br>
+error_parent#:#Parent Ref-ID (hierarchy) not found: %s<br>
+error_parent_ref#:#Parent Ref-ID (references) not found: %s<br>
+error_timeframe#:#Activation Timeframe is incomplete for course: %s<br>
+error_inscription#:#Inscription Timeframe is incomplete for course: %s<br>
+error_not_category#:#Object with Ref-ID (hierarchy) is not of type category: %s<br>
+error_container_ref#:#Object with Ref-ID (references) is not of type container: %s<br>
+error_large_file#:#The uploaded file is unusually big and cannot be read. Please check the excel sheet for empty rows after the filled rows and delete them.
+import_succeeded#:#Courses created:<br>%s<br>Courses updated:<br>%s<br>Course-references created:<br>%s<br>Course-references deleted:<br>%s
+import_failed#:#Course import failed. The validation exited with the following error messages:<br><br>
+creation_succeeded#:#Groups created successfully:<br>%s<br>
+creation_failed#:#Creating groups has failed. Please check your input.
+obj_acop#:#AdminContainer Plugin
+obj_acop_desc#:#Here you can easily create or modifiy groups.
+obj_extu_desc#:#Here you can filter for groups and assignments
+obj_extu#:#Submissions and Grades
+exc_select_ass_grp#:#Select Group and Assignment
+tab_tutor#:#Groupfilter
+obj_link#:#Link object
+obj_link_desc#:#Select groups you want to link the object.
+exc_no_submission_in_group#:#No submission in selected group: 
+exc_save_all_and_total#:#Save all and update Total Mark
+only_in#:#User only exists in group(s): 

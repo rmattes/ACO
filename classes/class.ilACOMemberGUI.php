@@ -1,6 +1,5 @@
 <?php
 require_once './Services/Form/classes/class.ilTextInputGUI.php';
-require_once './Services/Database/classes/class.ilDB.php';
 require_once './Services/Form/classes/class.ilPropertyFormGUI.php';
 
 define('IL_GRP_MEMBER',5);

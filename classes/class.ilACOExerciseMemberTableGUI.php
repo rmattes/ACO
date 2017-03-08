@@ -148,7 +148,7 @@ class ilACOExerciseMemberTableGUI extends ilExerciseMemberTableGUI {
 
         include_once "Services/Form/classes/class.ilPropertyFormGUI.php";
         include_once "Services/UIComponent/Overlay/classes/class.ilOverlayGUI.php";
-        $this->overlay_tpl = new ilTemplate("tpl.exc_learner_comment_overlay.html", true, true, "Modules/Exercise");
+        $this->overlay_tpl = new ilTemplate("tpl.exc_learner_comment_overlay.html", true, true, "Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/ACO");
      
     }
 

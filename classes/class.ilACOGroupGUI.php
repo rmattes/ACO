@@ -6,7 +6,6 @@ require_once './Modules/Group/classes/class.ilObjGroup.php';
 require_once './Services/Object/classes/class.ilObject2.php';
 require_once './Services/Form/classes/class.ilNumberInputGUI.php';
 require_once './Services/Form/classes/class.ilTextInputGUI.php';
-require_once './Services/Database/classes/class.ilDB.php';
 require_once './Services/Form/classes/class.ilRadioGroupInputGUI.php';
 require_once './Services/Form/classes/class.ilRadioOption.php';
 require_once './Services/Form/classes/class.ilDateTimeInputGUI.php';

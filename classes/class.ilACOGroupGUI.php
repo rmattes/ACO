@@ -199,6 +199,7 @@ class ilACOGroupGUI
 
         $this->group_folder_name_checkbox = new ilCheckboxInputGUI($this->pl->txt('group_folder_name_checkbox'),'group_folder_name_checkbox');
         $this->group_folder_name = new ilTextInputGUI($this->pl->txt("group_folder_name"),"group_folder_name");
+        $this->group_folder_name->setInfo($this->pl->txt("info_group_folder"));
         $this->group_folder_name_checkbox->addSubItem($this->group_folder_name);
         $form->addItem($this->group_folder_name_checkbox);
 
@@ -216,12 +217,26 @@ class ilACOGroupGUI
 
         include_once('./Services/Calendar/classes/class.ilDateTime.php');
 
-        $dt['year'] = (int) $_POST['reg'][$a_field]['date']['y'];
-        $dt['mon'] = (int) $_POST['reg'][$a_field]['date']['m'];
-        $dt['mday'] = (int) $_POST['reg'][$a_field]['date']['d'];
-        $dt['hours'] = (int) $_POST['reg'][$a_field]['time']['h'];
-        $dt['minutes'] = (int) $_POST['reg'][$a_field]['time']['m'];
-        $dt['seconds'] = (int) $_POST['reg'][$a_field]['time']['s'];
+        // #10206 / #10217
+        if(is_array($_POST[$a_field]['date']))
+        {
+            $dt['year'] = (int) $_POST[$a_field]['date']['y'];
+            $dt['mon'] = (int) $_POST[$a_field]['date']['m'];
+            $dt['mday'] = (int) $_POST[$a_field]['date']['d'];
+            $dt['hours'] = (int) $_POST[$a_field]['time']['h'];
+            $dt['minutes'] = (int) $_POST[$a_field]['time']['m'];
+            $dt['seconds'] = (int) $_POST[$a_field]['time']['s'];
+        }
+        else
+        {
+            $date = date_parse($_POST[$a_field]['date']." ".$_POST[$a_field]['time']);
+            $dt['year'] = (int) $date['year'];
+            $dt['mon'] = (int) $date['month'];
+            $dt['mday'] = (int) $date['day'];
+            $dt['hours'] = (int) $date['hour'];
+            $dt['minutes'] = (int) $date['minute'];
+            $dt['seconds'] = (int) $date['second'];
+        }
 
         $date = new ilDateTime($dt,IL_CAL_FKT_GETDATE,$ilUser->getTimeZone());
         return $date;
@@ -266,41 +281,49 @@ class ilACOGroupGUI
         $members = $this->members->getValue();
         $password = $this->pass->getValue();
         $reg_type = $this->reg_proc->getValue();
-        $folder_title = $this->group_folder_name->getValue();
+        $folder_title = explode(";", $this->group_folder_name->getValue());
 
-        if ($_POST['group_folder_name_checkbox'] AND !($this->folderAlreadyExistingCourse($folder_title))){
 
-            $courseFolder = new ilObjFolder();
-            $courseFolder->setTitle($folder_title);
-            $courseFolder->create();
-            $courseFolder->createReference();
-            $courseFolder->putInTree($_GET['ref_id']);
-            $courseFolder->setPermissions($_GET['ref_id']);
+
+        foreach ($folder_title as $forCourseFolderTitle){
+
+            if ($_POST['group_folder_name_checkbox'] AND !($this->folderAlreadyExistingCourse($forCourseFolderTitle))){
+
+                 $courseFolder = new ilObjFolder();
+                 $courseFolder->setTitle($forCourseFolderTitle);
+                 $courseFolder->create();
+                 $courseFolder->createReference();
+                 $courseFolder->putInTree($_GET['ref_id']);
+                 $courseFolder->setPermissions($_GET['ref_id']);
+
+            }
 
         }
 
         foreach ($this->groupsInCourse() as $groupsInCourse){
 
             //adminFolder is created in every existing group which hasn't had such a folder yet
-            if ($_POST['group_folder_name_checkbox'] AND
-                !($this->folderAlreadyExistingGroup($folder_title, $groupsInCourse['ref_id']))){
-                $oldGroupFolder = new ilObjFolder();
-                $oldGroupFolder->setTitle($folder_title);
-                $oldGroupFolder->create();
-                $oldGroupFolder->createReference();
-                $oldGroupFolder->putInTree($groupsInCourse['ref_id']);
-                $oldGroupFolder->setPermissions($groupsInCourse['ref_id']);
+            foreach ($folder_title as $forGroupFolderTitle) {
+
+                //var_dump($forGroupFolderTitle);
+
+                if ($_POST['group_folder_name_checkbox'] AND
+                        !($this->folderAlreadyExistingGroup($forGroupFolderTitle, $groupsInCourse['ref_id']))){
+
+                    $oldGroupFolder = new ilObjFolder();
+                    $oldGroupFolder->setTitle($forGroupFolderTitle);
+                    $oldGroupFolder->create();
+                    $oldGroupFolder->createReference();
+                    $oldGroupFolder->putInTree($groupsInCourse['ref_id']);
+                    $oldGroupFolder->setPermissions($groupsInCourse['ref_id']);
+                }
             }
 
         }
-
-        $folder_check = $this->group_folder_name_checkbox->getValue();
-        $folder_title = $this->group_folder_name->getValue();
-
        
         $parent_id = $_GET['ref_id']; 
         
-       $result = $this->countGroups($parent_id);
+        $result = $this->countGroups($parent_id);
         
         $nn = 1;
         
@@ -350,15 +373,19 @@ class ilACOGroupGUI
                     WHERE om.obj_id = '".$group->getId()."' AND om.usr_id = '".$userID."' ";
                  $ilDB->manipulate($query);
 
-                if ($_POST['group_folder_name_checkbox']){
 
-                    $groupFolder = new ilObjFolder();
-                    $groupFolder->setTitle($folder_title);
-                    $groupFolder->create();
-                    $groupFolder->createReference();
-                    $groupFolder->putInTree($group->getRefId());
-                    $groupFolder->setPermissions($group->getRefId());
 
+                foreach ($folder_title as $forGroupFolderTitle) {
+
+                    if ($_POST['group_folder_name_checkbox']){
+
+                        $groupFolder = new ilObjFolder();
+                        $groupFolder->setTitle($forGroupFolderTitle);
+                        $groupFolder->create();
+                        $groupFolder->createReference();
+                        $groupFolder->putInTree($group->getRefId());
+                        $groupFolder->setPermissions($group->getRefId());
+                    }
                 }
 
                 $this->courses['created'] .= ilObject2::_lookupTitle(ilObject2::_lookupObjId($_GET['ref_id'])) . ' - ' . $group->getTitle() . '<br>';
@@ -410,7 +437,8 @@ class ilACOGroupGUI
         }
 
         //if folder already exists in the course
-        if ($folderCourse[0]["count(*)"] != 0) {
+        if (strcmp($folderCourse[0]["COUNT(*)"], "0") !== 0) {
+            var_dump("IF");
             //ilUtil::sendFailure($this->pl->txt("folderAlreadyExistingCourse"), true);
             return true;
         } else {
@@ -436,7 +464,7 @@ class ilACOGroupGUI
 
 
         //if the folder already exists in a group
-        if ($folderGroup[0]["count(*)"] != 0) {
+        if (strcmp($folderGroup[0]["COUNT(*)"], "0") !== 0)  {
             //ilUtil::sendFailure($this->pl->txt("folderAlreadyExistingGroup"), true);
             return true;
         } else {

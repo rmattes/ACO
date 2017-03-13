@@ -1,3 +1,4 @@
+info_group_folder#:#Creation of several folders possible, e.g. folder1;folder2;folder3 etc.
 inf_parent_no_folder#:#Object was linked directly to the groups.
 obj_link#:#Link
 link_desc#:#Here it is possible to link several objects into groups

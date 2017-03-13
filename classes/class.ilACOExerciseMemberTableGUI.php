@@ -12,10 +12,17 @@ include_once("./Modules/Exercise/classes/class.ilExSubmission.php");
  * Time: 17:34
  *
  */
-class ilACOExerciseMemberTableGUI extends ilExerciseMemberTableGUI {
+class ilACOExerciseMemberTableGUI extends ilTable2GUI {
 
-
+    protected $exc;
+    protected $ass;
+    protected $exc_id;
+    protected $ass_id;
+    protected $sent_col;
+    protected $selected = array();
+    protected $teams = array();
     protected $group;
+
     function __construct($a_parent_obj, $a_parent_cmd, $a_exc, $a_ass,$group_id)
     {
         $this->group = $group_id;
@@ -33,7 +40,7 @@ class ilACOExerciseMemberTableGUI extends ilExerciseMemberTableGUI {
         $this->storage = new ilFSStorageExercise($this->exc_id, $this->ass_id);
         include_once("./Modules/Exercise/classes/class.ilExAssignment.php");
 
-        ilTable2GUI::__construct($a_parent_obj, $a_parent_cmd);
+        parent::__construct($a_parent_obj, $a_parent_cmd);
 
         $this->setTitle($lng->txt("exc_assignment").": ".$this->ass->getTitle());
         $this->setTopCommands(true);
@@ -127,7 +134,7 @@ class ilACOExerciseMemberTableGUI extends ilExerciseMemberTableGUI {
 
         $this->setEnableHeader(true);
         $this->setFormAction($ilCtrl->getFormAction($a_parent_obj));
-        $this->setRowTemplate("tpl.exc_members_row.html", "Modules/Exercise");
+        $this->setRowTemplate("tpl.exc_members_row.html", "Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/ACO");
         //$this->disable("footer");
         $this->setEnableTitle(true);
         $this->setSelectAllCheckbox("member");
@@ -152,12 +159,30 @@ class ilACOExerciseMemberTableGUI extends ilExerciseMemberTableGUI {
      
     }
 
+    function getSelectableColumns()
+    {
+        $columns = array();
+
+        $columns["image"] = array(
+            "txt" => $this->lng->txt("image"),
+            "default" => true
+        );
+
+        $columns["login"] = array(
+            "txt" => $this->lng->txt("login"),
+            "default" => true
+        );
+
+        return $columns;
+    }
+
     protected function fillRow($member)
     {
         if($this->isGroupMember($member,$this->group)){
             global $lng, $ilCtrl;
 
             $ilCtrl->setParameter($this->parent_obj, "ass_id", $this->ass_id);
+            $ilCtrl->setParameter($this->parent_obj, "grp_id", $this->group);
             $ilCtrl->setParameter($this->parent_obj, "member_id", $member["usr_id"]);
 
             include_once "./Services/Object/classes/class.ilObjectFactory.php";
@@ -461,6 +486,7 @@ class ilACOExerciseMemberTableGUI extends ilExerciseMemberTableGUI {
             }
 
             $ilCtrl->setParameter($this->parent_obj, "ass_id", $this->ass_id); // #17140
+            $ilCtrl->setParameter($this->parent_obj, "grp_id", $this->group);
             $ilCtrl->setParameter($this->parent_obj, "member_id", "");
         }
     }
@@ -485,6 +511,17 @@ class ilACOExerciseMemberTableGUI extends ilExerciseMemberTableGUI {
         return true;
 
         }
+
+    public function render()
+    {
+        global $ilCtrl;
+
+        $url = $ilCtrl->getLinkTarget($this->getParentObject(), "saveCommentForLearners", "", true, false);
+        $this->overlay_tpl->setVariable("AJAX_URL", $url);
+
+        return parent::render().
+            $this->overlay_tpl->get();
+    }
 
 
 }

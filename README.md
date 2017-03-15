@@ -3,12 +3,12 @@ ACO
 
 ACO Plugin, entwickelt durch Studenten des StuPro IZIAS an der Uni Stuttgart. Das Plugin unterliegt der GNU/GPL. 
 
-**HINWEIS**: Dieses Plugin wird open source der ILIAS Community zur Verüfgung gestellt. Bei Fragen senden Sie uns eine E-Mail.
+**HINWEIS**: Dieses Plugin wird open source der ILIAS Community zur VerÃ¼fgung gestellt. Bei Fragen senden Sie uns eine E-Mail.
 
 ###Beschreibung
-Das ACO Plugin ist ein UIHook Plugin für die E-Learning Plattform ILIAS. Es ermöglicht das einfache erstellen und verwalten einer Gruppenstruktur mit Hilfe zusätzlicher Tabs (Gruppen verwalten, Gruppen erstellen, Mitglieder verschieben), sowie ein vereinfachtes Eintragen der Punkte für Abgaben, in dem sich Abgaben nach Gruppen filtern lassen.
+Das ACO Plugin ist ein UIHook Plugin fÃ¼r die E-Learning Plattform ILIAS. Es ermÃ¶glicht das einfache erstellen und verwalten einer Gruppenstruktur mit Hilfe zusÃ¤tzlicher Tabs (Gruppen verwalten, Gruppen erstellen, Mitglieder verschieben), sowie ein vereinfachtes Eintragen der Punkte fÃ¼r Abgaben, in dem sich Abgaben nach Gruppen filtern lassen.
 
-Zudem lassen sich Excercises und Tests ebenfalls mit einem neuen Tab einfacher verlinken. Die vorgesehen Kursstruktur enthält dabei einen Admin Folder, über den sich die einzelnen Inhalte für die Gruppen verlinken lassen. 
+Zudem lassen sich Excercises und Tests ebenfalls mit einem neuen Tab einfacher verlinken. Die vorgesehen Kursstruktur enthÃ¤lt dabei einen Admin Folder, Ã¼ber den sich die einzelnen Inhalte fÃ¼r die Gruppen verlinken lassen. 
 
 ###Documentation
 
@@ -34,12 +34,15 @@ innerhalb von Kursen/inside of courses
 #Mitglieder verschieben/Move a group member tab
 
 ##Verlinkung/Link tab
-innerhalb von �bungen und Tests /inside of excercises and tests
+innerhalb von Übungen und Tests /inside of excercises and tests
 
 ##Gruppenfilter/groupfilter tab
-innerhalb von �bungen/inside of excercises
+innerhalb von Übungen/inside of excercises
  
 
 
 ###Contact
+
+
+
 

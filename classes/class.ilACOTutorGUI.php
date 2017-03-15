@@ -13,6 +13,11 @@ include_once("./Services/Form/classes/class.ilSelectInputGUI.php");
  * Time: 12:06
  * @ilCtrl_IsCalledBy ilACOTutorGUI: ilUIPluginRouterGUI
  * @ilCtrl_Calls      ilACOTutorGUI: ilObjExerciseGUI, ilExSubmissionFileGUI, ilFileSystemGUI, ilRepositorySearchGUI
+ * 
+ * This class implements the functionality of the groupfilter/tutor tab in the excercises.
+ * The main use of this class is that you can filter the user submissions by groups
+ * if the excercise is linked into the groups
+ * 
  */
 
 class ilACOTutorGUI {

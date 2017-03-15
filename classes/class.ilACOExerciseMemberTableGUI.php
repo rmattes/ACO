@@ -11,6 +11,9 @@ include_once("./Modules/Exercise/classes/class.ilExSubmission.php");
  * Date: 15.02.2016
  * Time: 17:34
  *
+ * This class implements the functionality of the table of the groupfilter tab 
+ * in excerxises.
+ * 
  */
 class ilACOExerciseMemberTableGUI extends ilTable2GUI {
 

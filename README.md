@@ -22,5 +22,24 @@ git clone https://github.com/Ilias-fmi/ACO.git
 ```
 Als ILIAS Administrator, installieren und aktivieren Sie das Plugin unter "Administration->Plugins".
 
+###Functionality
+
+##Gruppen verwalten/Manage groups tab 
+innerhalb von Kursen/inside of courses
+
+#Gruppen erstellen/Create groups tab
+
+#Kurs bearbeiten/Edit course tab
+
+#Mitglieder verschieben/Move a group member tab
+
+##Verlinkung/Link tab
+innerhalb von Übungen und Tests /inside of excercises and tests
+
+##Gruppenfilter/groupfilter tab
+innerhalb von Übungen/inside of excercises
+ 
+
+
 ###Contact
 

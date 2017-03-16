@@ -15,7 +15,7 @@ require_once './Services/Form/classes/class.ilDateTimeInputGUI.php';
  * Date: 06.02.2017
  * Time: 14:16
  * @ilCtrl_IsCalledBy ilACOLinkGUI: ilUIPluginRouterGUI
- * @ilCtrl_Calls      ilACOLinkGUI: ilExerciseHandlerGUI, ilRepositoryGUI, ilObjTestGUI
+ * @ilCtrl_Calls      ilACOLinkGUI: ilExerciseHandlerGUI, ilRepositoryGUI, ilObjTest, ilObjExercise
  * 
  * This class implements the functionality of the link tab in the tests or excercises.
  * That means you can link these elements from the course into groups in the course.
@@ -69,38 +69,13 @@ class ilACOLinkGUI{
         global $ilLocator, $tpl;
 
         $this->ctrl->setParameterByClass('ilexercisehandlergui', 'ref_id', $_GET['ref_id']);
-        $this->ctrl->setParameterByClass('ilobjtestgui', 'ref_id', $_GET['ref_id']);
         $this->ctrl->setParameterByClass('ilacolinkgui', 'ref_id', $_GET['ref_id']);
 
         $this->tabs->addTab('link', $this->pl->txt('tab_link'), $this->ctrl->getLinkTargetByClass(array('ilUIPluginRouterGUI', 'ilACOLinkGUI')));
 
         $this->ctrl->getRedirectSource();
 
-        if (ilObject::_lookupType($_GET['ref_id'], true) == 'tst'){
-
-            $this->tabs->setBackTarget($this->pl->txt('back'), $this->ctrl->getLinkTargetByClass(array(
-                'ilrepositorygui',
-                'ilObjTestGUI',
-            )));
-
-            $this->object = ilObjectFactory::getInstanceByRefId($_GET['ref_id']);
-            $ilLocator->addRepositoryItems($_GET['ref_id']);
-            $ilLocator->addItem($this->object->getTitle(),
-                $this->ctrl->getLinkTargetByClass(array('ilrepositorygui','ilObjTestGUI')), "", $_GET["ref_id"]);
-
-        } else {
-
-            $this->tabs->setBackTarget($this->pl->txt('back'), $this->ctrl->getLinkTargetByClass(array(
-                'ilrepositorygui',
-                'ilExerciseHandlerGUI',
-            )));
-
-            $this->object = ilObjectFactory::getInstanceByRefId($_GET['ref_id']);
-            $ilLocator->addRepositoryItems($_GET['ref_id']);
-            $ilLocator->addItem($this->object->getTitle(),
-                $this->ctrl->getLinkTargetByClass(array('ilrepositorygui','ilExerciseHandlerGUI')), "", $_GET["ref_id"]);
-
-        }
+        $ilLocator->addContextItems($_GET['ref_id']);
         $this->setTitleAndIcon();
 
 

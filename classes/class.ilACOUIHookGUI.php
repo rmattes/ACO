@@ -3,7 +3,11 @@ include_once("./Services/UIComponent/classes/class.ilUIHookPluginGUI.php");
 /**
  * Class ilACOUIHookGUI
  *
- * @author  Theodor Truffer <tt@studer-raimann.ch>
+ * This class implements the visability of every tab in our plugin and
+ * that they are only visible authorized users, eg. tutor or course admins.
+ * 
+ * The structur is inspirated by the UIHookGUI class of the courseimport Plugin
+ * form studer&raiman (@author Theodor Truffer)
  */
 class ilACOUIHookGUI extends ilUIHookPluginGUI
 {

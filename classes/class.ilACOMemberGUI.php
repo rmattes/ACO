@@ -1,6 +1,5 @@
 <?php
 require_once './Services/Form/classes/class.ilTextInputGUI.php';
-require_once './Services/Database/classes/class.ilDB.php';
 require_once './Services/Form/classes/class.ilPropertyFormGUI.php';
 
 define('IL_GRP_MEMBER',5);
@@ -149,15 +148,49 @@ class ilACOMemberGUI {
         $ajax_url = $ilCtrl->getLinkTargetByClass(array(get_class($this),'ilRepositorySearchGUI'),
             'doUserAutoComplete', '', true,false);
 
-        include_once("./Services/Form/classes/class.ilTextInputGUI.php");
         $this->userLogin = new ilTextInputGUI($a_options['auto_complete_name'], 'user_login');
         $this->userLogin->setDataSource($ajax_url);
 
+        //$this->groupTitle = new ilSelectInputGUI($this->pl->txt('group_title'), 'group_title');
+        //$this->groupTitle->setOptions($this->getGroups());
+
+        //$this->destinationTitle = new ilSelectInputGUI($this->pl->txt('destination_title'), 'destination_title');
+        //$this->destinationTitle->setOptions($this->getGroups());
+
+        $this->userLogin->setRequired(true);
+        //$this->groupTitle->setRequired(true);
+        //$this->destinationTitle->setRequired(true);
+
+        $form->addItem($this->userLogin);
+        //$form->addItem($this->groupTitle);
+        //$form->addItem($this->destinationTitle);
+        $form->addCommandButton(selectMember, $this->pl->txt(select_member));
+        //$form->addCommandButton('moveMember', $this->pl->txt('move_member'));
+
+        return $form;
+    }
+
+    protected function selectMember(){
+        global $lng, $ilCtrl;
+        $form = new ilPropertyFormGUI();
+        $form->setTitle($this->pl->txt('member_edit'));
+        $form->setDescription($this->pl->txt('member_description'));
+        $form->setId('member_edit');
+        $form->setFormAction($this->ctrl->getFormAction($this));
+
+
+        //var_dump($_POST['user_login']);
+
+        $this->userLogin = new ilTextInputGUI($this->pl->txt('user_login'), 'user_login');
+        $this->userLogin->setValue($_POST["user_login"]);
+        $this->userLogin->setDisabled(true);
+
         $this->groupTitle = new ilSelectInputGUI($this->pl->txt('group_title'), 'group_title');
-        $this->groupTitle->setOptions($this->getGroups());
+        $this->groupTitle->setOptions($this->getGroupsWhereMember($this->getMemberIdByLogin($_POST["user_login"])));
+        //var_dump($this->groupTitle);
 
         $this->destinationTitle = new ilSelectInputGUI($this->pl->txt('destination_title'), 'destination_title');
-        $this->destinationTitle->setOptions($this->getGroups());
+        $this->destinationTitle->setOptions($this->getGroupsWhereNotMember($this->getMemberIdByLogin($_POST["user_login"])));
 
         $this->userLogin->setRequired(true);
         $this->groupTitle->setRequired(true);
@@ -166,7 +199,11 @@ class ilACOMemberGUI {
         $form->addItem($this->userLogin);
         $form->addItem($this->groupTitle);
         $form->addItem($this->destinationTitle);
+        //$form->addCommandButton(selectMember, $this->pl->txt(select_member));
         $form->addCommandButton('moveMember', $this->pl->txt('move_member'));
+
+        $form->setValuesByPost();
+        $this->tpl->setContent($form->getHTML());
 
         return $form;
     }
@@ -200,26 +237,30 @@ class ilACOMemberGUI {
     }
 
     protected function moveMember(){
-        $form = $this->initForm();
+        $form = $this->selectMember();
         $form->setValuesByPost();
 
         $member_login = $this->userLogin->getValue();
-        $options = $this->groupTitle->getOptions();
-        $this->group_title = $options[$this->groupTitle->getValue()];
-        $this->destination_title = $options[$this->destinationTitle->getValue()];
+        $optionsGroupTitle = $this->groupTitle->getOptions();
+        $optionsDestinationTitle = $this->destinationTitle->getOptions();
+
+        $this->group_title = $optionsGroupTitle[$this->groupTitle->getValue()];
+        $this->destination_title = $optionsDestinationTitle[$this->destinationTitle->getValue()];
 
         $member_id = $this->getMemberIdByLogin($member_login);
         $group_id = $this->getGroupIdByTitle($this->group_title,$this->course_id);
         $destination_id = $this->getGroupIdByTitle($this->destination_title,$this->course_id);
 
-        $ref = $destination_id[0];
-        $ref2 = $group_id[0];
-
-        $description_dest = "Groupmember of group obj_no." . $ref["obj_id"];
-        $description_source = "Groupmember of group obj_no." . $ref2["obj_id"];
+        $description_dest = "Groupmember of group obj_no." . $destination_id[0]["obj_id"];
+        $description_source = "Groupmember of group obj_no." . $group_id[0]["obj_id"];
 
         $role_id_dest = $this->getRoleID($description_dest);
         $role_id_source = $this->getRoleID($description_source);
+
+        $group_id = $group_id[0]["obj_id"];
+        $destination_id = $destination_id[0]["obj_id"];
+        $role_id_source = $role_id_source[0]["obj_id"];
+        $role_id_dest = $role_id_dest[0]["obj_id"];
 
         //Ueberpruefung der Daten auf Korrektheit vor DB-Zugriff
         //$this->checkIfGroupExists($group_id[0]);                       //alte Gruppe vorhanden
@@ -227,11 +268,11 @@ class ilACOMemberGUI {
         //$this->checkIfUserExistsInGroup($member_id[0], $group_id[0]);             //User in alter Gruppe vorhanden
         //$this->checkIfUserNotExistsInGroup($member_id[0], $destination_id[0]);    //User in neuer Gruppe vorhanden
 
-        if (($this->checkIfGroupExists($group_id[0])) and ($this->checkIfGroupExists($destination_id[0])) and
-            ($this->checkIfUserExistsInGroup($member_id[0], $group_id[0])) and
-            ($this->checkIfUserNotExistsInGroup($member_id[0], $destination_id[0]))) {
+        if (($this->checkIfGroupExists($group_id)) and ($this->checkIfGroupExists($destination_id)) and
+            ($this->checkIfUserExistsInGroup($member_id, $group_id)) and
+            ($this->checkIfUserNotExistsInGroup($member_id, $destination_id))) {
 
-            $this->manipulateDB($member_id[0],$role_id_source[0],$destination_id[0],$role_id_dest[0],$group_id[0]);
+            $this->manipulateDB($member_id,$role_id_source,$destination_id,$role_id_dest,$group_id);
 
         }
 
@@ -246,6 +287,7 @@ class ilACOMemberGUI {
         while ($record = $ilDB->fetchAssoc($result)){
             array_push($role_id,$record);
         }
+
         return $role_id;
     }
     protected function manipulateDB($member_id,$role_id_source,$destination_id,$role_id_dest,$source_id){
@@ -253,18 +295,18 @@ class ilACOMemberGUI {
 
         //insert in RBAC
         $query = "INSERT INTO rbac_ua (usr_id, rol_id) ".
-            "VALUES (".$member_id['usr_id'].",".$role_id_dest['obj_id'].")";
+            "VALUES (".$member_id.",".$role_id_dest.")";
         $res = $ilDB->manipulate($query);
 
         //delete OLD from RBAC
         $query = "DELETE FROM rbac_ua 
-            WHERE usr_id = ".$member_id['usr_id']."
-            AND rol_id = ".$role_id_source['obj_id']." ";
+            WHERE usr_id = ".$member_id."
+            AND rol_id = ".$role_id_source." ";
         $res = $ilDB->manipulate($query);
 
         $query = "UPDATE ilias.obj_members as om
-        SET om.obj_id = '".$destination_id['obj_id']."' WHERE om.usr_id = '".$member_id['usr_id']."' AND om.obj_id = '"
-            .$source_id['obj_id']."' AND om.member = 1";
+        SET om.obj_id = '".$destination_id."' WHERE om.usr_id = '".$member_id."' AND om.obj_id = '"
+            .$source_id."' AND om.member = 1";
         $ilDB->manipulate($query);
 
 
@@ -299,7 +341,7 @@ class ilACOMemberGUI {
             array_push($member_id,$record);
         }
 
-        return $member_id;
+        return $member_id[0]["usr_id"];
 
     }
 
@@ -312,15 +354,17 @@ class ilACOMemberGUI {
         $query = "SELECT COUNT(*) FROM ilias.object_data as od 
                   join ilias.object_reference as obr on obr.obj_id = od.obj_id 
                   join ilias.obj_members as om on obr.obj_id = om.obj_id
-                  WHERE obr.deleted is null and od.obj_id = '".$group_id["obj_id"]."' and om.usr_id = '".$member_id["usr_id"]."'";
+                  WHERE obr.deleted is null and od.obj_id = '".$group_id."' and om.usr_id = '".$member_id."'";
 
         $result = $ilDB->query($query);
         while ($record = $ilDB->fetchAssoc($result)){
             array_push($queryResult,$record);
         }
 
-        if($queryResult[0]["count(*)"] != 1) {
-            var_dump($this->getGroupsWhereMember($member_id["usr_id"]));
+
+        if (strcmp($queryResult[0]["COUNT(*)"], "1") !== 0){
+        //if($queryResult[0]["count(*)"] != 1) {
+            //var_dump($this->getGroupsWhereMember($member_id["usr_id"]));
             ilUtil::sendFailure($this->pl->txt("userInGroupNotExistent").' '.$this->pl->txt("only_in").' '.implode(' - ',$this->getGroupsWhereMember($member_id["usr_id"])), true);
             return false;
         } else {
@@ -334,19 +378,18 @@ class ilACOMemberGUI {
 
         $queryResult = array();
 
-        //var_dump($member_id);
-
         $query = "SELECT COUNT(*) FROM ilias.object_data as od 
                   join ilias.object_reference as obr on obr.obj_id = od.obj_id 
                   join ilias.obj_members as om on obr.obj_id = om.obj_id
-                  WHERE obr.deleted is null and od.obj_id = '".$group_id["obj_id"]."' and om.usr_id = '".$member_id["usr_id"]."'";
+                  WHERE obr.deleted is null and od.obj_id = '".$group_id."' and om.usr_id = '".$member_id."'";
 
         $result = $ilDB->query($query);
         while ($record = $ilDB->fetchAssoc($result)){
             array_push($queryResult,$record);
         }
 
-        if($queryResult[0]["count(*)"] == 1) {
+        if (strcmp($queryResult[0]["COUNT(*)"], "1") == 0){
+        //if($queryResult[0]["count(*)"] == 1) {
             ilUtil::sendFailure($this->pl->txt("userInGroupExistent"), true);
             return false;
         } else {
@@ -362,11 +405,12 @@ class ilACOMemberGUI {
 
         $queryResult = array();
 
+        //var_dump("ifGroupExists");
         //var_dump($group_id);
 
         $query = "SELECT COUNT(*) FROM ilias.object_data as od 
                   join ilias.object_reference as obr on obr.obj_id = od.obj_id 
-                  WHERE obr.deleted is null and od.obj_id = '".$group_id["obj_id"]."'";
+                  WHERE obr.deleted is null and od.obj_id = '".$group_id."'";
 
         $result = $ilDB->query($query);
         while ($record = $ilDB->fetchAssoc($result)){
@@ -375,10 +419,13 @@ class ilACOMemberGUI {
 
         //var_dump($queryResult);
 
-        if($queryResult[0]["count(*)"] != 1) {
+        if (strcmp($queryResult[0]["COUNT(*)"], "1") !== 0){
+        //if($queryResult[0]["count(*)"] != 1) {
             ilUtil::sendFailure($this->pl->txt("groupNotExistent"), true);
+            //var_dump("false");
             return false;
         } else {
+            //var_dump("true");
             return true;
         }
     }
@@ -391,8 +438,8 @@ class ilACOMemberGUI {
         $query = "select od.title as 'title'
                     from ilias.object_data as od
                     join ilias.object_reference as oref on oref.obj_id = od.obj_id
-                    join ilias.crs_items citem on citem.obj_id = oref.ref_id
-                    where oref.deleted is null and od.`type`='grp' and citem.parent_id = '".$_GET['ref_id']."'";
+                    join ilias.tree tree on tree.child = oref.ref_id
+                    where oref.deleted is null and od.`type`='grp' and tree.parent = '".$_GET['ref_id']."'";
         $result = $ilDB->query($query);
         while ($record = $ilDB->fetchAssoc($result)){
             array_push($data,$record);
@@ -413,6 +460,8 @@ class ilACOMemberGUI {
 
         global $ilDB;
 
+        //var_dump($usr_id);
+
         $data = array();
         $query = "select od.title as 'title'
                     from ilias.object_data as od
@@ -420,8 +469,8 @@ class ilACOMemberGUI {
                     join ilias.crs_items citem on citem.obj_id = oref.ref_id
                     join ilias.obj_members as om on om.obj_id = oref.obj_id
                     join ilias.usr_data as ud on ud.usr_id = om.usr_id
-                    where oref.deleted is null and od.`type`='grp' and citem.parent_id = '".$_GET['ref_id'].
-                        "' and om.usr_id='".$usr_id."'";
+                    where oref.deleted is null and od.`type`='grp' and 
+                      citem.parent_id = '".$_GET['ref_id']."' and om.usr_id='".$usr_id."'";
         $result = $ilDB->query($query);
         while ($record = $ilDB->fetchAssoc($result)){
             array_push($data,$record);
@@ -435,6 +484,70 @@ class ilACOMemberGUI {
 
         }
 
+        return $output;
+
+    }
+
+    protected  function getGroupsWhereNotMember($usr_id){
+
+        global $ilDB;
+
+        //var_dump($usr_id);
+
+        $data1 = array();
+        $query1 = "select od.obj_id as 'obj_id'
+                    from ilias.object_data as od
+                    join ilias.object_reference as oref on oref.obj_id = od.obj_id
+                    join ilias.crs_items citem on citem.obj_id = oref.ref_id
+                    join ilias.obj_members as om on om.obj_id = oref.obj_id
+                    join ilias.usr_data as ud on ud.usr_id = om.usr_id
+                    where oref.deleted is null and od.`type`='grp' and 
+                      citem.parent_id = '".$_GET['ref_id']."' and om.usr_id='".$usr_id."'";
+        $result1 = $ilDB->query($query1);
+        while ($record1 = $ilDB->fetchAssoc($result1)){
+            array_push($data1,$record1);
+        }
+
+        $groupsIDWhereMemberTMP = array();
+
+        foreach ($data1 as $result1){
+
+            array_push($groupsIDWhereMemberTMP, $result1['obj_id']);
+
+        }
+
+        $groupsIDWhereMember = "'" .implode("','", $groupsIDWhereMemberTMP  ) . "'";
+
+        //var_dump("groupsIDWhereMember".$groupsIDWhereMember);
+
+        $data = array();
+
+        $query = "select distinct od.title as 'title'
+                    from ilias.object_data as od
+                    join ilias.object_reference as oref on oref.obj_id = od.obj_id
+                    join ilias.crs_items citem on citem.obj_id = oref.ref_id
+                    join ilias.obj_members as om on om.obj_id = oref.obj_id
+                    join ilias.usr_data as ud on ud.usr_id = om.usr_id
+                    where oref.deleted is null and od.`type`='grp' and 
+                      citem.parent_id = '".$_GET['ref_id']."' and om.obj_id not in (".$groupsIDWhereMember.")";
+        $result = $ilDB->query($query);
+
+        //var_dump($data);
+
+        while ($record = $ilDB->fetchAssoc($result)){
+            array_push($data,$record);
+        }
+
+        $output = array();
+
+        foreach ($data as $result){
+
+            array_push($output, $result['title']);
+
+        }
+
+
+        //var_dump($output);
         return $output;
 
     }

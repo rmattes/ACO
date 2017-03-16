@@ -6,7 +6,6 @@ require_once './Modules/Group/classes/class.ilObjGroup.php';
 require_once './Services/Object/classes/class.ilObject2.php';
 require_once './Services/Form/classes/class.ilNumberInputGUI.php';
 require_once './Services/Form/classes/class.ilTextInputGUI.php';
-require_once './Services/Database/classes/class.ilDB.php';
 require_once './Services/Form/classes/class.ilRadioGroupInputGUI.php';
 require_once './Services/Form/classes/class.ilRadioOption.php';
 require_once './Services/Form/classes/class.ilDateTimeInputGUI.php';
@@ -16,7 +15,12 @@ require_once './Services/Form/classes/class.ilDateTimeInputGUI.php';
  * Date: 06.02.2017
  * Time: 14:16
  * @ilCtrl_IsCalledBy ilACOLinkGUI: ilUIPluginRouterGUI
- * @ilCtrl_Calls      ilACOLinkGUI: ilExerciseHandlerGUI, ilRepositoryGUI, ilObjTestGUI
+ * @ilCtrl_Calls      ilACOLinkGUI: ilExerciseHandlerGUI, ilRepositoryGUI, ilObjTest, ilObjExercise
+ * 
+ * This class implements the functionality of the link tab in the tests or excercises.
+ * That means you can link these elements from the course into groups in the course.
+ * It includes a check if the elements are already and avoid thereby double links.
+ * 
  */
 
 class ilACOLinkGUI{
@@ -65,38 +69,13 @@ class ilACOLinkGUI{
         global $ilLocator, $tpl;
 
         $this->ctrl->setParameterByClass('ilexercisehandlergui', 'ref_id', $_GET['ref_id']);
-        $this->ctrl->setParameterByClass('ilobjtestgui', 'ref_id', $_GET['ref_id']);
         $this->ctrl->setParameterByClass('ilacolinkgui', 'ref_id', $_GET['ref_id']);
 
         $this->tabs->addTab('link', $this->pl->txt('tab_link'), $this->ctrl->getLinkTargetByClass(array('ilUIPluginRouterGUI', 'ilACOLinkGUI')));
 
         $this->ctrl->getRedirectSource();
 
-        if (ilObject::_lookupType($_GET['ref_id'], true) == 'tst'){
-
-            $this->tabs->setBackTarget($this->pl->txt('back'), $this->ctrl->getLinkTargetByClass(array(
-                'ilrepositorygui',
-                'ilObjTestGUI',
-            )));
-
-            $this->object = ilObjectFactory::getInstanceByRefId($_GET['ref_id']);
-            $ilLocator->addRepositoryItems($_GET['ref_id']);
-            $ilLocator->addItem($this->object->getTitle(),
-                $this->ctrl->getLinkTargetByClass(array('ilrepositorygui','ilObjTestGUI')), "", $_GET["ref_id"]);
-
-        } else {
-
-            $this->tabs->setBackTarget($this->pl->txt('back'), $this->ctrl->getLinkTargetByClass(array(
-                'ilrepositorygui',
-                'ilExerciseHandlerGUI',
-            )));
-
-            $this->object = ilObjectFactory::getInstanceByRefId($_GET['ref_id']);
-            $ilLocator->addRepositoryItems($_GET['ref_id']);
-            $ilLocator->addItem($this->object->getTitle(),
-                $this->ctrl->getLinkTargetByClass(array('ilrepositorygui','ilExerciseHandlerGUI')), "", $_GET["ref_id"]);
-
-        }
+        $ilLocator->addContextItems($_GET['ref_id']);
         $this->setTitleAndIcon();
 
 
@@ -312,21 +291,35 @@ class ilACOLinkGUI{
 
             foreach($group_admin_folder_ids as $folder_ref_id)
             {
+                
                 $linked_to_folders[] = $ilObjDataCache->lookupTitle($ilObjDataCache->lookupObjId($folder_ref_id[0]));
 
-                             
+               
+                
+                                          
                 //get Ref_id of Excercise or Test you want to link
                 $ref_id = $_GET['ref_id'];
-         
-                //bin mir ehrlich gesagt nicht sicher ob folder_ref_id die ref_id der Gruppen ist in die gelinked wird
-                //jedenfalls funktioniert das ganze noch nicht so richtig
+    
+                //get obj_id of the excercise or Test we want to link
+                $obj_id[] = $ilObjDataCache->lookupObjId($ref_id);
+                    
                 
-                $objId = $this->getObjIdFromLinkedObject($ref_id);
-                $isAlreadyLinked = $this->isAlreadyLinked($folder_ref_id, $objId);
-                               
-         //       if( $isAlreadyLinked == true){
-           //         break;
-            //    }
+                $isAlreadyLinked = $this->isAlreadyLinked($folder_ref_id[0], $obj_id[0]);
+                    
+                var_dump($isAlreadyLinked);
+                
+                //checks for each group if the object is already linked
+                //if this is the case we send a Failure to the user and we 
+                //continue with the next selected group 
+                
+                if( $isAlreadyLinked == true){
+                 
+               ilUtil::sendFailure(sprintf($this->pl->txt('some_folders_already_linked'), implode(', ', $linked_to_folders)), true);     
+                    
+                  continue;
+                                
+                 }
+              
 
                     // get node data
                     $top_node = $tree->getNodeData($ref_id);
@@ -363,8 +356,8 @@ class ilACOLinkGUI{
                 $log->write(__METHOD__.', link finished');
 
 
-            ilUtil::sendSuccess(sprintf($this->lng->txt('mgs_objects_linked_to_the_following_folders'), implode(', ', $linked_to_folders)), true);
-        } // END LINK
+            ilUtil::sendSuccess(sprintf($this->pl->txt('mgs_objects_linked_to_the_following_folders'), implode(', ', $linked_to_folders)), true);
+            } // END LINK
     }
 
 
@@ -410,45 +403,32 @@ class ilACOLinkGUI{
 
     }
     
-    protected function getObjIdFromLinkedObject($ref_id){
+    
+     protected function isAlreadyLinked($folder_ref_id, $obj_id){
         global $ilDB;
-
-        $data = array();
+           
+           $data = array();
         
-        $query = "select  obj_id
-        from ilias.object_reference
-        where  ref_id = '".$ref_id."' ";
+        $query = "select oref.obj_id
+                  from ilias.tree as tr
+                  join ilias.object_reference as oref on oref.ref_id = tr.child
+                  where tr.parent = '".$folder_ref_id."'
+                  and oref.obj_id = '".$obj_id."'
+                  and oref.deleted is null";
         
         $result = $ilDB->query($query);
+                  
         while ($record = $ilDB->fetchAssoc($result)){
             array_push($data,$record);
         }
-        return $data;
         
-        
-        
-    }
-
-     protected function isAlreadyLinked($folder_ref_id, $objId){
-        global $ilDB;
-
-        $data = array();
-        
-        $query = "select obj_id 
-        from ilias.object_reference
-        where  ref_id = '".$ref_id."' 
-        and    obj_id = '".$folder_ref_id."' 
-        and deleted is null";
-        
-        $result = $ilDB->query($query);
-        while ($record = $ilDB->fetchAssoc($result)){
-            array_push($data,$record);
-        }
+       // var_dump($data);
         if(empty($data)){
-            return true;
+            return false;
         }
-        return false;
-        
+        else{
+        return true;
+        }
         
     }
     

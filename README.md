@@ -52,7 +52,7 @@ Hiermit lassen lassen sich in Übungen Abgaben nach Gruppen gefiltert anzeigen u
 
 Manuel Mergel  merglml@studi.informatik.uni-stuttgart.de 
     
-Kai Durst
+Kai Durst durstrl@studi.informatik.uni-stuttgart.de
     
 Philipp Gruber gruberpp@studi.informatik.uni-stuttgart.de
 

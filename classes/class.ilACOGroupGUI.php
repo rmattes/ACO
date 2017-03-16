@@ -251,8 +251,8 @@ class ilACOGroupGUI
          $query = "select od.title as 'Übungsruppe'
                   from ilias.object_data od
                   join ilias.object_reference obr on od.obj_id = obr.obj_id
-                  join ilias.crs_items crsi on obr.ref_id = crsi.obj_id
-                  where (od.type = 'grp') and (obr.deleted is null) and (crsi.parent_id = '".$parent_id."') ";
+                  join ilias.tree crsi on obr.ref_id = crsi.child
+                  where (od.type = 'grp') and (obr.deleted is null) and (crsi.parent = '".$parent_id."') ";
         
            $results = $ilDB->query($query);
             while ($record = $ilDB->fetchAssoc($results)){
@@ -324,6 +324,8 @@ class ilACOGroupGUI
         $parent_id = $_GET['ref_id']; 
         
         $result = $this->countGroups($parent_id);
+
+        var_dump($result);
         
         $nn = 1;
         

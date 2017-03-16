@@ -188,7 +188,6 @@ class ilACOGroupDisplayGUI
 
 
             $data=$tmp_data;
-            var_dump($data);
             foreach ($data as $row){
             $section = new ilFormSectionHeaderGUI();
             $section->setTitle($row['title']);
@@ -464,10 +463,10 @@ where om.admin = 1 and oref.ref_id = '".$ref_id."'";
                     from ilias.object_data as od
                     join ilias.object_reference as oref on oref.obj_id = od.obj_id 
                     join ilias.grp_settings gs on gs.obj_id = oref.obj_id
-                    join ilias.crs_items citem on citem.obj_id = oref.ref_id
+                    join ilias.tree citem on citem.child = oref.ref_id
                     left join (select * from ilias.obj_members om where om.admin = 1) as obm on obm.obj_id = oref.obj_id
                     left join ilias.usr_data ud on ud.usr_id = obm.usr_id
-                    where oref.deleted is null and od.`type`='grp' and citem.parent_id = '".$ref_id."'";
+                    where oref.deleted is null and od.`type`='grp' and citem.parent = '".$ref_id."'";
         $result = $ilDB->query($query);
         while ($record = $ilDB->fetchAssoc($result)){
             array_push($data,$record);

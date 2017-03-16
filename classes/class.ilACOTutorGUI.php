@@ -423,13 +423,11 @@ class ilACOTutorGUI {
         $members = array();
 
         $this->assignment = $this->getAssignment($_POST['ass_id']);
-        $this->group = $_GET["grp_id"];
+        $this->group = $_POST["grp_id"];
 
         foreach($this->exercise->members_obj->getMembers() as $member_id)
         {
 
-            var_dump($member_id);
-            var_dump($this->group);
             if($this->isGroupMember($member_id,$this->group)) {
                 $submission = new ilExSubmission($this->assignment, $member_id);
                 $submission->updateTutorDownloadTime();
@@ -452,7 +450,6 @@ class ilACOTutorGUI {
                 $ilCtrl->redirect($this, $this->getViewBack());
             }
         }
-
 
         ilExSubmission::downloadAllAssignmentFiles($this->assignment, $members);
     }
@@ -852,11 +849,7 @@ class ilACOTutorGUI {
         $_GET["grp_id"] = ilUtil::stripSlashes($_POST["grp_id"]);
         $this->group = ilUtil::stripSlashes($_POST["grp_id"]);
 
-        $this->tpl->setDescription($this->pl->txt('obj_extu_desc'));
-
         $this->selection['group']=ilUtil::stripSlashes($_POST["grp_id"]);
-
-        var_dump($this->tpl->getDescription());
 
         $_GET["ass_id"] = ilUtil::stripSlashes($_POST["ass_id"]);
         $this->selected_assignment = ilUtil::stripSlashes($_POST["ass_id"]);

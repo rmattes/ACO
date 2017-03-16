@@ -150,23 +150,11 @@ class ilACOMemberGUI {
 
         $this->userLogin = new ilTextInputGUI($a_options['auto_complete_name'], 'user_login');
         $this->userLogin->setDataSource($ajax_url);
-
-        //$this->groupTitle = new ilSelectInputGUI($this->pl->txt('group_title'), 'group_title');
-        //$this->groupTitle->setOptions($this->getGroups());
-
-        //$this->destinationTitle = new ilSelectInputGUI($this->pl->txt('destination_title'), 'destination_title');
-        //$this->destinationTitle->setOptions($this->getGroups());
-
         $this->userLogin->setRequired(true);
-        //$this->groupTitle->setRequired(true);
-        //$this->destinationTitle->setRequired(true);
 
         $form->addItem($this->userLogin);
-        //$form->addItem($this->groupTitle);
-        //$form->addItem($this->destinationTitle);
         $form->addCommandButton(selectMember, $this->pl->txt(select_member));
-        //$form->addCommandButton('moveMember', $this->pl->txt('move_member'));
-
+	
         return $form;
     }
 
@@ -178,16 +166,12 @@ class ilACOMemberGUI {
         $form->setId('member_edit');
         $form->setFormAction($this->ctrl->getFormAction($this));
 
-
-        //var_dump($_POST['user_login']);
-
         $this->userLogin = new ilTextInputGUI($this->pl->txt('user_login'), 'user_login');
         $this->userLogin->setValue($_POST["user_login"]);
         $this->userLogin->setDisabled(true);
 
         $this->groupTitle = new ilSelectInputGUI($this->pl->txt('group_title'), 'group_title');
         $this->groupTitle->setOptions($this->getGroupsWhereMember($this->getMemberIdByLogin($_POST["user_login"])));
-        //var_dump($this->groupTitle);
 
         $this->destinationTitle = new ilSelectInputGUI($this->pl->txt('destination_title'), 'destination_title');
         $this->destinationTitle->setOptions($this->getGroupsWhereNotMember($this->getMemberIdByLogin($_POST["user_login"])));
@@ -199,7 +183,6 @@ class ilACOMemberGUI {
         $form->addItem($this->userLogin);
         $form->addItem($this->groupTitle);
         $form->addItem($this->destinationTitle);
-        //$form->addCommandButton(selectMember, $this->pl->txt(select_member));
         $form->addCommandButton('moveMember', $this->pl->txt('move_member'));
 
         $form->setValuesByPost();
@@ -214,12 +197,9 @@ class ilACOMemberGUI {
      */
     protected function doUserAutoComplete()
     {
-
-
         $a_fields = array('login','firstname','lastname','email');
         $result_field = 'login';
-
-
+	
         include_once './Services/User/classes/class.ilUserAutoComplete.php';
         $auto = new ilUserAutoComplete();
 
@@ -263,10 +243,10 @@ class ilACOMemberGUI {
         $role_id_dest = $role_id_dest[0]["obj_id"];
 
         //Ueberpruefung der Daten auf Korrektheit vor DB-Zugriff
-        //$this->checkIfGroupExists($group_id[0]);                       //alte Gruppe vorhanden
-        //$this->checkIfGroupExists($destination_id[0]);                 //neue Gruppe vorhanden
-        //$this->checkIfUserExistsInGroup($member_id[0], $group_id[0]);             //User in alter Gruppe vorhanden
-        //$this->checkIfUserNotExistsInGroup($member_id[0], $destination_id[0]);    //User in neuer Gruppe vorhanden
+        //$this->checkIfGroupExists($group_id);                       //alte Gruppe vorhanden
+        //$this->checkIfGroupExists($destination_id);                 //neue Gruppe vorhanden
+        //$this->checkIfUserExistsInGroup($member_id, $group_id);             //User in alter Gruppe vorhanden
+        //$this->checkIfUserNotExistsInGroup($member_id, $destination_id);    //User in neuer Gruppe vorhanden
 
         if (($this->checkIfGroupExists($group_id)) and ($this->checkIfGroupExists($destination_id)) and
             ($this->checkIfUserExistsInGroup($member_id, $group_id)) and
@@ -363,8 +343,6 @@ class ilACOMemberGUI {
 
 
         if (strcmp($queryResult[0]["COUNT(*)"], "1") !== 0){
-        //if($queryResult[0]["count(*)"] != 1) {
-            //var_dump($this->getGroupsWhereMember($member_id["usr_id"]));
             ilUtil::sendFailure($this->pl->txt("userInGroupNotExistent").' '.$this->pl->txt("only_in").' '.implode(' - ',$this->getGroupsWhereMember($member_id["usr_id"])), true);
             return false;
         } else {
@@ -389,7 +367,6 @@ class ilACOMemberGUI {
         }
 
         if (strcmp($queryResult[0]["COUNT(*)"], "1") == 0){
-        //if($queryResult[0]["count(*)"] == 1) {
             ilUtil::sendFailure($this->pl->txt("userInGroupExistent"), true);
             return false;
         } else {
@@ -405,9 +382,6 @@ class ilACOMemberGUI {
 
         $queryResult = array();
 
-        //var_dump("ifGroupExists");
-        //var_dump($group_id);
-
         $query = "SELECT COUNT(*) FROM ilias.object_data as od 
                   join ilias.object_reference as obr on obr.obj_id = od.obj_id 
                   WHERE obr.deleted is null and od.obj_id = '".$group_id."'";
@@ -417,15 +391,10 @@ class ilACOMemberGUI {
             array_push($queryResult,$record);
         }
 
-        //var_dump($queryResult);
-
         if (strcmp($queryResult[0]["COUNT(*)"], "1") !== 0){
-        //if($queryResult[0]["count(*)"] != 1) {
             ilUtil::sendFailure($this->pl->txt("groupNotExistent"), true);
-            //var_dump("false");
             return false;
         } else {
-            //var_dump("true");
             return true;
         }
     }
@@ -448,9 +417,7 @@ class ilACOMemberGUI {
         $output = array();
 
         foreach ($data as $result){
-
             array_push($output, $result['title']);
-
         }
 
         return $output;
@@ -459,8 +426,6 @@ class ilACOMemberGUI {
     protected  function getGroupsWhereMember($usr_id){
 
         global $ilDB;
-
-        //var_dump($usr_id);
 
         $data = array();
         $query = "select od.title as 'title'
@@ -479,9 +444,7 @@ class ilACOMemberGUI {
         $output = array();
 
         foreach ($data as $result){
-
             array_push($output, $result['title']);
-
         }
 
         return $output;
@@ -491,8 +454,6 @@ class ilACOMemberGUI {
     protected  function getGroupsWhereNotMember($usr_id){
 
         global $ilDB;
-
-        //var_dump($usr_id);
 
         $data1 = array();
         $query1 = "select od.obj_id as 'obj_id'
@@ -511,14 +472,10 @@ class ilACOMemberGUI {
         $groupsIDWhereMemberTMP = array();
 
         foreach ($data1 as $result1){
-
             array_push($groupsIDWhereMemberTMP, $result1['obj_id']);
-
         }
 
         $groupsIDWhereMember = "'" .implode("','", $groupsIDWhereMemberTMP  ) . "'";
-
-        //var_dump("groupsIDWhereMember".$groupsIDWhereMember);
 
         $data = array();
 
@@ -532,8 +489,6 @@ class ilACOMemberGUI {
                       citem.parent_id = '".$_GET['ref_id']."' and om.obj_id not in (".$groupsIDWhereMember.")";
         $result = $ilDB->query($query);
 
-        //var_dump($data);
-
         while ($record = $ilDB->fetchAssoc($result)){
             array_push($data,$record);
         }
@@ -541,13 +496,9 @@ class ilACOMemberGUI {
         $output = array();
 
         foreach ($data as $result){
-
             array_push($output, $result['title']);
-
         }
 
-
-        //var_dump($output);
         return $output;
 
     }

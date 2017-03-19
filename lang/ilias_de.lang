@@ -18,6 +18,7 @@ folder_name_checkbox#:#Ordner in jeder Gruppe
 tab_link#:#Verlinkung
 save_link#:#Verlinken
 link_exercise#:#&Uuml;bung verlinken
+link_test#:#Test verlinken
 ref_id#:#Referenz-ID in der Datenbank
 save_groups#:#&Auml;nderungen speichern
 group_name#:#Gruppenname

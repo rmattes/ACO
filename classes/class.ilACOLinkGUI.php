@@ -122,7 +122,13 @@ class ilACOLinkGUI{
     {
 
         $form = new ilPropertyFormGUI();
-        $form->setTitle($this->pl->txt('link_exercise'));
+        if (ilObject::_lookupType($_GET['ref_id'], true) == 'tst'){
+            $form->setTitle($this->pl->txt('link_test'));
+        } else {
+            $form->setTitle($this->pl->txt('link_exercise'));
+        }
+
+
         $form->setFormAction($this->ctrl->getFormAction($this));
         $data = $this->getGroups($_GET['ref_id']);
 

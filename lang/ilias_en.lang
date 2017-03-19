@@ -16,6 +16,7 @@ group_folder_name#:#Folder name
 tab_link#:#Link
 save_link#:#Link
 link_exercise#:#Link exercise
+link_test#:#Link test
 ref_id#:#Reference-ID from the database
 save_groups#:#Save changes
 group_name#:#Group name

@@ -166,7 +166,7 @@ class ilACOMemberGUI {
         $form->setId('member_edit');
         $form->setFormAction($this->ctrl->getFormAction($this));
 
-        $this->userLogin = new ilTextInputGUI($this->pl->txt('user_login'), 'user_login');
+        $this->userLogin = new ilTextInputGUI($this->pl->txt('member_login'), 'user_login');
         $this->userLogin->setValue($_POST["user_login"]);
         $this->userLogin->setDisabled(true);
 

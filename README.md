@@ -38,11 +38,13 @@ Dieser Subtab ermöglicht es Gruppenmitglieder innerhalb des Kurses in eine ande
 
 ### Verlinkung/Link tab
 Dieser Tab existiert innerhalb von Übungen und Tests / This tab exists inside of excercises and tests
+
 Dabei lassen sich über diesen Übungen oder Tests in die einzelnen Gruppen verlinken, wahlweise von einem Admin Ordner in einen Ordner in den Gruppen. 
 
 ### Gruppenfilter/groupfilter tab
 Dieser Tab existiert innerhalb von Übungen / This tab exists inside of excercises
-Hiermit lassen lassen sich in Übungen Abgaben nach Gruppen gefiltert anzeigen und herunterladen.  
+
+Hiermit lassen sich in Übungen Abgaben nach Gruppen gefiltert anzeigen und herunterladen.  
 
 **Eine genauere Beschreibung der Funktionen und ein Manual finden sie hier**
 [Link zu pdf welches noch zu erstellen ist]

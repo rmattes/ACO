@@ -46,8 +46,8 @@ Dieser Tab existiert innerhalb von Übungen / This tab exists inside of excercis
 
 Hiermit lassen sich in Übungen Abgaben nach Gruppen gefiltert anzeigen und herunterladen.  
 
-**Eine genauere Beschreibung der Funktionen und ein Manual finden sie hier**
-[Link zu pdf welches noch zu erstellen ist]
+**Eine genauere Beschreibung der Funktionen bzw. Dokumentation und ein Manual finden sie hier**
+https://github.com/Ilias-fmi/ACO/blob/master/doc/Dokumentation.pdf
 
 
 ### Contact

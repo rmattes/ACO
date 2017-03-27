@@ -1,16 +1,281 @@
-\section{classtitle}
+\section{ilACOMemberGUI}
 
 \subsection*{Beschreibung}
+Diese Klasse implementiert die Funktion \textit{Mitglieder verschieben} und beinhaltet die Möglichkeit, einzelne Mitglieder einer Gruppe in einem Kurs in eine andere Gruppe zu verschieben. 
+Hierzu wird der zu verschiebende Benutzer über ein AutoComplete-Feld ausgewählt, anschließend werden die Gruppen angezeigt, von denen er verschoben werden kann, sowie die Gruppen, in die er verschoben werden kann.
 
 \subsection*{Klassenvariablen}
+\subparagraph{ctrl}
+protected - type: ilCtrl - Steuerung Zugriffsrechte
+\subparagraph{tpl}
+protected - type: ilTemplate - Template für Darstellung und Formatierung
+\subparagraph{pl}
+protected - type: ilACOPlugin - Instanz des Plugins
+\subparagraph{tabs}
+protected - type: ilTabsGUI - Verwaltung von Tabs
+\subparagraph{ilLocator}
+protected - type: ilLocatorGUI - Darstellung in der Tree Hierarchie
+\subparagraph{lng}
+protected - type: ilLanguage - Einbindung der Language-File von ILIAS
+\subparagraph{tree}
+protected - type: ilTree - Verwaltung der Tree Hierarchie
+\subparagraph{course\_id}
+protected - type: Integer - Kurs ID für Verwendung in der Klasse
+\subparagraph{userLogin}
+protected - type: String - Benutzername für Verwendung in der Klasse
+\subparagraph{groupTitle}
+protected - type: String - Gruppentitel für Gruppe zum Entfernen
+\subparagraph{destinationTitle}
+protected - type: String - Gruppentitel für Gruppe zum Einfügen
+\subparagraph{group\_title}
+protected - type: String - Gruppentitel für Gruppe zum Entfernen
+\subparagraph{destination\_title}
+protected - type: String - Gruppentitel für Gruppe zum Einfügen
+
 
 \subsection*{Funktions-Liste}
-
-\paragraph{\nameref{funktion}}
+\paragraph{\nameref{constructMGUI}}
+\paragraph{\nameref{setTitleAndIconMGUI}}
+\paragraph{\nameref{executeCommandMGUI}}
+\paragraph{\nameref{viewMGUI}}
+\paragraph{\nameref{initFormMGUI}}
+\paragraph{\nameref{selectMemberMGUI}}
+\paragraph{\nameref{doUserAutoCompleteMGUI}}
+\paragraph{\nameref{moveMemberMGUI}}
+\paragraph{\nameref{getRoleIDMGUI}}
+\paragraph{\nameref{manipulateDBMGUI}}
+\paragraph{\nameref{getGroupIdByTitleMGUI}}
+\paragraph{\nameref{getMemberIdByLoginMGUI}}
+\paragraph{\nameref{checkIfUserExistsInGroupMGUI}}
+\paragraph{\nameref{checkIfUserNotExistsInGroupMGUI}}
+\paragraph{\nameref{checkIfGroupExistsMGUI}}
+\paragraph{\nameref{getGroupsMGUI}}
+\paragraph{\nameref{getGroupsWhereMemberMGUI}}
+\paragraph{\nameref{getGroupsWhereNotMemberMGUI}}
+\paragraph{\nameref{checkAccessMGUI}}
 
 \subsection*{Funktionen}
 
-\subsubsection*{funktionstitle}\label{funktion}
-\paragraph{Beschreibung}
-\paragraph{Parameter-Liste}
-\paragraph{Rückgabewerte}
+\subsubsection*{\textit{\_\_construct}}\label{constructMGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{\_\_construct()} 
+	\item[] 
+\end{itemize}
+
+\subsubsection*{\textit{setTitleAndIcon}}\label{setTitleAndIconMGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{setTitleAndIcon()} 
+	\item[] 
+\end{itemize}
+
+\subsubsection*{\textit{executeCommand}}\label{executeCommandMGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{executeCommand()} 
+	\item[] 
+\end{itemize}
+
+\subsubsection*{\textit{view}}\label{viewMGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{view()} 
+	\item[] 
+\end{itemize}
+
+\subsubsection*{\textit{initForm}}\label{initFormMGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{initForm()} 
+	\item[] 
+\end{itemize}
+\subparagraph{Rückgabewerte}
+\begin{itemize}
+\item[] \textbf{form} - Formular mit Standardwerten, type: ilPropertyFormGUI
+\end{itemize}
+
+\subsubsection*{\textit{selectMember}}\label{selectMemberMGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{selectMember()} 
+	\item[] 
+\end{itemize}
+\subparagraph{Rückgabewerte}
+\begin{itemize}
+	\item[] \textbf{form} - Formular gemäß dem angegebenen Benutzer, type: ilPropertyFormGUI
+\end{itemize}
+
+\subsubsection*{\textit{doUserAutoComplete}}\label{doUserAutoCompleteMGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{doUserAutoComplete()} 
+	\item[] 
+\end{itemize}
+
+\subsubsection*{\textit{moveMember}}\label{moveMemberMGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{moveMember()} 
+	\item[] 
+\end{itemize}
+
+\subsubsection*{\textit{getRoleID}}\label{getRoleIDMGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{getRoleID(\$description)} 
+	\item[] 
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\begin{itemize}
+	\item[] \textbf{description} - Beschreibung, type: 
+\end{itemize}
+\subparagraph{Rückgabewerte}
+\begin{itemize}
+	\item[] \textbf{role\_id} - Beschreibung, type:
+\end{itemize}
+
+\subsubsection*{\textit{manipulateDB}}\label{manipulateDBMGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{manipulateDB(\$member\_id,\$role\_id\_source,\$destination\_id,\$role\_id\_dest,\$source\_id)} 
+	\item[] 
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\begin{itemize}
+	\item[] \textbf{member\_id} - Beschreibung, type: 
+	\item[] \textbf{role\_id\_source} - Beschreibung, type: 
+	\item[] \textbf{destination\_id} - Beschreibung, type: 
+	\item[] \textbf{role\_id\_dest} - Beschreibung, type: 
+	\item[] \textbf{source\_id} - Beschreibung, type: 
+\end{itemize}
+
+\subsubsection*{\textit{getGroupIdByTitle}}\label{getGroupIdByTitleMGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{getGroupIdByTitle(\$group\_title,\$course\_id)} 
+	\item[] 
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\begin{itemize}
+	\item[] \textbf{group\_title} - Beschreibung, type: 
+	\item[] \textbf{course\_id} - Beschreibung, type:
+\end{itemize}
+\subparagraph{Rückgabewerte}
+\begin{itemize}
+	\item[] \textbf{group\_id} - Beschreibung, type:
+\end{itemize}
+
+\subsubsection*{\textit{getMemberIdByLogin}}\label{getMemberIdByLoginMGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{getMemberIdByLogin(\$member\_login)} 
+	\item[] 
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\begin{itemize}
+	\item[] \textbf{member\_login} - Beschreibung, type: 
+\end{itemize}
+\subparagraph{Rückgabewerte}
+\begin{itemize}
+	\item[] \textbf{member\_id[0]["usr\_id"]} - Beschreibung, type:
+\end{itemize}
+
+\subsubsection*{\textit{checkIfUserExistsInGroup}}\label{checkIfUserExistsInGroupMGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{checkIfUserExistsInGroup(\$member\_id,\$group\_id)} 
+	\item[] 
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\begin{itemize}
+	\item[] \textbf{member\_id} - Beschreibung, type: 
+	\item[] \textbf{group\_id} - Beschreibung, type: 
+\end{itemize}
+\subparagraph{Rückgabewerte}
+\begin{itemize}
+	\item[] \textbf{(true,false)} - Beschreibung, type:
+\end{itemize}
+
+\subsubsection*{\textit{checkIfUserNotExistsInGroup}}\label{checkIfUserNotExistsInGroupMGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{checkIfUserNotExistsInGroup(\$member\_id,\$group\_id)} 
+	\item[] 
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\begin{itemize}
+	\item[] \textbf{member\_id} - Beschreibung, type: 
+	\item[] \textbf{group\_id} - Beschreibung, type: 
+\end{itemize}
+\subparagraph{Rückgabewerte}
+\begin{itemize}
+	\item[] \textbf{(true,false)} - Beschreibung, type:
+\end{itemize}
+
+\subsubsection*{\textit{checkIfGroupExists}}\label{checkIfGroupExistsMGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{checkIfGroupExists(\$group\_id)} 
+	\item[] 
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\begin{itemize}
+	\item[] \textbf{\$group\_id} - Beschreibung, type: 
+\end{itemize}
+\subparagraph{Rückgabewerte}
+\begin{itemize}
+	\item[] \textbf{(true,false)} - Beschreibung, type:
+\end{itemize}
+
+\subsubsection*{\textit{getGroups}}\label{getGroupsMGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{getGroups()} 
+	\item[] 
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\begin{itemize}
+	\item[] \textbf{var} - Beschreibung, type: 
+\end{itemize}
+\subparagraph{Rückgabewerte}
+\begin{itemize}
+	\item[] \textbf{output} - Beschreibung, type:
+\end{itemize}
+
+\subsubsection*{\textit{getGroupsWhereMember}}\label{getGroupsWhereMemberMGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{getGroupsWhereMember(\$usr\_id)} 
+	\item[] 
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\begin{itemize}
+	\item[] \textbf{usr\_id} - Beschreibung, type: 
+\end{itemize}
+\subparagraph{Rückgabewerte}
+\begin{itemize}
+	\item[] \textbf{output} - Beschreibung, type:
+\end{itemize}
+
+\subsubsection*{\textit{getGroupsWhereNotMember}}\label{getGroupsWhereNotMemberMGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{getGroupsWhereNotMember(\$usr\_id)} 
+	\item[] 
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\begin{itemize}
+	\item[] \textbf{usr\_id} - Beschreibung, type: 
+\end{itemize}
+\subparagraph{Rückgabewerte}
+\begin{itemize}
+	\item[] \textbf{output} - Beschreibung, type:
+\end{itemize}
+
+\subsubsection*{\textit{checkAccess}}\label{checkAccessMGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{checkAccess()} 
+	\item[] 
+\end{itemize}

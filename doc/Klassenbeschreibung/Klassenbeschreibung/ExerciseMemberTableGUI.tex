@@ -25,22 +25,18 @@ protected - type: integer - Gruppen ID der darzustellenden Gruppe
 
 \subsection*{Funktions-Liste}
 
-\subparagraph{\nameref{__constructTable}}
-\subparagraph{\nameref{getSelectableColumns}}
-\subparagraph{\nameref{fillRow}}
-\subparagraph{\nameref{isGroupMember}}
+\subparagraph{\nameref{constructEMT}}
+\subparagraph{\nameref{getSelectableColumnsEMT}}
+\subparagraph{\nameref{fillRowEMT}}
+\subparagraph{\nameref{isGroupMemberEMT}}
 
 \subsection*{Funktionen}
 
-\subsubsection*{\textit{\_\_construct}}\label{__constructTable}
-
-
-Konstruktor der Tabelle für \textit{Gruppenfilter}
-Erstellt eine gefilterte Tabelle
+\subsubsection*{\textit{\_\_construct}}\label{constructEMT}
 \subparagraph{Beschreibung}
 \begin{itemize}
-	\item[]  \noindent\fbox{\_\_construct(\$a\_parent\_obj, \$a\_parent\_cmd, \$a\_exc, \$a\_ass,\$group\_id)}
-	\item[] Erstellt die gefilterte Tabelle nach den übergebenen Parametern
+	\item[] \noindent\fbox{\_\_construct(\$a\_parent\_obj, \$a\_parent\_cmd, \$a\_exc, \$a\_ass,\$group\_id)}
+	\item[] Konstruktor der Tabelle für \textit{Gruppenfilter}. Erstellt eine gefilterte Tabelle nach den übergebenen Parametern
 \end{itemize}
 \subparagraph{Parameter-Liste}
 \begin{itemize}
@@ -50,48 +46,33 @@ Erstellt eine gefilterte Tabelle
 	\item[]\textbf{a\_ass} - type: ilAssignment - Assignment nach dem gefiltert wird
 	\item[]\textbf{group\_id} - type: integer - Gruppen-ID nach der gefiltert wird
 \end{itemize}
-\subparagraph{Rückgabewerte}
-\begin{itemize}
-	\item[] Gibt keine Werte zurück
-\end{itemize}
 
-
-
-\subsubsection*{\textit{getSelectableColumns}}\label{getSelectableColumns}
-
-
-Gibt ein Array zurück, welches bestimmt welche Spalten in der Tabellenansicht aktiviert bzw. deaktiviert werden können.
+\subsubsection*{\textit{getSelectableColumns}}\label{getSelectableColumnsEMT}
 \subparagraph{Beschreibung}
 \begin{itemize}
-	\item[]  \noindent\fbox{getSelectableColumns()}
-	\item[] Gibt ein Array der selektierbaren Spalten zurück
+	\item[] \noindent\fbox{getSelectableColumns()}
+	\item[] Gibt ein Array zurück, welches bestimmt welche Spalten in der Tabellenansicht aktiviert bzw. deaktiviert werden können.
 \end{itemize}
-\subparagraph{Parameter-Liste}
 \subparagraph{Rückgabewerte}
 \begin{itemize}
 	\item[] Gibt ein mehrdimensionales Array zurück.
 \end{itemize}
 
-\subsubsection*{\textit{fillRow}}\label{fillRow}
-Füllt eine Reihe mit den Daten des übergebenen Parameter. Wird von der Methode \nameref{__constructTable} aufgerufen.
+\subsubsection*{\textit{fillRow}}\label{fillRowEMT}
 \subparagraph{Beschreibung}
 \begin{itemize}
-	\item[]  \noindent\fbox{fillRow(\$member)}
-	\item[] Füllt eine Reihe der Tabelle
+	\item[] \noindent\fbox{fillRow(\$member)}
+	\item[] Füllt eine Reihe mit den Daten des übergebenen Parameter. Wird von der Methode \nameref{__constructTable} aufgerufen.
 \end{itemize}
 \subparagraph{Parameter-Liste}
 \begin{itemize}
 	\item[] \textbf{member} - type: Array - Ein Array mit den Feldern usr\_id, team\_id, team, und name
 \end{itemize}
-\subparagraph{Rückgabewerte}
-\begin{itemize}
-	\item[] Gibt keine Werte zurück
-\end{itemize}
 
-\subsubsection*{\textit{isGroupMember}}\label{isGroupMember}
+\subsubsection*{\textit{isGroupMember}}\label{isGroupMemberEMT}
 \subparagraph{Beschreibung}
 \begin{itemize}
-	\item[]  \noindent\fbox{isGroupMember(\$member,\$group\_id)}
+	\item[] \noindent\fbox{isGroupMember(\$member,\$group\_id)}
 	\item[] Überprüft auf Gruppenmitgliedschaft 
 \end{itemize}
 \subparagraph{Parameter-Liste}

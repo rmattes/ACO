@@ -42,58 +42,62 @@ protected - type: array - Array mit allen Admins in einer Gruppe
 \subparagraph{\nameref{doUserAutoCompleteGDGUI}}
 \subparagraph{\nameref{checkAccessGDGUI}}
 
-\subsection*{\textit{Funktionen}}
+\subsection*{Funktionen}
 
-\subsubsection*{\_\_construct}\label{constructGDGUI}
+\subsubsection*{\textit{\_\_construct}}\label{constructGDGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{\_\_construct()}
 	\item[] Konstruktion der Grundinstanz
 \end{itemize}
 
-\subsubsection*{prepareOutput}\label{prepareOutputGDGUI}
+\subsubsection*{\textit{prepareOutput}}\label{prepareOutputGDGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{prepareOutput()}
 	\item[] Grundlegende Eigenschaften werden festgelegt: Tabs, Position in der Tree Hierarchie, BackTarget, Titel und Icon, sowie das verwendete Template
 \end{itemize}
 
-\subsubsection*{setTitleAndIcon}\label{setTitleAndIconGDGUI}
+\subsubsection*{\textit{setTitleAndIcon}}\label{setTitleAndIconGDGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{setTitleAndIcon()}
 	\item[] Titel und Symbol des Objekt werden festgelegt
 \end{itemize}
 
-\subsubsection*{executeCommand}\label{executeCommandGDGUI}
+\subsubsection*{\textit{executeCommand}}\label{executeCommandGDGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{executeCommand()}
 	\item[] Regelung der Umsetzung von Befehlen mittels CommandButtons
 \end{itemize}
 
-\subsubsection*{view}\label{viewGDGUI}
+\subsubsection*{\textit{view}}\label{viewGDGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{view()}
 	\item[] Ausgabe der initialen Ansicht als HTML-Dokument
 \end{itemize}
 
-\subsubsection*{initForm}\label{initFormGDGUI}
+\subsubsection*{\textit{initForm}}\label{initFormGDGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{initForm()}
 	\item[] Formular wird generiert und mit initialen Werten gefüllt
 \end{itemize}
+\subparagraph{Rückgabewerte}
+\begin{itemize}
+	\item[] \textbf{form} - Formular mit Standardwerten, type: ilPropertyFormGUI
+\end{itemize}
 
-\subsubsection*{saveGroups}\label{saveGroupsGDGUI}
+\subsubsection*{\textit{saveGroups}}\label{saveGroupsGDGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[]  \noindent\fbox{saveGroups()} 
 	\item[] Die Änderungen in der tabellarischen Übersicht der Gruppen werden an die Funktion \nameref{updateGroupGDGUI} übergeben. Anschließend wird die tabellarische Übersicht aktualisiert, um die aktuellen Daten anzuzeigen.
 \end{itemize}
 
-\subsubsection*{getUserId}\label{getUserIdGDGUI}
+\subsubsection*{\textit{getUserId}}\label{getUserIdGDGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[]  \noindent\fbox{getUserId(\$user\_login)} 
@@ -108,7 +112,7 @@ protected - type: array - Array mit allen Admins in einer Gruppe
 	\item[] \textbf{data[0]} - UserID, type: Integer
 \end{itemize}
 
-\subsubsection*{getAdminRoleId}\label{getAdminRoleIdGDGUI}
+\subsubsection*{\textit{getAdminRoleId}}\label{getAdminRoleIdGDGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[]  \noindent\fbox{getAdminRoleId(\$obj\_id)} 
@@ -123,7 +127,7 @@ protected - type: array - Array mit allen Admins in einer Gruppe
 	\item[] \textbf{role\_id[0]} - Objekt ID der Benutzerrolle Gruppen-Administrator, type: Integer
 \end{itemize}
 
-\subsubsection*{getLoginbyIDS}\label{getLoginbyIDSGDGUI}
+\subsubsection*{\textit{getLoginbyIDS}}\label{getLoginbyIDSGDGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[]  \noindent\fbox{getLoginByIDS(\$ids)} 
@@ -138,7 +142,7 @@ protected - type: array - Array mit allen Admins in einer Gruppe
 	\item[] \textbf{logins} - Benutzernamen, type: String[]
 \end{itemize}
 
-\subsubsection*{getCourseAdminIDs}\label{getCourseAdminIDsGDGUI}
+\subsubsection*{\textit{getCourseAdminIDs}}\label{getCourseAdminIDsGDGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[]  \noindent\fbox{getCourseAdminIDs(\$ref\_id)} 
@@ -153,7 +157,7 @@ protected - type: array - Array mit allen Admins in einer Gruppe
 	\item[] \textbf{ids} - UserID des Kurs-Administrators, type: Integer
 \end{itemize}
 
-\subsubsection*{loadDate}\label{loadDateGDGUI}
+\subsubsection*{\textit{loadDate}}\label{loadDateGDGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{loadDate(\$a\_field)}
@@ -168,7 +172,7 @@ protected - type: array - Array mit allen Admins in einer Gruppe
 	\item[] \textbf{date} - Wert aus dem Feld umgewandelt in Datenbank-kompatibles Format, type: ilDateTime
 \end{itemize}
 
-\subsubsection*{updateGroup}\label{updateGroupGDGUI}
+\subsubsection*{\textit{updateGroup}}\label{updateGroupGDGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[]  \noindent\fbox{updateGroups(\$obj\_id, \$title, \$description, \$tutor, \$members, \$reg\_start, \$reg\_end, \$time\_reg)} 
@@ -186,7 +190,7 @@ protected - type: array - Array mit allen Admins in einer Gruppe
 	\item[] \textbf{time\_reg} - Zeitlich begrenzter Beitritt, type: Boolean
 \end{itemize}
 
-\subsubsection*{getTableData}\label{getTableDataGDGUI}
+\subsubsection*{\textit{getTableData}}\label{getTableDataGDGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{getTableData(\$ref\_id)}
@@ -201,14 +205,14 @@ protected - type: array - Array mit allen Admins in einer Gruppe
 	\item[] \textbf{data} - Parameter aller Gruppen zu dem Kurs, type: Array
 \end{itemize}
 
-\subsubsection*{doUserAutoComplete}\label{doUserAutoCompleteGDGUI}
+\subsubsection*{\textit{doUserAutoComplete}}\label{doUserAutoCompleteGDGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{doUserAutoComplete()}
 	\item[] Werden in einem Eingabefeld mind. 3 Zeichen eingegeben, versucht die Funktion Vorschläge zur Auswahl von Benutzern zu machen
 \end{itemize}
 
-\subsubsection*{checkAccess}\label{checkAccessGDGUI}
+\subsubsection*{\textit{checkAccess}}\label{checkAccessGDGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{checkAccess()}

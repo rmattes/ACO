@@ -37,49 +37,55 @@ protected - type: ilTree - Verwaltung der Tree Hierarchie
 \subparagraph{\nameref{checkAccessLGUI}}
 
 \subsection*{Funktionen}
-\subsubsection*{\_\_construct}\label{constructLGUI}
+
+\subsubsection*{\textit{\_\_construct}}\label{constructLGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{\_\_construct()} 
 	\item[] Konstruktion der Grundinstanz
 \end{itemize}
 
-\subsubsection*{prepareOutput}\label{prepareOutputLGUI}
+\subsubsection*{\textit{prepareOutput}}\label{prepareOutputLGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{prepareOutput()} 
 	\item[] Grundlegende Eigenschaften werden festgelegt: Tabs, Position in der Tree Hierarchie, BackTarget, Titel und Icon, sowie das verwendete Template
 \end{itemize}
 
-\subsubsection*{setTitleAndIcon}\label{setTitleAndIconLGUI}
+\subsubsection*{\textit{setTitleAndIcon}}\label{setTitleAndIconLGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{setTitleAndIcon()} 
 	\item[] Titel und Symbol des Objekt werden festgelegt
 \end{itemize}
 
-\subsubsection*{executeCommand}\label{executeCommandLGUI}
+\subsubsection*{\textit{executeCommand}}\label{executeCommandLGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{executeCommand()} 
 	\item[] Regelung der Umsetzung von Befehlen mittels CommandButtons
 \end{itemize}
 
-\subsubsection*{view}\label{viewLGUI}
+\subsubsection*{\textit{view}}\label{viewLGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{view()} 
 	\item[] Ausgabe der initialen Ansicht als HTML-Dokument
 \end{itemize}
 
-\subsubsection*{initForm}\label{initFormLGUI}
+\subsubsection*{\textit{initForm}}\label{initFormLGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{initForm()} 
 	\item[] Formular wird generiert und mit initialen Werten gefüllt
 \end{itemize}
+\subparagraph{Rückgabewerte}
+\begin{itemize}
+\item[] \textbf{form} - Formular mit Standardwerten, type: ilPropertyFormGUI
+\end{itemize}
 
-\subsubsection*{getAdminFolderIds}\label{getAdminFolderIdsLGUI}
+
+\subsubsection*{\textit{getAdminFolderIds}}\label{getAdminFolderIdsLGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{getAdminFolderIds()} 
@@ -90,7 +96,7 @@ protected - type: ilTree - Verwaltung der Tree Hierarchie
 	\item[] \textbf{ids} - IDs der Ordner im Kurs, type: Array
 \end{itemize}
 
-\subsubsection*{getFolderName}\label{getFolderNameLGUI}
+\subsubsection*{\textit{getFolderName}}\label{getFolderNameLGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{getFolderName()} 
@@ -101,7 +107,7 @@ protected - type: ilTree - Verwaltung der Tree Hierarchie
 	\item[] \textbf{folder['title']} - Titel des Ordners, type: String 
 \end{itemize}
 
-\subsubsection*{getParentIds}\label{getParentIdsLGUI}
+\subsubsection*{\textit{getParentIds}}\label{getParentIdsLGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{getParentIds(\$id)} 
@@ -116,7 +122,7 @@ protected - type: ilTree - Verwaltung der Tree Hierarchie
 	\item[] \textbf{ids} - IDs zu den übergeordneten Objekten eines Objekts, type: Array
 \end{itemize}
 
-\subsubsection*{getGroupFolderID}\label{getGroupFolderIDLGUI}
+\subsubsection*{\textit{getGroupFolderID}}\label{getGroupFolderIDLGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{getGroupFolderID()} 
@@ -132,14 +138,14 @@ protected - type: ilTree - Verwaltung der Tree Hierarchie
 	\item[] \textbf{ids} - IDs der Ordner in einer Gruppe, type: Array
 \end{itemize}
 
-\subsubsection*{link}\label{linkLGUI}
+\subsubsection*{\textit{link}}\label{linkLGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{link()} 
 	\item[] Verlinkt das gewählte Objekt in die entsprechenden Gruppen, nach der Überprüfung, ob es dort bereits existiert oder ob es in einen Ordner in der Gruppe oder direkt in die Gruppe verlinkt werden muss.
 \end{itemize}
 
-\subsubsection*{getGroups}\label{getGroupsLGUI}
+\subsubsection*{\textit{getGroups}}\label{getGroupsLGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{getGroups()} 
@@ -154,7 +160,7 @@ protected - type: ilTree - Verwaltung der Tree Hierarchie
 	\item[] \textbf{data} - Titel und ReferenzIDs der Gruppen in einem Kurs, type: Array
 \end{itemize}
 
-\subsubsection*{isCourse}\label{isCourseLGUI}
+\subsubsection*{\textit{isCourse}}\label{isCourseLGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{isCourse()} 
@@ -169,7 +175,7 @@ protected - type: ilTree - Verwaltung der Tree Hierarchie
 	\item[] \textbf{(true, false)} - Ist Objekt ein Kurs? (ja/nein), type: Boolean
 \end{itemize}
 
-\subsubsection*{isAlreadyLinked}\label{isAlreadyLinkedLGUI}
+\subsubsection*{\textit{isAlreadyLinked}}\label{isAlreadyLinkedLGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{isAlreadyLinked()} 
@@ -185,7 +191,7 @@ protected - type: ilTree - Verwaltung der Tree Hierarchie
 	\item[] \textbf{(true, false)} - Bereits verlinkt? (ja/nein), type: Boolean
 \end{itemize}
 
-\subsubsection*{checkAccess}\label{checkAccessLGUI}
+\subsubsection*{\textit{checkAccess}}\label{checkAccessLGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{checkAccess()} 

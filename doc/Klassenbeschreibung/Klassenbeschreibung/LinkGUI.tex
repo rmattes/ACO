@@ -1,16 +1,211 @@
-\section{classtitle}
+\section{ilACOLinkGUI}
 
 \subsection*{Beschreibung}
+Diese Klasse implementiert die Funktion \textit{Verlinkung} und beinhaltet die Möglichkeit, Exercise- oder Test-Objekte in einem Kurs in alle oder nur in ausgewählte Gruppen in einem Kurs zu verlinken.
 
 \subsection*{Klassenvariablen}
+\subparagraph{ctrl}
+protected - type: ilCtrl
+\subparagraph{tpl}
+protected - type: ilTemplate
+\subparagraph{pl}
+protected - type: ilACOPlugin
+\subparagraph{tabs}
+protected - type: ilTabsGUI
+\subparagraph{ilLocator}
+protected - type: ilLocatorGUI
+\subparagraph{lng}
+protected - type: ilLanguage
+\subparagraph{tree}
+protected - type: ilTree
 
 \subsection*{Funktions-Liste}
-
-\paragraph{\nameref{funktion}}
+\subparagraph{\nameref{constructLGUI}}
+\subparagraph{\nameref{prepareOutputLGUI}}
+\subparagraph{\nameref{setTitleAndIconLGUI}}
+\subparagraph{\nameref{executeCommandLGUI}}
+\subparagraph{\nameref{viewLGUI}}
+\subparagraph{\nameref{initFormLGUI}}
+\subparagraph{\nameref{getAdminFolderIdsLGUI}}
+\subparagraph{\nameref{getFolderNameLGUI}}
+\subparagraph{\nameref{getParentIdsLGUI}}
+\subparagraph{\nameref{getGroupFolderIDLGUI}}
+\subparagraph{\nameref{linkLGUI}}
+\subparagraph{\nameref{getGroupsLGUI}}
+\subparagraph{\nameref{isCourseLGUI}}
+\subparagraph{\nameref{isAlreadyLinkedLGUI}}
+\subparagraph{\nameref{checkAccessLGUI}}
 
 \subsection*{Funktionen}
+\subsubsection*{\_\_construct}\label{constructLGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{\_\_construct()} 
+	\item[] 
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\subparagraph{Rückgabewerte}
 
-\subsubsection*{funktionstitle}\label{funktion}
-\paragraph{Beschreibung}
-\paragraph{Parameter-Liste}
-\paragraph{Rückgabewerte}
+\subsubsection*{prepareOutput}\label{prepareOutputLGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{prepareOutput()} 
+	\item[] 
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\subparagraph{Rückgabewerte}
+
+\subsubsection*{setTitleAndIcon}\label{setTitleAndIconLGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{setTitleAndIcon()} 
+	\item[] 
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\subparagraph{Rückgabewerte}
+
+\subsubsection*{executeCommand}\label{executeCommandLGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{executeCommand()} 
+	\item[] 
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\subparagraph{Rückgabewerte}
+
+\subsubsection*{view}\label{viewLGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{view()} 
+	\item[] 
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\subparagraph{Rückgabewerte}
+
+\subsubsection*{initForm}\label{initFormLGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{initForm()} 
+	\item[] 
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\subparagraph{Rückgabewerte}
+
+\subsubsection*{getAdminFolderIds}\label{getAdminFolderIdsLGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{getAdminFolderIds()} 
+	\item[] 
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\subparagraph{Rückgabewerte}
+\begin{itemize}
+	\item[] \textbf{ids} - IDs der Ordner im Kurs, type: Array
+\end{itemize}
+
+\subsubsection*{getFolderName}\label{getFolderNameLGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{getFolderName()} 
+	\item[] 
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\subparagraph{Rückgabewerte}
+\begin{itemize}
+	\item[] \textbf{folder['title']} - Titel der Gruppe, type: String 
+\end{itemize}
+
+\subsubsection*{getParentIds}\label{getParentIdsLGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{getParentIds(\$id)} 
+	\item[] 
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\begin{itemize}
+	\item[] \textbf{id} - ID eines Objekts, type: Integer 
+\end{itemize}
+\subparagraph{Rückgabewerte}
+\begin{itemize}
+	\item[] \textbf{ids} - IDs zu den übergeordneten Objekten eines Objekts, type: Array
+\end{itemize}
+
+\subsubsection*{getGroupFolderID}\label{getGroupFolderIDLGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{getGroupFolderID()} 
+	\item[] 
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\begin{itemize}
+	\item[] \textbf{group\_id} - ID der Gruppe, type: Integer
+	\item[] \textbf{folder\_name} - Titel des Ordners, type: Integer
+\end{itemize}
+\subparagraph{Rückgabewerte}
+\begin{itemize}
+	\item[] \textbf{ids} - IDs der Ordner in einer Gruppe, type: Array
+\end{itemize}
+
+\subsubsection*{link}\label{linkLGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{link()} 
+	\item[] 
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\subparagraph{Rückgabewerte}
+
+\subsubsection*{getGroups}\label{getGroupsLGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{getGroups()} 
+	\item[] 
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\begin{itemize}
+	\item[] \textbf{ref\_id} - ReferenzID eines Kurses, type: Integer
+\end{itemize}
+\subparagraph{Rückgabewerte}
+\begin{itemize}
+	\item[] \textbf{data} - Titel und ReferenzIDs der Gruppen in einem Kurs, type: Array
+\end{itemize}
+
+\subsubsection*{isCourse}\label{isCourseLGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{isCourse()} 
+	\item[] 
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\begin{itemize}
+	\item[] \textbf{ref\_id} - ReferenzID eines Kurses, type: Integer
+\end{itemize}
+\subparagraph{Rückgabewerte}
+\begin{itemize}
+	\item[] \textbf{(true, false)} - Ist Objekt ein Kurs? (ja/nein), type: Boolean
+\end{itemize}
+
+\subsubsection*{isAlreadyLinked}\label{isAlreadyLinkedLGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{isAlreadyLinked()} 
+	\item[] 
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\begin{itemize}
+	\item[] \textbf{folder\_ref\_id} - ReferenzID einer Gruppe, type: Integer
+	\item[] \textbf{obj\_id} - ID des Objekts, das verlinkt werden soll, type: Integer
+\end{itemize}
+\subparagraph{Rückgabewerte}
+\begin{itemize}
+	\item[] \textbf{(true, false)} - Bereits verlinkt? (ja/nein), type: Boolean
+\end{itemize}
+
+\subsubsection*{checkAccess}\label{checkAccessLGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{checkAccess()} 
+	\item[] 
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\subparagraph{Rückgabewerte}

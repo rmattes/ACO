@@ -1,16 +1,229 @@
-\section{classtitle}
+\section{ilACOGroupDisplayGUI}
 
 \subsection*{Beschreibung}
+Diese Klasse implementiert die Funktion \textit{Kurs bearbeiten} und beinhaltet die Möglichkeit, die einzelnen Gruppen in einem Kurs zentral zu verwalten. 
+Hierzu werden bestimmte Parameter der Gruppen in einer tabellarischen Übersicht dargestellt und können editiert werden.
 
 \subsection*{Klassenvariablen}
+\subparagraph{ctrl}
+protected - type: ilCtrl
+\subparagraph{tpl}
+protected - type: ilTemplate
+\subparagraph{pl}
+protected - type: ilACOPlugin
+\subparagraph{tabs}
+protected - type: ilTabsGUI
+\subparagraph{ilLocator}
+protected - type: ilLocatorGUI
+\subparagraph{lng}
+protected - type: ilLanguage
+\subparagraph{tree}
+protected - type: ilTree
+\subparagraph{form}
+protected - type: ilPropertyFormGUI
+\subparagraph{groupAdmins}
+protected - type: array
 
 \subsection*{Funktions-Liste}
+\subparagraph{\nameref{constructGDGUI}}
+\subparagraph{\nameref{prepareOutputGDGUI}}
+\subparagraph{\nameref{setTitleAndIconGDGUI}}
+\subparagraph{\nameref{executeCommandGDGUI}}
+\subparagraph{\nameref{viewGDGUI}}
+\subparagraph{\nameref{initFormGDGUI}}
+\subparagraph{\nameref{saveGroupsGDGUI}}
+\subparagraph{\nameref{getUserIdGDGUI}}
+\subparagraph{\nameref{getAdminRoleIdGDGUI}}
+\subparagraph{\nameref{getLoginbyIDSGDGUI}}
+\subparagraph{\nameref{getCourseAdminIDsGDGUI}}
+\subparagraph{\nameref{loadDateGDGUI}}
+\subparagraph{\nameref{updateGroupGDGUI}}
+\subparagraph{\nameref{getTableDataGDGUI}}
+\subparagraph{\nameref{doUserAutoCompleteGDGUI}}
+\subparagraph{\nameref{checkAccessGDGUI}}
 
-\paragraph{\nameref{funktion}}
+\subsection*{\textit{Funktionen}}
 
-\subsection*{Funktionen}
+\subsubsection*{\_\_construct}\label{constructGDGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{\_\_construct()}
+	\item[] 
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\subparagraph{Rückgabewerte}
 
-\subsubsection*{funktionstitle}\label{funktion}
-\paragraph{Beschreibung}
-\paragraph{Parameter-Liste}
-\paragraph{Rückgabewerte}
+\subsubsection*{prepareOutput}\label{prepareOutputGDGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{prepareOutput()}
+	\item[] 
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\subparagraph{Rückgabewerte}
+
+\subsubsection*{setTitleAndIcon}\label{setTitleAndIconGDGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{setTitleAndIcon()}
+	\item[] 
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\subparagraph{Rückgabewerte}
+
+\subsubsection*{executeCommand}\label{executeCommandGDGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{executeCommand()}
+	\item[] 
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\subparagraph{Rückgabewerte}
+
+\subsubsection*{view}\label{viewGDGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{view()}
+	\item[] 
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\subparagraph{Rückgabewerte}
+
+\subsubsection*{initForm}\label{initFormGDGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{initForm()}
+	\item[] 
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\subparagraph{Rückgabewerte}
+
+\subsubsection*{saveGroups}\label{saveGroupsGDGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[]  \noindent\fbox{saveGroups()} 
+	\item[] Die Änderungen in der tabellarischen Übersicht der Gruppen werden an die Funktion \nameref{updateGroupGDGUI} übergeben. Anschließend wird die tabellarische Übersicht aktualisiert, um die aktuellen Daten anzuzeigen.
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\subparagraph{Rückgabewerte}
+
+\subsubsection*{getUserId}\label{getUserIdGDGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[]  \noindent\fbox{getUserId(\$user\_login)} 
+	\item[] Benutzername als Eingabe liefert die dazugehörige UserID
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\begin{itemize}
+	\item[] \textbf{user\_login} - Benutzername, type: String
+\end{itemize}
+\subparagraph{Rückgabewerte}
+\begin{itemize}
+	\item[] \textbf{data[0]} - UserID, type: Integer
+\end{itemize}
+
+\subsubsection*{getAdminRoleId}\label{getAdminRoleIdGDGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[]  \noindent\fbox{getAdminRoleId(\$obj\_id)} 
+	\item[] ObjektID einer Gruppe als Eingabe liefert die ObjektID der Benutzerrolle des Gruppen-Administrators
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\begin{itemize}
+	\item[] \textbf{obj\_id} - ID eines Objekts, type: Integer
+\end{itemize}
+\subparagraph{Rückgabewerte}
+\begin{itemize}
+	\item[] \textbf{role\_id[0]} - Objekt ID der Benutzerrolle Gruppen-Administrator, type: Integer
+\end{itemize}
+
+\subsubsection*{getLoginbyIDS}\label{getLoginbyIDSGDGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[]  \noindent\fbox{getLoginByIDS(\$ids)} 
+	\item[] Auf Eingabe von UserIDs werden die dazugehörigen Benutzernamen ausgegeben.
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\begin{itemize}
+	\item[] \textbf{ids} - UserIDs, type: Integer[]
+\end{itemize}
+\subparagraph{Rückgabewerte}
+\begin{itemize}
+	\item[] \textbf{logins} - Benutzernamen, type: String[]
+\end{itemize}
+
+\subsubsection*{getCourseAdminIDs}\label{getCourseAdminIDsGDGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[]  \noindent\fbox{getCourseAdminIDs(\$ref\_id)} 
+	\item[] Auf Eingabe der ReferenzID eines Kurses wird die UserID des dazugehörigen Kurs-Administrators ausgegeben.
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\begin{itemize}
+	\item[] \textbf{ref\_id} - ReferenzID eines Kurses, type: Integer
+\end{itemize}
+\subparagraph{Rückgabewerte}
+\begin{itemize}
+	\item[] \textbf{ids} - UserID des Kurs-Administrators, type: Integer
+\end{itemize}
+
+\subsubsection*{loadDate}\label{loadDateGDGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{loadDate(\$a\_field)}
+	\item[] 
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\subparagraph{Rückgabewerte}
+
+\subsubsection*{updateGroup}\label{updateGroupGDGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[]  \noindent\fbox{updateGroups(\$obj\_id, \$title, \$description, \$tutor, \$members, \$reg\_start, \$reg\_end, \$time\_reg)} 
+	\item[] Die Funktion wird von \nameref{saveGroupsGDGUI} aufgerufen und schreibt die geänderten Werte in die Datenbank.
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\begin{itemize}
+	\item[] \textbf{obj\_id} - ObjektID der Gruppe, type: Integer
+	\item[] \textbf{title} - Titel der Gruppe, type: String
+	\item[] \textbf{description} - Beschreibung der Gruppe, type: String
+	\item[] \textbf{tutor} - Benutername des Gruppentutors, type: String
+	\item[] \textbf{members} - Anzahl maximaler Mitglieder, type: Integer
+	\item[] \textbf{reg\_start} - Zeitpunkt Anfang Beitritt, type: ilDateTime
+	\item[] \textbf{reg\_end} - Zeitpunkt Ende Beitritt, type: ilDateTime
+	\item[] \textbf{time\_reg} - Zeitlich begrenzter Beitritt, type: Boolean
+\end{itemize}
+\subparagraph{Rückgabewerte}
+
+\subsubsection*{getTableData}\label{getTableDataGDGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{getTableData(\$ref\_id)}
+	\item[] Liefert auf Eingabe der ReferenzID eines Kurses bestimmte Parameter der Gruppen in diesem Kurs.
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\begin{itemize}
+	\item[] \textbf{ref\_id} - ReferenzID des Kurses, type: Integer
+\end{itemize}
+\subparagraph{Rückgabewerte}
+\begin{itemize}
+	\item[] \textbf{data} - Parameter aller Gruppen zu dem Kurs, type: Array
+\end{itemize}
+
+\subsubsection*{doUserAutoComplete}\label{doUserAutoCompleteGDGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{doUserAutoComplete()}
+	\item[] 
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\subparagraph{Rückgabewerte}
+
+\subsubsection*{checkAccess}\label{checkAccessGDGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{checkAccess()}
+	\item[] 
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\subparagraph{Rückgabewerte}

@@ -49,13 +49,10 @@ class ilACOLinkGUI{
      */
     protected $lng;
 
-    var $object;
-
     public function __construct()
     {
         global  $ilCtrl, $tpl, $ilTabs, $ilLocator, $lng;
         $this->unique_id = md5(uniqid());
-        //var_dump($this->unique_id);
         $this->lng = $lng;
         $this->tabs = $ilTabs;
         $this->ctrl = $ilCtrl;
@@ -97,7 +94,6 @@ class ilACOLinkGUI{
         $cmd = $this->ctrl->getCmd('view');
         $this->ctrl->saveParameter($this, 'ref_id');
         $this->prepareOutput();
-        //var_dump($cmd);
         switch ($cmd) {
             default:
                 $this->$cmd();
@@ -132,8 +128,6 @@ class ilACOLinkGUI{
         $form->setFormAction($this->ctrl->getFormAction($this));
         $data = $this->getGroups($_GET['ref_id']);
 
-        //var_dump($data);
-
         //radio button to select if to link to all groups or only to single ones
         $link_proc = new ilRadioGroupInputGUI($this->pl->txt('link_type'),'link_type');
         $opt1 = new ilRadioOption($this->pl->txt('link_all'), 'link_all');
@@ -142,7 +136,6 @@ class ilACOLinkGUI{
         foreach ($data as $row){
 
             $checkbox_link = new ilCheckboxInputGUI($row['title'], $row['ref_id']);
-            //$checkbox_link->setValue($this->isReferenced($row['obj_id'],$_GET['ref_id']));
             $opt2->addSubItem($checkbox_link);
 
         }
@@ -154,12 +147,6 @@ class ilACOLinkGUI{
         $form->addCommandButton('link',$this->pl->txt('save_link'));
         return $form;
     }
-
-    protected function isReferenced($group_id,$exercise_id){
-
-    }
-
-
 
 
     protected function getAdminFolderIds(){
@@ -178,7 +165,6 @@ class ilACOLinkGUI{
         $folder_name = $this->getFolderName();
 
         foreach($formitems as $checkbox){
-            var_dump($checkFormItems);
             if (($checkFormItems)=="link_all"){
                 $checkbox->setChecked(true);
             }
@@ -221,7 +207,7 @@ class ilACOLinkGUI{
         while ($record = $ilDB->fetchAssoc($result)){
             array_push($data,$record);
         }
-        //var_dump($data);
+
         if(empty($data)){
             ilUtil::sendInfo($this->pl->txt('inf_parent_no_folder'));
             return -1;
@@ -229,6 +215,7 @@ class ilACOLinkGUI{
         $folder = $data[0];
         return $folder['title'];
     }
+
     protected function getParentIds($id){
 
         global $ilDB;
@@ -279,7 +266,6 @@ class ilACOLinkGUI{
     }
 
 
-
     protected function link()
     {
         global $rbacreview, $log, $tree, $ilObjDataCache, $ilUser;
@@ -293,31 +279,22 @@ class ilACOLinkGUI{
 
             $group_admin_folder_ids = $this->getAdminFolderIds();
 
-            //var_dump($group_admin_folder_ids);
-
             foreach($group_admin_folder_ids as $folder_ref_id)
             {
                 
                 $linked_to_folders[] = $ilObjDataCache->lookupTitle($ilObjDataCache->lookupObjId($folder_ref_id[0]));
-
-               
-                
                                           
                 //get Ref_id of Excercise or Test you want to link
                 $ref_id = $_GET['ref_id'];
     
                 //get obj_id of the excercise or Test we want to link
                 $obj_id[] = $ilObjDataCache->lookupObjId($ref_id);
-                    
                 
                 $isAlreadyLinked = $this->isAlreadyLinked($folder_ref_id[0], $obj_id[0]);
-                    
-                var_dump($isAlreadyLinked);
                 
                 //checks for each group if the object is already linked
                 //if this is the case we send a Failure to the user and we 
-                //continue with the next selected group 
-                
+                //continue with the next selected group
                 if( $isAlreadyLinked == true){
                  
                ilUtil::sendFailure(sprintf($this->pl->txt('some_folders_already_linked'), implode(', ', $linked_to_folders)), true);     
@@ -325,14 +302,11 @@ class ilACOLinkGUI{
                   continue;
                                 
                  }
-              
-
                     // get node data
                     $top_node = $tree->getNodeData($ref_id);
 
                     // get subnodes of top nodes
                     $subnodes[$ref_id] = $tree->getSubtree($top_node);
-
 
                 // now move all subtrees to new location
                 foreach($subnodes as $key => $subnode)
@@ -427,8 +401,7 @@ class ilACOLinkGUI{
         while ($record = $ilDB->fetchAssoc($result)){
             array_push($data,$record);
         }
-        
-       // var_dump($data);
+
         if(empty($data)){
             return false;
         }
@@ -437,7 +410,6 @@ class ilACOLinkGUI{
         }
         
     }
-    
 
         protected function checkAccess()
     {

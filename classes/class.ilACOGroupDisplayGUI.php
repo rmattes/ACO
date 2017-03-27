@@ -52,8 +52,6 @@ class ilACOGroupDisplayGUI
      * @var ilLanguage
      */
     protected $lng;
-
-    protected $course_table;
     /**
      * @var ilTree
      */
@@ -61,7 +59,7 @@ class ilACOGroupDisplayGUI
 
     protected $form;
 
-    protected $group_admins;
+    protected $groupAdmins;
 
     public function __construct()
     {
@@ -72,7 +70,7 @@ class ilACOGroupDisplayGUI
         $this->ctrl = $ilCtrl;
         $this->tpl = $tpl;
         $this->ilLocator = $ilLocator;
-        $this->group_admins = array();
+        $this->groupAdmins = array();
         $this->pl = ilACOPlugin::getInstance();
     }
 
@@ -114,9 +112,7 @@ class ilACOGroupDisplayGUI
         $this->tpl->setDescription($this->pl->txt('obj_acop_desc'));
     }
 
-    /**
-     *
-     */
+
     public function executeCommand()
     {
         $this->checkAccess();
@@ -166,7 +162,7 @@ class ilACOGroupDisplayGUI
             $tmp_data = array();
             $tmp_ids = array();
             foreach ($data as $row){
-            $this->group_admins[$row['obj_id']]=$row['login'];
+            $this->groupAdmins[$row['obj_id']]=$row['login'];
                 $id = $row["obj_id"];
                 if(in_array($id,$tmp_ids)){
                     foreach ($tmp_data as $grp){
@@ -192,7 +188,6 @@ class ilACOGroupDisplayGUI
             $section = new ilFormSectionHeaderGUI();
             $section->setTitle($row['title']);
             $form->addItem($section);
-            //$ref_id_field = new ilNumberInputGUI($this->pl->txt("ref_id"), "ref_id".$n);
             $textfield_name = new ilTextInputGUI($this->pl->txt("group_name"), "group_name".$n);
             $textfield_description = new ilTextInputGUI($this->pl->txt("group_description"),"description".$n);
             $textfield_tutor = new ilTextInputGUI($a_options['auto_complete_name'], 'tutor'.$n);
@@ -206,9 +201,6 @@ class ilACOGroupDisplayGUI
             $dur->setStartText($this->pl->txt('cal_start'));
             $dur->setEndText($this->pl->txt('cal_end'));
             $dur->setShowTime(true);
-            //$ref_id_field->setValue($row['obj_id']);
-            //$ref_id_field->setHiddenTitle($row['obj_id']);
-            //$ref_id_field->setDisabled(true);
             $textfield_name->setValue($row['title']);
             $textfield_name->setHiddenTitle($row['obj_id']);
             $textfield_description->setValue($row['description']);
@@ -219,7 +211,6 @@ class ilACOGroupDisplayGUI
             $end_time = new ilDateTime($row['registration_end'],IL_CAL_DATETIME);
             $dur->setStart($start_time);
             $dur->setEnd($end_time);
-            //$form->addItem($ref_id_field);
             $form->addItem($textfield_name);
             $form->addItem($textfield_description);
 
@@ -259,10 +250,6 @@ class ilACOGroupDisplayGUI
             $reg_start = $reg_start->get(IL_CAL_DATETIME);
             $reg_end = $reg_end->get(IL_CAL_DATETIME);
 
-            
-       
-
-            
             //if reg_end before reg_start, we set the reg_start on the reg_end
             //maybe not the best solution 
             if($reg_end<$reg_start){
@@ -327,8 +314,8 @@ class ilACOGroupDisplayGUI
         $ids = array();
         $data = array();
         $query = "select om.usr_id from ilias.obj_members as om
-join ilias.object_reference as oref on oref.obj_id = om.obj_id
-where om.admin = 1 and oref.ref_id = '".$ref_id."'";
+                    join ilias.object_reference as oref on oref.obj_id = om.obj_id
+                    where om.admin = 1 and oref.ref_id = '".$ref_id."'";
 
         $result = $ilDB->query($query);
         while ($record = $ilDB->fetchAssoc($result)){
@@ -340,7 +327,7 @@ where om.admin = 1 and oref.ref_id = '".$ref_id."'";
         return $ids;
 
     }
-    protected function loadDate($a_comp,$a_field)
+    protected function loadDate($a_field)
     {
         global $ilUser;
 
@@ -388,7 +375,7 @@ where om.admin = 1 and oref.ref_id = '".$ref_id."'";
 
         //MANIPULATE GROUP ADMIN needs to be checked
         //Update Group Admins if necessary
-        if($this->group_admins[$obj_id]!=$tutor){
+        if($this->groupAdmins[$obj_id]!=$tutor){
 
             $user_id = $this->getUserId($tutor);
             $user_id = $user_id['usr_id'];
@@ -402,31 +389,13 @@ where om.admin = 1 and oref.ref_id = '".$ref_id."'";
 
             $rbacadmin->assignUser($role_id,$user_id);
 
-            if((!empty($this->group_admins[$obj_id]))){
-                $user_id_old = $this->getUserId($this->group_admins[$obj_id]);
+            if((!empty($this->groupAdmins[$obj_id]))){
+                $user_id_old = $this->getUserId($this->groupAdmins[$obj_id]);
                 $user_id_old = $user_id_old['usr_id'];
 
                 if(!in_array($user_id_old,$course_admins)){
-
                     $rbacadmin->deassignUser($role_id,$user_id_old);
-
-                     //Update Obj_members
-//                    $query = "UPDATE ilias.obj_members as om
-//                    SET  om.usr_id = '".$user_id."' WHERE
-//                    om.obj_id = '".$obj_id."' AND om.admin = 1 AND om.usr_id = '".$user_id_old."'";
-//                    $ilDB->manipulate($query);
-                    }else{
-//                    $query = "INSERT INTO ilias.obj_members (obj_id,usr_id,blocked,notification,passed,origin,origin_ts,contact,admin,tutor,member)
-//                    VALUES (".$obj_id.",".$user_id.",0,0,NULL,0,0,0,1,0,0)";
-//                    $ilDB->manipulate($query);
                 }
-
-
-            }else{
-//                $query = "INSERT INTO ilias.obj_members (obj_id,usr_id,blocked,notification,passed,origin,origin_ts,contact,admin,tutor,member)
-//                VALUES (".$obj_id.",".$user_id.",0,0,NULL,0,0,0,1,0,0)";
-//                $ilDB->manipulate($query);
-
             }
         }
 
@@ -446,7 +415,7 @@ where om.admin = 1 and oref.ref_id = '".$ref_id."'";
        
 
 
-       if($time_reg=="1") {
+       if(  $time_reg=="1") {
        $query3 = "UPDATE ilias.grp_settings as gs
 
                   SET gs.registration_start = '".$reg_start."', gs.registration_unlimited = 0

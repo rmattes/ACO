@@ -1,7 +1,48 @@
 \chapter{Klassenbeschreibungen}
 \minitoc
-Bla hier wird beschrieben
 
+Die Klassen und deren Zusammensetzung als Gesamtsystem wird
+nachfolgend beschrieben. 
+\\
+
+Angefangen mit einem Klassendiagramm unseres Plugins sowie 
+dann die Gruppierung der Klassen sowie anderer Plugin Bestandteile in
+Komponenten.		
+\\
+
+Tablogik: class.ilACOPlugin, class.ilACOUIHookGUI 
+
+Gruppenerstellen: class.ilACOGroupGUI
+
+Gruppenfilter: class.ilACOTutorGUI
+
+Verlinkung: class.ilACOLinkGUI, class.ilACOExerciseMemberTableGUI, templates
+
+Gruppen verwalten: class.ilACOGroupDisplayGUI
+
+Mitgliederverschieben: class.ilACOMemberGUI
+
+Lang Files: lang
+
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{img/klassendiagramm.jpg}
+	\caption{Klassendiagramm}
+\end{figure}
+
+\newpage
+
+
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{img/ComponentDiagram.png}
+	\caption{Komponentendiagramm}
+\end{figure}
+
+
+\clearpage
 
 
 \input{Klassenbeschreibung/Klassenbeschreibung/ExerciseMemberTableGUI}

@@ -47,7 +47,6 @@ class ilACOExerciseMemberTableGUI extends ilTable2GUI {
 
         $this->setTitle($lng->txt("exc_assignment").": ".$this->ass->getTitle());
         $this->setTopCommands(true);
-        //$this->setLimit(9999);
 
         $data = $this->ass->getMemberListData();
 
@@ -65,10 +64,6 @@ class ilACOExerciseMemberTableGUI extends ilTable2GUI {
 
                 if(!$team_id)
                 {
-                    // #11058
-                    // $team_id = $ass_obj->getTeamId($item["usr_id"], true);
-
-                    // #11957
                     $team_id = "nty".$item["usr_id"];
                 }
 
@@ -138,11 +133,9 @@ class ilACOExerciseMemberTableGUI extends ilTable2GUI {
         $this->setEnableHeader(true);
         $this->setFormAction($ilCtrl->getFormAction($a_parent_obj));
         $this->setRowTemplate("tpl.exc_members_row.html", "Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/ACO");
-        //$this->disable("footer");
         $this->setEnableTitle(true);
         $this->setSelectAllCheckbox("member");
 
-       // $this->addMultiCommand("saveStatusSelected", $lng->txt("exc_save_selected"));
         $this->addMultiCommand("redirectFeedbackMail", $lng->txt("exc_send_mail"));
         $this->addMultiCommand("sendMembers", $lng->txt("exc_send_assignment"));
 
@@ -152,7 +145,6 @@ class ilACOExerciseMemberTableGUI extends ilTable2GUI {
             $this->addMultiCommand("dissolveTeams", $lng->txt("exc_team_multi_dissolve"));
         }
 
-        //$this->addMultiCommand("confirmDeassignMembers", $lng->txt("exc_deassign_members"));
 
         $this->addCommandButton("saveStatusAll", $this->pl->txt("exc_save_all_and_total"));
 
@@ -314,11 +306,6 @@ class ilACOExerciseMemberTableGUI extends ilTable2GUI {
                     $this->tpl->setCurrentBlock("team_info");
                     $this->tpl->setVariable("TXT_TEAM_INFO", $lng->txt("exc_no_team_yet"));
 
-                    /*
-                    $this->tpl->setVariable("TXT_CREATE_TEAM", $lng->txt("exc_create_team"));
-                    $this->tpl->setVariable("URL_CREATE_TEAM",
-                        $ilCtrl->getLinkTargetByClass("ilExSubmissionTeamGUI", "createSingleMemberTeam"));
-                    */
 
                     if($file_info["files"]["count"])
                     {
@@ -390,8 +377,6 @@ class ilACOExerciseMemberTableGUI extends ilTable2GUI {
                 $lcomment_form->addItem($lcomment);
 
                 $lcomment_form->addCommandButton("save", $lng->txt("save"));
-                // $lcomment_form->addCommandButton("cancel", $lng->txt("cancel"));
-
                 $this->overlay_tpl->setCurrentBlock("overlay_bl");
                 $this->overlay_tpl->setVariable("COMMENT_OVERLAY_ID", $overlay_id);
                 $this->overlay_tpl->setVariable("COMMENT_OVERLAY_FORM", $lcomment_form->getHTML());
@@ -437,20 +422,7 @@ class ilACOExerciseMemberTableGUI extends ilTable2GUI {
                 $this->tpl->setVariable("TXT_FEEDBACK",
                     $lng->txt("exc_send_mail"));
 
-//                // file feedback
-//                $cnt_files = $this->storage->countFeedbackFiles($submission->getFeedbackId());
-//                $this->tpl->setVariable("LINK_FILE_FEEDBACK",
-//                    $ilCtrl->getLinkTargetByClass("ilfilesystemgui", "listFiles"));
-//                if ($cnt_files == 0)
-//                {
-//                    $this->tpl->setVariable("TXT_FILE_FEEDBACK",
-//                        $lng->txt("exc_add_feedback_file"));
-//                }
-//                else
-//                {
-//                    $this->tpl->setVariable("TXT_FILE_FEEDBACK",
-//                        $lng->txt("exc_fb_files")." (".$cnt_files.")");
-//                }
+//
 
                 // peer review / rating
                 if($peer_review = $submission->getPeerReview())
@@ -471,12 +443,6 @@ class ilACOExerciseMemberTableGUI extends ilTable2GUI {
                     $this->tpl->setVariable("LINK_PEER_REVIEW_RECEIVED",
                         $ilCtrl->getLinkTargetByClass("ilexpeerreviewgui", "showReceivedPeerReview"));
 
-                    /* :TODO: restrict to valid?
-                    $rating = new ilRatingGUI();
-                    $rating->setObject($this->ass_id, "ass", $member_id, "peer");
-                    $rating->setUserId(0);
-                    $this->tpl->setVariable("VAL_RATING", $rating->getHTML(true, false));
-                    */
 
                     $this->tpl->parseCurrentBlock();
                 }

@@ -5,19 +5,19 @@ Diese Klasse implementiert die Funktion \textit{Verlinkung} und beinhaltet die M
 
 \subsection*{Klassenvariablen}
 \subparagraph{ctrl}
-protected - type: ilCtrl
+protected - type: ilCtrl - Steuerung Zugriffsrechte
 \subparagraph{tpl}
-protected - type: ilTemplate
+protected - type: ilTemplate - Template für Darstellung und Formatierung
 \subparagraph{pl}
-protected - type: ilACOPlugin
+protected - type: ilACOPlugin - Instanz des Plugins
 \subparagraph{tabs}
-protected - type: ilTabsGUI
+protected - type: ilTabsGUI - Verwaltung von Tabs
 \subparagraph{ilLocator}
-protected - type: ilLocatorGUI
+protected - type: ilLocatorGUI - Darstellung in der Tree Hierarchie
 \subparagraph{lng}
-protected - type: ilLanguage
+protected - type: ilLanguage - Einbindung der Language-File von ILIAS
 \subparagraph{tree}
-protected - type: ilTree
+protected - type: ilTree - Verwaltung der Tree Hierarchie
 
 \subsection*{Funktions-Liste}
 \subparagraph{\nameref{constructLGUI}}
@@ -41,63 +41,50 @@ protected - type: ilTree
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{\_\_construct()} 
-	\item[] 
+	\item[] Konstruktion der Grundinstanz
 \end{itemize}
-\subparagraph{Parameter-Liste}
-\subparagraph{Rückgabewerte}
 
 \subsubsection*{prepareOutput}\label{prepareOutputLGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{prepareOutput()} 
-	\item[] 
+	\item[] Grundlegende Eigenschaften werden festgelegt: Tabs, Position in der Tree Hierarchie, BackTarget, Titel und Icon, sowie das verwendete Template
 \end{itemize}
-\subparagraph{Parameter-Liste}
-\subparagraph{Rückgabewerte}
 
 \subsubsection*{setTitleAndIcon}\label{setTitleAndIconLGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{setTitleAndIcon()} 
-	\item[] 
+	\item[] Titel und Symbol des Objekt werden festgelegt
 \end{itemize}
-\subparagraph{Parameter-Liste}
-\subparagraph{Rückgabewerte}
 
 \subsubsection*{executeCommand}\label{executeCommandLGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{executeCommand()} 
-	\item[] 
+	\item[] Regelung der Umsetzung von Befehlen mittels CommandButtons
 \end{itemize}
-\subparagraph{Parameter-Liste}
-\subparagraph{Rückgabewerte}
 
 \subsubsection*{view}\label{viewLGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{view()} 
-	\item[] 
+	\item[] Ausgabe der initialen Ansicht als HTML-Dokument
 \end{itemize}
-\subparagraph{Parameter-Liste}
-\subparagraph{Rückgabewerte}
 
 \subsubsection*{initForm}\label{initFormLGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{initForm()} 
-	\item[] 
+	\item[] Formular wird generiert und mit initialen Werten gefüllt
 \end{itemize}
-\subparagraph{Parameter-Liste}
-\subparagraph{Rückgabewerte}
 
 \subsubsection*{getAdminFolderIds}\label{getAdminFolderIdsLGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{getAdminFolderIds()} 
-	\item[] 
+	\item[] TODO
 \end{itemize}
-\subparagraph{Parameter-Liste}
 \subparagraph{Rückgabewerte}
 \begin{itemize}
 	\item[] \textbf{ids} - IDs der Ordner im Kurs, type: Array
@@ -107,19 +94,18 @@ protected - type: ilTree
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{getFolderName()} 
-	\item[] 
+	\item[] Ausgabe des Titels eines Ordners
 \end{itemize}
-\subparagraph{Parameter-Liste}
 \subparagraph{Rückgabewerte}
 \begin{itemize}
-	\item[] \textbf{folder['title']} - Titel der Gruppe, type: String 
+	\item[] \textbf{folder['title']} - Titel des Ordners, type: String 
 \end{itemize}
 
 \subsubsection*{getParentIds}\label{getParentIdsLGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{getParentIds(\$id)} 
-	\item[] 
+	\item[] Ausgabe der ID des dem Objekt übergeordneten Objekts
 \end{itemize}
 \subparagraph{Parameter-Liste}
 \begin{itemize}
@@ -134,7 +120,7 @@ protected - type: ilTree
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{getGroupFolderID()} 
-	\item[] 
+	\item[] TODO
 \end{itemize}
 \subparagraph{Parameter-Liste}
 \begin{itemize}
@@ -150,16 +136,14 @@ protected - type: ilTree
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{link()} 
-	\item[] 
+	\item[] Verlinkt das gewählte Objekt in die entsprechenden Gruppen, nach der Überprüfung, ob es dort bereits existiert oder ob es in einen Ordner in der Gruppe oder direkt in die Gruppe verlinkt werden muss.
 \end{itemize}
-\subparagraph{Parameter-Liste}
-\subparagraph{Rückgabewerte}
 
 \subsubsection*{getGroups}\label{getGroupsLGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{getGroups()} 
-	\item[] 
+	\item[] Funktion liefert alle Gruppen in einem Kurs
 \end{itemize}
 \subparagraph{Parameter-Liste}
 \begin{itemize}
@@ -174,7 +158,7 @@ protected - type: ilTree
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{isCourse()} 
-	\item[] 
+	\item[] Überprüft, ob das Objekt zu einer ReferenzID ein Kurs ist
 \end{itemize}
 \subparagraph{Parameter-Liste}
 \begin{itemize}
@@ -189,7 +173,7 @@ protected - type: ilTree
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{isAlreadyLinked()} 
-	\item[] 
+	\item[] Funktion überprüft, ob das Objekt in eine Gruppe schon verlinkt wurde
 \end{itemize}
 \subparagraph{Parameter-Liste}
 \begin{itemize}
@@ -205,7 +189,5 @@ protected - type: ilTree
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{checkAccess()} 
-	\item[] 
+	\item[] Überprüft, ob man Lese- oder Schreibrechte auf das aktuelle Objekt hat.
 \end{itemize}
-\subparagraph{Parameter-Liste}
-\subparagraph{Rückgabewerte}

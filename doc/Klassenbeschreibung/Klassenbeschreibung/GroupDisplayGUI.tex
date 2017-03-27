@@ -6,23 +6,23 @@ Hierzu werden bestimmte Parameter der Gruppen in einer tabellarischen Übersicht
 
 \subsection*{Klassenvariablen}
 \subparagraph{ctrl}
-protected - type: ilCtrl
+protected - type: ilCtrl - Steuerung Zugriffsrechte
 \subparagraph{tpl}
-protected - type: ilTemplate
+protected - type: ilTemplate - Template für Darstellung und Formatierung
 \subparagraph{pl}
-protected - type: ilACOPlugin
+protected - type: ilACOPlugin - Instanz des Plugins
 \subparagraph{tabs}
-protected - type: ilTabsGUI
+protected - type: ilTabsGUI - Verwaltung von Tabs
 \subparagraph{ilLocator}
-protected - type: ilLocatorGUI
+protected - type: ilLocatorGUI - Darstellung in der Tree Hierarchie
 \subparagraph{lng}
-protected - type: ilLanguage
+protected - type: ilLanguage - Einbindung der Language-File von ILIAS
 \subparagraph{tree}
-protected - type: ilTree
+protected - type: ilTree - Verwaltung der Tree Hierarchie
 \subparagraph{form}
-protected - type: ilPropertyFormGUI
+protected - type: ilPropertyFormGUI - Instanz eines Formulars
 \subparagraph{groupAdmins}
-protected - type: array
+protected - type: array - Array mit allen Admins in einer Gruppe
 
 \subsection*{Funktions-Liste}
 \subparagraph{\nameref{constructGDGUI}}
@@ -48,55 +48,43 @@ protected - type: array
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{\_\_construct()}
-	\item[] 
+	\item[] Konstruktion der Grundinstanz
 \end{itemize}
-\subparagraph{Parameter-Liste}
-\subparagraph{Rückgabewerte}
 
 \subsubsection*{prepareOutput}\label{prepareOutputGDGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{prepareOutput()}
-	\item[] 
+	\item[] Grundlegende Eigenschaften werden festgelegt: Tabs, Position in der Tree Hierarchie, BackTarget, Titel und Icon, sowie das verwendete Template
 \end{itemize}
-\subparagraph{Parameter-Liste}
-\subparagraph{Rückgabewerte}
 
 \subsubsection*{setTitleAndIcon}\label{setTitleAndIconGDGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{setTitleAndIcon()}
-	\item[] 
+	\item[] Titel und Symbol des Objekt werden festgelegt
 \end{itemize}
-\subparagraph{Parameter-Liste}
-\subparagraph{Rückgabewerte}
 
 \subsubsection*{executeCommand}\label{executeCommandGDGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{executeCommand()}
-	\item[] 
+	\item[] Regelung der Umsetzung von Befehlen mittels CommandButtons
 \end{itemize}
-\subparagraph{Parameter-Liste}
-\subparagraph{Rückgabewerte}
 
 \subsubsection*{view}\label{viewGDGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{view()}
-	\item[] 
+	\item[] Ausgabe der initialen Ansicht als HTML-Dokument
 \end{itemize}
-\subparagraph{Parameter-Liste}
-\subparagraph{Rückgabewerte}
 
 \subsubsection*{initForm}\label{initFormGDGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{initForm()}
-	\item[] 
+	\item[] Formular wird generiert und mit initialen Werten gefüllt
 \end{itemize}
-\subparagraph{Parameter-Liste}
-\subparagraph{Rückgabewerte}
 
 \subsubsection*{saveGroups}\label{saveGroupsGDGUI}
 \subparagraph{Beschreibung}
@@ -104,8 +92,6 @@ protected - type: array
 	\item[]  \noindent\fbox{saveGroups()} 
 	\item[] Die Änderungen in der tabellarischen Übersicht der Gruppen werden an die Funktion \nameref{updateGroupGDGUI} übergeben. Anschließend wird die tabellarische Übersicht aktualisiert, um die aktuellen Daten anzuzeigen.
 \end{itemize}
-\subparagraph{Parameter-Liste}
-\subparagraph{Rückgabewerte}
 
 \subsubsection*{getUserId}\label{getUserIdGDGUI}
 \subparagraph{Beschreibung}
@@ -171,10 +157,16 @@ protected - type: array
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{loadDate(\$a\_field)}
-	\item[] 
+	\item[] Datum im Formular wird angepasst, um es in die Datenbank schreiben zu können.
 \end{itemize}
 \subparagraph{Parameter-Liste}
+\begin{itemize}
+	\item[] \textbf{a\_field} - Wert eines Datumsfelds im Formular, type: ilDateTime
+\end{itemize}
 \subparagraph{Rückgabewerte}
+\begin{itemize}
+	\item[] \textbf{date} - Wert aus dem Feld umgewandelt in Datenbank-kompatibles Format, type: ilDateTime
+\end{itemize}
 
 \subsubsection*{updateGroup}\label{updateGroupGDGUI}
 \subparagraph{Beschreibung}
@@ -193,7 +185,6 @@ protected - type: array
 	\item[] \textbf{reg\_end} - Zeitpunkt Ende Beitritt, type: ilDateTime
 	\item[] \textbf{time\_reg} - Zeitlich begrenzter Beitritt, type: Boolean
 \end{itemize}
-\subparagraph{Rückgabewerte}
 
 \subsubsection*{getTableData}\label{getTableDataGDGUI}
 \subparagraph{Beschreibung}
@@ -214,16 +205,12 @@ protected - type: array
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{doUserAutoComplete()}
-	\item[] 
+	\item[] Werden in einem Eingabefeld mind. 3 Zeichen eingegeben, versucht die Funktion Vorschläge zur Auswahl von Benutzern zu machen
 \end{itemize}
-\subparagraph{Parameter-Liste}
-\subparagraph{Rückgabewerte}
 
 \subsubsection*{checkAccess}\label{checkAccessGDGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{checkAccess()}
-	\item[] 
+	\item[] Überprüft, ob man Lese- oder Schreibrechte auf das aktuelle Objekt hat.
 \end{itemize}
-\subparagraph{Parameter-Liste}
-\subparagraph{Rückgabewerte}

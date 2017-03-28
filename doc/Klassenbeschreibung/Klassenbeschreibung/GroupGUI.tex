@@ -112,64 +112,64 @@ protected - type: ilCheckboxInputGUI - \\~ \hspace*{6,2cm} {Auswahl zur Erstellu
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{countGroups(\$parent\_id)}
-	\item[] 
+	\item[] Gibt die Anzahl an Gruppen zurück, die in einem Kurs vorhanden sind.
 \end{itemize}
 \subparagraph{Parameter-Liste}
 \begin{itemize}
-	\item[] \textbf{parent\_id} - , type: 
+	\item[] \textbf{parent\_id} - ReferenzID des Kurses, type: Integer
 \end{itemize}
 \subparagraph{Rückgabewerte}
 \begin{itemize}
-	\item[] \textbf{result} - , type: 
+	\item[] \textbf{result} - Anzahl an Gruppen im Kurs, type: Integer
 \end{itemize}
 
 \subsubsection*{\textit{createGroups}}\label{createGroupsGGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{createGroups()}
-	\item[] 
+	\item[] Funktion erstellt die Gruppen und eventuell Ordner in einem Kurs entsprechend den Angaben im Formular. 
 \end{itemize}
 
 \subsubsection*{\textit{groupsInCourse}}\label{groupsInCourseGGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{groupsInCourse()}
-	\item[] 
+	\item[] Gibt die ReferenzIDs der Gruppen in einem Kurs zurück.
 \end{itemize}
 \subparagraph{Rückgabewerte}
 \begin{itemize}
-	\item[] \textbf{group\_id} - , type: 
+	\item[] \textbf{group\_id} - ReferenzIDs der Gruppen im Kurs, type: Array
 \end{itemize}
 
 \subsubsection*{\textit{folderAlreadyExistingCourse}}\label{folderAlreadyExistingCourseGGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{folderAlreadyExistingCourse(\$folder\_name)}
-	\item[] 
+	\item[] Überprüft, ob ein Ordner im Kurs bereits vorhanden ist.
 \end{itemize}
 \subparagraph{Parameter-Liste}
 \begin{itemize}
-	\item[] \textbf{folder\_name} - , type: 
+	\item[] \textbf{folder\_name} - Titel des Ordners, type: String
 \end{itemize}
 \subparagraph{Rückgabewerte}
 \begin{itemize}
-	\item[] \textbf{(true,false)} - , type: 
+	\item[] \textbf{(true,false)} - Ordner vorhanden? (ja/nein), type: Boolean
 \end{itemize}
 
 \subsubsection*{\textit{folderAlreadyExistingGroup}}\label{folderAlreadyExistingGroupGGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{folderAlreadyExistingGroup(\$folder\_name,\$group\_ref\_id)}
-	\item[] 
+	\item[] Überprüft, ob ein Ordner in einer Gruppe bereits vorhanden ist.
 \end{itemize}
 \subparagraph{Parameter-Liste}
 \begin{itemize}
-	\item[] \textbf{folder\_name} - , type: 
-	\item[] \textbf{ref\_id} - , type:
+	\item[] \textbf{folder\_name} - Titel des Ordners, type: String 
+	\item[] \textbf{ref\_id} - ReferenzID der Gruppe, type: Integer
 \end{itemize}
 \subparagraph{Rückgabewerte}
 \begin{itemize}
-	\item[] \textbf{(true,false)} - , type: 
+	\item[] \textbf{(true,false)} - Ordner vorhanden? (ja/nein), type: Boolean
 \end{itemize}
 
 \subsubsection*{\textit{checkAccess}}\label{checkAccessGGUI}

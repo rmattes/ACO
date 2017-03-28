@@ -3,6 +3,7 @@
 \subsection*{Beschreibung}
 In dieser Klasse können über ein Formular mehrere Gruppen auf einmal in einem Kurs angelegt werden. Außerdem können optionale ein oder mehrere Ordner im Kurs und den jeweiligen Gruppen erstellt werden. Folgende Eigenschaften stehen für die Gruppen bereit: Gruppenname (Präfix im Titel, der mit aufsteigenden Ziffern ergänzt wird), Anzahl der zu erstellenden Gruppen, maximale Mitgliederzahl, Beitritt direkt oder mit Passwortschutz, optional: Zeitlich begrenzter Zutritt und anlegen eines oder mehrerer Ordner.
 
+
 \subsection*{Klassenvariablen}
 \subparagraph{CREATION\_SUCCEEDED}
 protected - type: String - Ausgabe Erstellung erfolgt
@@ -41,12 +42,139 @@ protected - type: ilCheckboxInputGUI - \\~ \hspace*{6,2cm} {Auswahl zur Erstellu
 
 
 \subsection*{Funktions-Liste}
+\subparagraph{\nameref{constructGGUI}}
+\subparagraph{\nameref{prepareOutputGGUI}}
+\subparagraph{\nameref{setTitleAndIconGGUI}}
+\subparagraph{\nameref{executeCommandGGUI}}
+\subparagraph{\nameref{viewGGUI}}
+\subparagraph{\nameref{loadDateGGUI}}
+\subparagraph{\nameref{countGroupsGGUI}}
+\subparagraph{\nameref{createGroupsGGUI}}
+\subparagraph{\nameref{groupsInCourseGGUI}}
+\subparagraph{\nameref{folderAlreadyExistingCourseGGUI}}
+\subparagraph{\nameref{folderAlreadyExistingGroupGGUI}}
+\subparagraph{\nameref{checkAccessGGUI}}
 
-\paragraph{\nameref{funktion}}
 
 \subsection*{Funktionen}
 
-\subsubsection*{funktionstitle}\label{funktion}
-\paragraph{Beschreibung}
-\paragraph{Parameter-Liste}
-\paragraph{Rückgabewerte}
+\subsubsection*{\textit{\_\_construct}}\label{constructGGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{\_\_construct()}
+	\item[] Konstruktion der Grundinstanz
+\end{itemize}
+
+\subsubsection*{\textit{prepareOutput}}\label{prepareOutputGGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{prepareOutput()}
+	\item[] Grundlegende Eigenschaften werden festgelegt: Tabs, Position in der Tree Hierarchie, BackTarget, Titel und Icon, sowie das verwendete Template
+\end{itemize}
+
+\subsubsection*{\textit{setTitleAndIcon}}\label{setTitleAndIconGGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{setTitleAndIcon()}
+	\item[] Titel und Symbol des Objekt werden festgelegt
+\end{itemize}
+
+\subsubsection*{\textit{executeCommand}}\label{executeCommandGGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{executeCommand()}
+	\item[] Regelung der Umsetzung von Befehlen mittels CommandButtons
+\end{itemize}
+
+\subsubsection*{\textit{view}}\label{viewGGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{view()}
+	\item[] Ausgabe der initialen Ansicht als HTML-Dokument
+\end{itemize}
+
+\subsubsection*{\textit{loadDate}}\label{loadDateGGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{loadDate(\$a\_field)}
+	\item[] Datum im Formular wird angepasst, um es in die Datenbank schreiben zu können.
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\begin{itemize}
+	\item[] \textbf{a\_field} - Wert eines Datumsfelds im Formular, type: ilDateTime
+\end{itemize}
+\subparagraph{Rückgabewerte}
+\begin{itemize}
+	\item[] \textbf{date} - Wert aus dem Feld umgewandelt in Datenbank-kompatibles Format, type: ilDateTime
+\end{itemize}
+
+\subsubsection*{\textit{countGroups}}\label{countGroupsGGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{countGroups(\$parent\_id)}
+	\item[] 
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\begin{itemize}
+	\item[] \textbf{parent\_id} - , type: 
+\end{itemize}
+\subparagraph{Rückgabewerte}
+\begin{itemize}
+	\item[] \textbf{result} - , type: 
+\end{itemize}
+
+\subsubsection*{\textit{createGroups}}\label{createGroupsGGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{createGroups()}
+	\item[] 
+\end{itemize}
+
+\subsubsection*{\textit{groupsInCourse}}\label{groupsInCourseGGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{groupsInCourse()}
+	\item[] 
+\end{itemize}
+\subparagraph{Rückgabewerte}
+\begin{itemize}
+	\item[] \textbf{group\_id} - , type: 
+\end{itemize}
+
+\subsubsection*{\textit{folderAlreadyExistingCourse}}\label{folderAlreadyExistingCourseGGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{folderAlreadyExistingCourse(\$folder\_name)}
+	\item[] 
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\begin{itemize}
+	\item[] \textbf{folder\_name} - , type: 
+\end{itemize}
+\subparagraph{Rückgabewerte}
+\begin{itemize}
+	\item[] \textbf{(true,false)} - , type: 
+\end{itemize}
+
+\subsubsection*{\textit{folderAlreadyExistingGroup}}\label{folderAlreadyExistingGroupGGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{folderAlreadyExistingGroup(\$folder\_name,\$group\_ref\_id)}
+	\item[] 
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\begin{itemize}
+	\item[] \textbf{folder\_name} - , type: 
+	\item[] \textbf{ref\_id} - , type:
+\end{itemize}
+\subparagraph{Rückgabewerte}
+\begin{itemize}
+	\item[] \textbf{(true,false)} - , type: 
+\end{itemize}
+
+\subsubsection*{\textit{checkAccess}}\label{checkAccessGGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{checkAccess()}
+	\item[] Überprüft, ob man Lese- oder Schreibrechte auf das aktuelle Objekt hat.
+\end{itemize}

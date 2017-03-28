@@ -279,6 +279,8 @@ class ilACOGroupGUI
         $prefix = $this->group_name->getValue();
         $number = $this->group_count->getValue();
         $members = $this->members->getValue();
+        
+               
         $password = $this->pass->getValue();
         $reg_type = $this->reg_proc->getValue();
         $folder_title = explode(";", $this->group_folder_name->getValue());
@@ -325,8 +327,6 @@ class ilACOGroupGUI
         
         $result = $this->countGroups($parent_id);
 
-        var_dump($result);
-        
         $nn = 1;
         
         if ($result > 0){
@@ -339,8 +339,7 @@ class ilACOGroupGUI
         for ($n = $nn ; $n <= $number; $n++) {
                 $group = new ilObjGroup();
 
-                var_dump($n);
-                
+                         
                 if($n<10){   //is necessary for numerical sort
                     
                 $group->setTitle($prefix.' 0'.$n);
@@ -443,8 +442,7 @@ class ilACOGroupGUI
 
         //if folder already exists in the course
         if (strcmp($folderCourse[0]["COUNT(*)"], "0") !== 0) {
-            var_dump("IF");
-            //ilUtil::sendFailure($this->pl->txt("folderAlreadyExistingCourse"), true);
+          
             return true;
         } else {
             return false;
@@ -470,7 +468,7 @@ class ilACOGroupGUI
 
         //if the folder already exists in a group
         if (strcmp($folderGroup[0]["COUNT(*)"], "0") !== 0)  {
-            //ilUtil::sendFailure($this->pl->txt("folderAlreadyExistingGroup"), true);
+            
             return true;
         } else {
             return false;

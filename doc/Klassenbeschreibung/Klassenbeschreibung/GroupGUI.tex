@@ -1,8 +1,44 @@
-\section{classtitle}
+\section{ilACOGroupGUI}
 
 \subsection*{Beschreibung}
+In dieser Klasse können über ein Formular mehrere Gruppen auf einmal in einem Kurs angelegt werden. Außerdem können optionale ein oder mehrere Ordner im Kurs und den jeweiligen Gruppen erstellt werden. Folgende Eigenschaften stehen für die Gruppen bereit: Gruppenname (Präfix im Titel, der mit aufsteigenden Ziffern ergänzt wird), Anzahl der zu erstellenden Gruppen, maximale Mitgliederzahl, Beitritt direkt oder mit Passwortschutz, optional: Zeitlich begrenzter Zutritt und anlegen eines oder mehrerer Ordner.
 
 \subsection*{Klassenvariablen}
+\subparagraph{CREATION\_SUCCEEDED}
+protected - type: String - Ausgabe Erstellung erfolgt
+\subparagraph{CREATION\_FAILED}
+protected - type: String - Ausgabe fehlgeschlagene Erstellung
+\subparagraph{ctrl}
+protected - type: ilCtrl - Steuerung Zugriffsrechte
+\subparagraph{tpl}
+protected - type: ilTemplate - Template für Darstellung und Formatierung
+\subparagraph{pl}
+protected - type: ilACOPlugin - Instanz des Plugins
+\subparagraph{tabs}
+protected - type: ilTabsGUI - Verwaltung von Tabs
+\subparagraph{ilLocator}
+protected - type: ilLocatorGUI - Darstellung in der Tree Hierarchie
+\subparagraph{lng}
+protected - type: ilLanguage - Einbindung der Language-File von ILIAS
+\subparagraph{tree}
+protected - type: ilTree - Verwaltung der Tree Hierarchie
+\subparagraph{courses}
+protected - type: Array - Verwaltung von Kursen
+\subparagraph{members}
+protected - type: Integer - Max. Mitgliederzahl in einer Gruppe
+\subparagraph{group\_count}
+protected - type: Integer - Anzahl an Gruppen
+\subparagraph{reg\_proc}
+protected - type: ilRadioGroupInputGUI - Auswahl Anmeldeart
+\subparagraph{pass}
+protected - type: String - Passwort bei Anmeldebeschränkung
+\subparagraph{group\_name}
+protected - type: String - Präfix der Gruppentitel
+\subparagraph{group\_folder\_name}
+protected - type: String - Titel des/der Ordners/Ordner 
+\subparagraph{group\_folder\_name\_checkbox}
+protected - type: ilCheckboxInputGUI - \\~ \hspace*{6,2cm} {Auswahl zur Erstellung von Ordner(n)}
+
 
 \subsection*{Funktions-Liste}
 

@@ -1,16 +1,321 @@
-\section{classtitle}
+\section{ilACOTutorGUI}
 
 \subsection*{Beschreibung}
+blabla
 
 \subsection*{Klassenvariablen}
+\subparagraph{VIEW\_ASSIGNMENT}
+protected - type: Integer - 
+\subparagraph{VIEW\_PARTICIPANT}
+protected - type: Integer - 
+\subparagraph{VIEW\_GRADES}
+protected - type: Integer - 
+\subparagraph{exercise}
+protected - type: ilObjExercise - 
+\subparagraph{assignment}
+protected - type: ilExAssignment - 
+\subparagraph{ctrl}
+protected - type: ilCtrl - Steuerung Zugriffsrechte
+\subparagraph{tpl}
+protected - type: ilTemplate - Template für Darstellung und Formatierung
+\subparagraph{pl}
+protected - type: ilACOPlugin - Instanz des Plugins
+\subparagraph{tabs}
+protected - type: ilTabsGUI - Verwaltung von Tabs
+\subparagraph{ilLocator}
+protected - type: ilLocatorGUI - Darstellung in der Tree Hierarchie
+\subparagraph{lng}
+protected - type: ilLanguage - Einbindung der Language-File von ILIAS
+\subparagraph{tree}
+protected - type: ilTree - Verwaltung der Tree Hierarchie
+\subparagraph{assign}
+public - type: Array - 
+\subparagraph{assignment\_list}
+protected - type:  - 
+\subparagraph{selected\_assignment}
+protected - type:  - 
+\subparagraph{group}
+protected - type:  - 
+\subparagraph{group\_marks}
+protected - type:  - 
+\subparagraph{si}
+protected - type:  - 
+\subparagraph{group\_si}
+protected - type:  - 
+\subparagraph{selInputAss}
+protected - type:  - 
+\subparagraph{selection}
+protected - type: Array - 
+
 
 \subsection*{Funktions-Liste}
+\paragraph{\nameref{constructTGUI}}
+\paragraph{\nameref{prepareOutputTGUI}}
+\paragraph{\nameref{setTitleAndIconTGUI}}
+\paragraph{\nameref{executeCommandTGUI}}
+\paragraph{\nameref{getViewBackTGUI}}
+\paragraph{\nameref{initSubmissionTGUI}}
+\paragraph{\nameref{viewTGUI}}
+\paragraph{\nameref{getAssignmentTGUI}}
+\paragraph{\nameref{isCourseTGUI}}
+\paragraph{\nameref{getParentIdsTGUI}}
+\paragraph{\nameref{getGroupsTGUI}}
+\paragraph{\nameref{membersObjectTGUI}}
+\paragraph{\nameref{downloadAllObjectTGUI}}
+\paragraph{\nameref{isGroupMemberTGUI}}
+\paragraph{\nameref{saveCommentsObjectTGUI}}
+\paragraph{\nameref{saveCommentForLearnersObjectTGUI}}
+\paragraph{\nameref{createTeamsObjectTGUI}}
+\paragraph{\nameref{dissolveTeamsObjectTGUI}}
+\paragraph{\nameref{getMultiActionUserIdsTGUI}}
+\paragraph{\nameref{redirectFeedbackMailObjectTGUI}}
+\paragraph{\nameref{sendMembersObjectTGUI}}
+\paragraph{\nameref{saveStatusAllObjectTGUI}}
+\paragraph{\nameref{saveStatusTGUI}}
+\paragraph{\nameref{selectAssignmentObjectTGUI}}
+\paragraph{\nameref{checkAccessTGUI}}
 
-\paragraph{\nameref{funktion}}
 
 \subsection*{Funktionen}
 
-\subsubsection*{funktionstitle}\label{funktion}
-\paragraph{Beschreibung}
-\paragraph{Parameter-Liste}
-\paragraph{Rückgabewerte}
+\subsubsection*{\textit{\_\_construct}}\label{constructTGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{\_\_construct()}
+	\item[] Konstruktion der Grundinstanz
+\end{itemize}
+
+\subsubsection*{\textit{prepareOutput}}\label{prepareOutputTGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{prepareOutput()}
+	\item[] Grundlegende Eigenschaften werden festgelegt: Tabs, Position in der Tree Hierarchie, BackTarget, Titel und Icon, sowie das verwendete Template
+\end{itemize}
+
+\subsubsection*{\textit{setTitleAndIcon}}\label{setTitleAndIconTGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{setTitleAndIcon()}
+	\item[] Titel und Symbol des Objekt werden festgelegt
+\end{itemize}
+
+\subsubsection*{\textit{executeCommand}}\label{executeCommandTGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{executeCommand()}
+	\item[] Regelung der Umsetzung von Befehlen mittels CommandButtons
+\end{itemize}
+
+\subsubsection*{\textit{getViewBack}}\label{getViewBackTGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{getViewBack()}
+	\item[] 
+\end{itemize}
+\subparagraph{Rückgabewerte}
+\begin{itemize}
+	\item[] \textbf{back\_cmd} - , type: String
+\end{itemize}
+
+\subsubsection*{\textit{initSubmission}}\label{initSubmissionTGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{initSubmission()}
+	\item[] 
+\end{itemize}
+\subparagraph{Rückgabewerte}
+\begin{itemize}
+	\item[] \textbf{new ilExSubmission} - , type: ilExSubmission
+\end{itemize}
+
+\subsubsection*{\textit{view}}\label{viewTGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{view()}
+	\item[] Ausgabe der initialen Ansicht als HTML-Dokument
+\end{itemize}
+
+\subsubsection*{\textit{getAssignment}}\label{getAssignmentTGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{getAssignment(\$ass\_id)}
+	\item[] 
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\begin{itemize}
+	\item[] \textbf{as\_id} - , type: 
+\end{itemize}
+\subparagraph{Rückgabewerte}
+\begin{itemize}
+	\item[] \textbf{as} - , type: 
+\end{itemize}
+
+\subsubsection*{\textit{isCourse}}\label{isCourseTGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{isCourse(\$ref\_id)}
+	\item[] 
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\begin{itemize}
+	\item[] \textbf{ref\_id} - , type: Integer
+\end{itemize}
+\subparagraph{Rückgabewerte}
+\begin{itemize}
+	\item[] \textbf{(true,false)} - , type: Boolean
+\end{itemize}
+
+\subsubsection*{\textit{getParentIds}}\label{getParentIdsTGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{getParentIds(\$id)}
+	\item[]  
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\begin{itemize}
+	\item[] \textbf{id} - , type: 
+\end{itemize}
+\subparagraph{Rückgabewerte}
+\begin{itemize}
+	\item[] \textbf{ids} - , type: 
+\end{itemize}
+
+\subsubsection*{\textit{getGroups}}\label{getGroupsTGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{getGroups()}
+	\item[] 
+\end{itemize}
+\subparagraph{Rückgabewerte}
+\begin{itemize}
+	\item[] \textbf{output} - , type: 
+\end{itemize}
+
+
+\subsubsection*{\textit{membersObject}}\label{membersObjectTGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{membersObject()}
+	\item[] 
+\end{itemize}
+\subparagraph{Rückgabewerte}
+\begin{itemize}
+	\item[] \textbf{} - , type: 
+\end{itemize}
+
+\subsubsection*{\textit{downloadAllObject}}\label{downloadAllObjectTGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{downloadAllObject()}
+	\item[] 
+\end{itemize}
+
+\subsubsection*{\textit{isGroupMember}}\label{isGroupMemberTGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{isGroupMember(\$member,\$group\_id)}
+	\item[]  
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\begin{itemize}
+	\item[] \textbf{member} - , type: 
+	\item[] \textbf{group\_id} - , type:
+\end{itemize}
+\subparagraph{Rückgabewerte}
+\begin{itemize}
+	\item[] \textbf{(true,false)} - , type: Boolean
+\end{itemize}
+
+\subsubsection*{\textit{saveCommentsObject}}\label{saveCommentsObjectTGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{saveCommentsObject()}
+	\item[]  
+\end{itemize}
+\subparagraph{Rückgabewerte}
+\begin{itemize}
+	\item[] \textbf{} - , type: 
+\end{itemize}
+
+\subsubsection*{\textit{saveCommentForLearnersObject}}\label{saveCommentForLearnersObjectTGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{saveCommentForLearnersObject()}
+	\item[]  
+\end{itemize}
+
+\subsubsection*{\textit{createTeamsObject}}\label{createTeamsObjectTGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{createTeamsObject()}
+	\item[]  
+\end{itemize}
+
+\subsubsection*{\textit{dissolveTeamsObject}}\label{dissolveTeamsObjectTGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{dissolveTeamsObject()}
+	\item[]  
+\end{itemize}
+
+\subsubsection*{\textit{getMultiActionUserIds}}\label{getMultiActionUserIdsTGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{getMultiActionUserIds(\$a\_keep\_teams)}
+	\item[]  
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\begin{itemize}
+	\item[] \textbf{\$a\_keep\_teams} - , type: Boolean
+\end{itemize}
+\subparagraph{Rückgabewerte}
+\begin{itemize}
+	\item[] \textbf{members} - , type: 
+\end{itemize}
+
+\subsubsection*{\textit{redirectFeedbackMailObject}}\label{redirectFeedbackMailObjectTGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{redirectFeedbackMailObject()}
+	\item[]  
+\end{itemize}
+
+\subsubsection*{\textit{sendMembersObject}}\label{sendMembersObjectTGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{sendMembersObject()}
+	\item[]  
+\end{itemize}
+
+\subsubsection*{\textit{saveStatusAllObject}}\label{saveStatusAllObjectTGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{saveStatusAllObject()}
+	\item[]  
+\end{itemize}
+
+\subsubsection*{\textit{saveStatus}}\label{saveStatusTGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{saveStatus(array \$a\_data,\$user\_ids)}
+	\item[]  
+\end{itemize}
+\subparagraph{Parameter-Liste}
+\begin{itemize}
+	\item[] \textbf{a\_data} - , type: 
+	\item[] \textbf{user\_id} - , type: 
+\end{itemize}
+
+\subsubsection*{\textit{selectAssignmentObject}}\label{selectAssignmentObjectTGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{selectAssignmentObject()}
+	\item[]  
+\end{itemize}
+
+\subsubsection*{\textit{checkAccess}}\label{checkAccessTGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{checkAccess()}
+	\item[] Überprüft, ob man Lese- oder Schreibrechte auf das aktuelle Objekt hat.
+\end{itemize}

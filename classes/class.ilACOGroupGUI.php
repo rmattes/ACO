@@ -339,8 +339,10 @@ class ilACOGroupGUI
         for ($n = $nn ; $n <= $number; $n++) {
                 $group = new ilObjGroup();
 
-                if($number<10){   //is necessary for numerical sort
+                var_dump($n);
                 
+                if($n<10){   //is necessary for numerical sort
+                    
                 $group->setTitle($prefix.' 0'.$n);
                 
                 }
@@ -359,6 +361,7 @@ class ilACOGroupGUI
                 
                 $reg_end = $reg_start;
                 }
+              
                 $group->setRegistrationStart($reg_start);
                 $group->setRegistrationEnd($reg_end);
                 $group->setMaxMembers($members);

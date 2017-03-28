@@ -1,16 +1,35 @@
-\section{classtitle}
+\section{ilACOPlugin}
 
 \subsection*{Beschreibung}
+Grundklasse zur Konstruktion einer Instanz des Plugins in ILIAS und Festlegung des Namens.
 
 \subsection*{Klassenvariablen}
+\subparagraph{instance}
+protected - type: ilACOPlugin - Instanz des Plugins
 
 \subsection*{Funktions-Liste}
-
-\paragraph{\nameref{funktion}}
+\paragraph{\nameref{getInstanceUIHGUI}}
+\paragraph{\nameref{getPluginNameUIHGUI}}
 
 \subsection*{Funktionen}
+\subsubsection*{\textit{getInstance}}\label{getInstanceUIHGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{getInstance()} 
+	\item[] Erstellt eine Instanz des Plugins
+\end{itemize}
+\subparagraph{Rückgabewerte}
+\begin{itemize}
+	\item[] \textbf{instance} - Instanz des Plugins, type: ilACOPlugin
+\end{itemize}
 
-\subsubsection*{funktionstitle}\label{funktion}
-\paragraph{Beschreibung}
-\paragraph{Parameter-Liste}
-\paragraph{Rückgabewerte}
+\subsubsection*{\textit{getPluginName}}\label{getPluginNameUIHGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{getPluginName()} 
+	\item[] Gibt den Namen des Plugins aus
+\end{itemize}
+\subparagraph{Rückgabewerte}
+\begin{itemize}
+	\item[] \textbf{"ACO"} - Name des Plugins, type: String
+\end{itemize}

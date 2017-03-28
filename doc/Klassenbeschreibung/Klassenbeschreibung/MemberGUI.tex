@@ -36,6 +36,7 @@ protected - type: String - Gruppentitel für Gruppe zum Einfügen
 \subsection*{Funktions-Liste}
 \paragraph{\nameref{constructMGUI}}
 \paragraph{\nameref{setTitleAndIconMGUI}}
+\paragraph{\nameref{prepareOutputMGUI}}
 \paragraph{\nameref{executeCommandMGUI}}
 \paragraph{\nameref{viewMGUI}}
 \paragraph{\nameref{initFormMGUI}}
@@ -60,35 +61,42 @@ protected - type: String - Gruppentitel für Gruppe zum Einfügen
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{\_\_construct()} 
-	\item[] 
+	\item[] Konstruktion der Grundinstanz
+\end{itemize}
+
+\subsubsection*{\textit{prepareOutput}}\label{prepareOutputMGUI}
+\subparagraph{Beschreibung}
+\begin{itemize}
+	\item[] \noindent\fbox{prepareOutput()}
+	\item[] Grundlegende Eigenschaften werden festgelegt: Tabs, Position in der Tree Hierarchie, BackTarget, Titel und Icon, sowie das verwendete Template
 \end{itemize}
 
 \subsubsection*{\textit{setTitleAndIcon}}\label{setTitleAndIconMGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{setTitleAndIcon()} 
-	\item[] 
+	\item[] Titel und Symbol des Objekt werden festgelegt
 \end{itemize}
 
 \subsubsection*{\textit{executeCommand}}\label{executeCommandMGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{executeCommand()} 
-	\item[] 
+	\item[] Regelung der Umsetzung von Befehlen mittels CommandButtons
 \end{itemize}
 
 \subsubsection*{\textit{view}}\label{viewMGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{view()} 
-	\item[] 
+	\item[] Ausgabe der initialen Ansicht als HTML-Dokument
 \end{itemize}
 
 \subsubsection*{\textit{initForm}}\label{initFormMGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{initForm()} 
-	\item[] 
+	\item[] Formular wird generiert und mit initialen Werten gefüllt
 \end{itemize}
 \subparagraph{Rückgabewerte}
 \begin{itemize}
@@ -99,7 +107,7 @@ protected - type: String - Gruppentitel für Gruppe zum Einfügen
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{selectMember()} 
-	\item[] 
+	\item[] Formularansicht mit Name des Benutzers, Gruppen, in denen er Mitglied bw. kein Mitglied ist. Ruft nach Klicken auf den CommandButon die Funktion \nameref{moveMemberMGUI} auf
 \end{itemize}
 \subparagraph{Rückgabewerte}
 \begin{itemize}
@@ -110,172 +118,168 @@ protected - type: String - Gruppentitel für Gruppe zum Einfügen
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{doUserAutoComplete()} 
-	\item[] 
+	\item[] Werden in einem Eingabefeld mind. 3 Zeichen eingegeben, versucht die Funktion Vorschläge zur Auswahl von Benutzern zu machen
 \end{itemize}
 
 \subsubsection*{\textit{moveMember}}\label{moveMemberMGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{moveMember()} 
-	\item[] 
+	\item[] Werte aus dem Formular aus \nameref{selectMemberMGUI} werden ausgewertet und an \nameref{manipulateDBMGUI} übergeben. Anschließend wieder zurück zur initialen Formularansicht.
 \end{itemize}
 
 \subsubsection*{\textit{getRoleID}}\label{getRoleIDMGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{getRoleID(\$description)} 
-	\item[] 
+	\item[] Gibt die ObjektID zurück, die dem Eintrag in der Datenbank entspricht, in dem die Rolle als Gruppenmitglied geregelt ist. 
 \end{itemize}
 \subparagraph{Parameter-Liste}
 \begin{itemize}
-	\item[] \textbf{description} - Beschreibung, type: 
+	\item[] \textbf{description} - Datenbankeintrag für Regelung Gruppenmitgliedschaft, type: String
 \end{itemize}
 \subparagraph{Rückgabewerte}
 \begin{itemize}
-	\item[] \textbf{role\_id} - Beschreibung, type:
+	\item[] \textbf{role\_id} - ObjektID des entsprechenden Datenbankeintrags, type: Integer
 \end{itemize}
 
 \subsubsection*{\textit{manipulateDB}}\label{manipulateDBMGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{manipulateDB(\$member\_id,\$role\_id\_source,\$destination\_id,\$role\_id\_dest,\$source\_id)} 
-	\item[] 
+	\item[] Schreibt die Werte aus dem Formular in die Datenbank und verschiebt somit den Benutzer aus einer Gruppe in eine andere und passt die Zugriffsrechte des Benutzers entsprechend an.
 \end{itemize}
 \subparagraph{Parameter-Liste}
 \begin{itemize}
-	\item[] \textbf{member\_id} - Beschreibung, type: 
-	\item[] \textbf{role\_id\_source} - Beschreibung, type: 
-	\item[] \textbf{destination\_id} - Beschreibung, type: 
-	\item[] \textbf{role\_id\_dest} - Beschreibung, type: 
-	\item[] \textbf{source\_id} - Beschreibung, type: 
+	\item[] \textbf{member\_id} - UserID des Benutzers, type: Integer
+	\item[] \textbf{role\_id\_source} - ID alt zur Festlegung der Rolle des Benutzers, type: Integer
+	\item[] \textbf{destination\_id} - ID der neuen Gruppe des Benutzers, type: Integer
+	\item[] \textbf{role\_id\_dest} - ID neu zur Festlegung der Rolle des Benutzers, type: Integer
+	\item[] \textbf{source\_id} - ID der bisherigen Gruppe des Benutzers, type: Integer
 \end{itemize}
 
 \subsubsection*{\textit{getGroupIdByTitle}}\label{getGroupIdByTitleMGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{getGroupIdByTitle(\$group\_title,\$course\_id)} 
-	\item[] 
+	\item[] Gibt bei Eingabe des Gruppentitels die dazugehörige ObjektID zurück.
 \end{itemize}
 \subparagraph{Parameter-Liste}
 \begin{itemize}
-	\item[] \textbf{group\_title} - Beschreibung, type: 
-	\item[] \textbf{course\_id} - Beschreibung, type:
+	\item[] \textbf{group\_title} - Titel der Gruppe, type: String
+	\item[] \textbf{course\_id} - ReferenzID des übergeordneten Kurses, type: Integer
 \end{itemize}
 \subparagraph{Rückgabewerte}
 \begin{itemize}
-	\item[] \textbf{group\_id} - Beschreibung, type:
+	\item[] \textbf{group\_id} - ObjektID der Gruppe, type:
 \end{itemize}
 
 \subsubsection*{\textit{getMemberIdByLogin}}\label{getMemberIdByLoginMGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{getMemberIdByLogin(\$member\_login)} 
-	\item[] 
+	\item[] Gibt bei Eingabe des Benutzernamens die dazugehörige UserID zurück.	
 \end{itemize}
 \subparagraph{Parameter-Liste}
 \begin{itemize}
-	\item[] \textbf{member\_login} - Beschreibung, type: 
+	\item[] \textbf{member\_login} - Benutzername, type: String
 \end{itemize}
 \subparagraph{Rückgabewerte}
 \begin{itemize}
-	\item[] \textbf{member\_id[0]["usr\_id"]} - Beschreibung, type:
+	\item[] \textbf{member\_id[0]["usr\_id"]} - UserID, type: Integer
 \end{itemize}
 
 \subsubsection*{\textit{checkIfUserExistsInGroup}}\label{checkIfUserExistsInGroupMGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{checkIfUserExistsInGroup(\$member\_id,\$group\_id)} 
-	\item[] 
+	\item[] Überprüft, ob der Benutzer in einer Gruppe bereits vorhanden ist oder nicht und gibt einen entsprechenden Boolean-Wert zurück.
 \end{itemize}
 \subparagraph{Parameter-Liste}
 \begin{itemize}
-	\item[] \textbf{member\_id} - Beschreibung, type: 
-	\item[] \textbf{group\_id} - Beschreibung, type: 
+	\item[] \textbf{member\_id} - UserID des Benutzers, type: 
+	\item[] \textbf{group\_id} - ObjektID der Gruppe, type: 
 \end{itemize}
 \subparagraph{Rückgabewerte}
 \begin{itemize}
-	\item[] \textbf{(true,false)} - Beschreibung, type:
+	\item[] \textbf{(true,false)} - Benutzer bereits Mitglied? (ja, nein), type: Boolean
 \end{itemize}
 
 \subsubsection*{\textit{checkIfUserNotExistsInGroup}}\label{checkIfUserNotExistsInGroupMGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{checkIfUserNotExistsInGroup(\$member\_id,\$group\_id)} 
-	\item[] 
+	\item[] Überprüft, ob der Benutzer in einer Gruppe bereits vorhanden ist oder nicht und gibt einen entsprechenden Boolean-Wert zurück.
 \end{itemize}
 \subparagraph{Parameter-Liste}
 \begin{itemize}
-	\item[] \textbf{member\_id} - Beschreibung, type: 
-	\item[] \textbf{group\_id} - Beschreibung, type: 
+	\item[] \textbf{member\_id} - UserID des Benutzers, type: Integer
+	\item[] \textbf{group\_id} - ObjektID der Gruppe, type: Integer
 \end{itemize}
 \subparagraph{Rückgabewerte}
 \begin{itemize}
-	\item[] \textbf{(true,false)} - Beschreibung, type:
+	\item[] \textbf{(true,false)} - Benutzer kein Mitglied? (ja, nein), type:
 \end{itemize}
 
 \subsubsection*{\textit{checkIfGroupExists}}\label{checkIfGroupExistsMGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{checkIfGroupExists(\$group\_id)} 
-	\item[] 
+	\item[] Überprüft, ob die angegebene Gruppe tatsächlich existiert.
 \end{itemize}
 \subparagraph{Parameter-Liste}
 \begin{itemize}
-	\item[] \textbf{\$group\_id} - Beschreibung, type: 
+	\item[] \textbf{\$group\_id} - ObjektID der Gruppe, type: Integer
 \end{itemize}
 \subparagraph{Rückgabewerte}
 \begin{itemize}
-	\item[] \textbf{(true,false)} - Beschreibung, type:
+	\item[] \textbf{(true,false)} - Gruppe vorhanden? (ja/nein), type: Boolean
 \end{itemize}
 
 \subsubsection*{\textit{getGroups}}\label{getGroupsMGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{getGroups()} 
-	\item[] 
-\end{itemize}
-\subparagraph{Parameter-Liste}
-\begin{itemize}
-	\item[] \textbf{var} - Beschreibung, type: 
+	\item[] Funktion gibt die Titel aller Gruppen zurück, die in einem Kurs existent sind. 
 \end{itemize}
 \subparagraph{Rückgabewerte}
 \begin{itemize}
-	\item[] \textbf{output} - Beschreibung, type:
+	\item[] \textbf{output} - Titel der Gruppen, type: Array
 \end{itemize}
 
 \subsubsection*{\textit{getGroupsWhereMember}}\label{getGroupsWhereMemberMGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{getGroupsWhereMember(\$usr\_id)} 
-	\item[] 
+	\item[] Gibt die Titel der Gruppen zurück, in denen ein bestimmter Benutzer ein Mitglied ist.
 \end{itemize}
 \subparagraph{Parameter-Liste}
 \begin{itemize}
-	\item[] \textbf{usr\_id} - Beschreibung, type: 
+	\item[] \textbf{usr\_id} - UserID des Benutzers, type: Integer
 \end{itemize}
 \subparagraph{Rückgabewerte}
 \begin{itemize}
-	\item[] \textbf{output} - Beschreibung, type:
+	\item[] \textbf{output} - Titel der Gruppen, type: Array
 \end{itemize}
 
 \subsubsection*{\textit{getGroupsWhereNotMember}}\label{getGroupsWhereNotMemberMGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{getGroupsWhereNotMember(\$usr\_id)} 
-	\item[] 
+	\item[] Gibt die Titel der Gruppen zurück, in denen ein bestimmter Benutzer kein Mitglied ist.
 \end{itemize}
 \subparagraph{Parameter-Liste}
 \begin{itemize}
-	\item[] \textbf{usr\_id} - Beschreibung, type: 
+	\item[] \textbf{usr\_id} - UserID des Benutzers, type: Integer
 \end{itemize}
 \subparagraph{Rückgabewerte}
 \begin{itemize}
-	\item[] \textbf{output} - Beschreibung, type:
+	\item[] \textbf{output} - Titel der Gruppen, type: Array
 \end{itemize}
 
 \subsubsection*{\textit{checkAccess}}\label{checkAccessMGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{checkAccess()} 
-	\item[] 
+	\item[] Überprüft, ob man Lese- oder Schreibrechte auf das aktuelle Objekt hat.
 \end{itemize}

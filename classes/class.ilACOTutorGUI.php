@@ -375,10 +375,18 @@ class ilACOTutorGUI {
 
             $ilToolbar->addSeparator();
         }
+
         // #16165 - if only 1 assignment dropdown is not displayed;
         else if($this->assignment)
         {
             $ilCtrl->setParameter($this, "ass_id", $this->assignment->getId());
+            include_once("./Services/UIComponent/Button/classes/class.ilSubmitButton.php");
+            $button = ilSubmitButton::getInstance();
+            $button->setCaption($this->pl->txt("exc_select_ass_grp"));
+            $button->setCommand("selectAssignment");
+            $ilToolbar->addStickyItem($button);
+
+            $ilToolbar->addSeparator();
         }
 
         // #16168 - no assignments

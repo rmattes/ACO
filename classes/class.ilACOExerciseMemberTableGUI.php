@@ -5,17 +5,19 @@ include_once("./Modules/Exercise/classes/class.ilExAssignment.php");
 include_once("./Modules/Exercise/classes/class.ilExAssignmentMemberStatus.php");
 include_once("./Modules/Exercise/classes/class.ilExAssignmentTeam.php");
 include_once("./Modules/Exercise/classes/class.ilExSubmission.php");
+
 /**
  * Created by PhpStorm.
  * User: Manuel
  * Date: 15.02.2016
  * Time: 17:34
  *
- * This class implements the functionality of the table of the groupfilter tab 
+ * This class implements the functionality of the table of the groupfilter tab
  * in excerxises.
- * 
+ *
  */
-class ilACOExerciseMemberTableGUI extends ilTable2GUI {
+class ilACOExerciseMemberTableGUI extends ilTable2GUI
+{
 
     protected $exc;
     protected $ass;
@@ -26,7 +28,7 @@ class ilACOExerciseMemberTableGUI extends ilTable2GUI {
     protected $teams = array();
     protected $group;
 
-    function __construct($a_parent_obj, $a_parent_cmd, $a_exc, $a_ass,$group_id)
+    function __construct($a_parent_obj, $a_parent_cmd, $a_exc, $a_ass, $group_id)
     {
         $this->group = $group_id;
         global $ilCtrl, $lng;
@@ -35,7 +37,7 @@ class ilACOExerciseMemberTableGUI extends ilTable2GUI {
         $this->exc_id = $this->exc->getId();
         $this->ass = $a_ass;
         $this->ass_id = $this->ass->getId();
-        $this->setId("exc_mem_".$this->ass_id);
+        $this->setId("exc_mem_" . $this->ass_id);
         $this->pl = ilACOPlugin::getInstance();
 
 
@@ -45,30 +47,26 @@ class ilACOExerciseMemberTableGUI extends ilTable2GUI {
 
         parent::__construct($a_parent_obj, $a_parent_cmd);
 
-        $this->setTitle($lng->txt("exc_assignment").": ".$this->ass->getTitle());
+        $this->setTitle($lng->txt("exc_assignment") . ": " . $this->ass->getTitle());
         $this->setTopCommands(true);
 
         $data = $this->ass->getMemberListData();
 
         // team upload?  (1 row == 1 team)
-        if($this->ass->hasTeam())
-        {
+        if ($this->ass->hasTeam()) {
             $this->teams = ilExAssignmentTeam::getInstancesFromMap($this->ass_id);
             $team_map = ilExAssignmentTeam::getAssignmentTeamMap($this->ass_id);
 
             $tmp = array();
 
-            foreach($data as $item)
-            {
+            foreach ($data as $item) {
                 $team_id = $team_map[$item["usr_id"]];
 
-                if(!$team_id)
-                {
-                    $team_id = "nty".$item["usr_id"];
+                if (!$team_id) {
+                    $team_id = "nty" . $item["usr_id"];
                 }
 
-                if(!isset($tmp[$team_id]))
-                {
+                if (!isset($tmp[$team_id])) {
                     $tmp[$team_id] = $item;
                 }
 
@@ -78,49 +76,40 @@ class ilACOExerciseMemberTableGUI extends ilTable2GUI {
 
             $data = $tmp;
             unset($tmp);
-        }
-        else
-        {
+        } else {
             // peer review / rating
             $ass_obj = new ilExAssignment($this->ass_id);
-            if($ass_obj->getPeerReview())
-            {
+            if ($ass_obj->getPeerReview()) {
                 include_once './Services/Rating/classes/class.ilRatingGUI.php';
             }
         }
 
         $tmp = array();
-        foreach ($data as $member){
-                if($this->isGroupMember($member,$this->group)) {
-                array_push($tmp,$member);
-                }
+        foreach ($data as $member) {
+            if ($this->isGroupMember($member, $this->group)) {
+                array_push($tmp, $member);
+            }
         }
-        $data=$tmp;
+        $data = $tmp;
         $this->setData($data);
 
         $this->addColumn("", "", "1", true);
 
-        if(!$this->ass->hasTeam())
-        {
+        if (!$this->ass->hasTeam()) {
             $this->selected = $this->getSelectedColumns();
-            if(in_array("image", $this->selected))
-            {
+            if (in_array("image", $this->selected)) {
                 $this->addColumn($this->lng->txt("image"), "", "1");
             }
             $this->addColumn($this->lng->txt("name"), "name");
-            if(in_array("login", $this->selected))
-            {
+            if (in_array("login", $this->selected)) {
                 $this->addColumn($this->lng->txt("login"), "login");
             }
-        }
-        else
-        {
+        } else {
             $this->addColumn($this->lng->txt("exc_team"));
         }
 
         $this->sent_col = ilExAssignmentMemberStatus::lookupAnyExerciseSent($this->ass_id);
-        if ($this->sent_col)
-        {
+        if ($this->sent_col) {
             $this->addColumn($this->lng->txt("exc_exercise_sent"), "sent_time");
         }
         $this->addColumn($this->lng->txt("exc_submission"), "submission");
@@ -139,8 +128,7 @@ class ilACOExerciseMemberTableGUI extends ilTable2GUI {
         $this->addMultiCommand("redirectFeedbackMail", $lng->txt("exc_send_mail"));
         $this->addMultiCommand("sendMembers", $lng->txt("exc_send_assignment"));
 
-        if($this->ass->hasTeam())
-        {
+        if ($this->ass->hasTeam()) {
             $this->addMultiCommand("createTeams", $lng->txt("exc_team_multi_create"));
             $this->addMultiCommand("dissolveTeams", $lng->txt("exc_team_multi_dissolve"));
         }
@@ -151,7 +139,7 @@ class ilACOExerciseMemberTableGUI extends ilTable2GUI {
         include_once "Services/Form/classes/class.ilPropertyFormGUI.php";
         include_once "Services/UIComponent/Overlay/classes/class.ilOverlayGUI.php";
         $this->overlay_tpl = new ilTemplate("tpl.exc_learner_comment_overlay.html", true, true, "Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/ACO");
-     
+
     }
 
     function getSelectableColumns()
@@ -173,7 +161,7 @@ class ilACOExerciseMemberTableGUI extends ilTable2GUI {
 
     protected function fillRow($member)
     {
-        if($this->isGroupMember($member,$this->group)){
+        if ($this->isGroupMember($member, $this->group)) {
             global $lng, $ilCtrl;
 
             $ilCtrl->setParameter($this->parent_obj, "ass_id", $this->ass_id);
@@ -183,8 +171,7 @@ class ilACOExerciseMemberTableGUI extends ilTable2GUI {
             include_once "./Services/Object/classes/class.ilObjectFactory.php";
             $member_id = $member["usr_id"];
 
-            if(!($mem_obj = ilObjectFactory::getInstanceByObjId($member_id,false)))
-            {
+            if (!($mem_obj = ilObjectFactory::getInstanceByObjId($member_id, false))) {
                 return;
             }
 
@@ -193,32 +180,24 @@ class ilACOExerciseMemberTableGUI extends ilTable2GUI {
 
             // checkbox
             $this->tpl->setVariable("VAL_CHKBOX",
-                ilUtil::formCheckbox(0,"member[$member_id]",1));
+                ilUtil::formCheckbox(0, "member[$member_id]", 1));
             $this->tpl->setVariable("VAL_ID", $member_id);
 
-            if(!$has_no_team_yet)
-            {
+            if (!$has_no_team_yet) {
                 // mail sent
-                if ($this->sent_col)
-                {
-                    if ($member_status->getSent())
-                    {
+                if ($this->sent_col) {
+                    if ($member_status->getSent()) {
                         $this->tpl->setCurrentBlock("mail_sent");
-                        if (($st = $member_status->getSentTime()) > 0)
-                        {
+                        if (($st = $member_status->getSentTime()) > 0) {
                             $this->tpl->setVariable("TXT_MAIL_SENT",
                                 sprintf($lng->txt("exc_sent_at"),
-                                    ilDatePresentation::formatDate(new ilDateTime($st,IL_CAL_DATETIME))));
-                        }
-                        else
-                        {
+                                    ilDatePresentation::formatDate(new ilDateTime($st, IL_CAL_DATETIME))));
+                        } else {
                             $this->tpl->setVariable("TXT_MAIL_SENT",
                                 $lng->txt("sent"));
                         }
                         $this->tpl->parseCurrentBlock();
-                    }
-                    else
-                    {
+                    } else {
                         $this->tpl->setCurrentBlock("mail_sent");
                         $this->tpl->setVariable("TXT_MAIL_SENT",
                             "&nbsp;");
@@ -227,18 +206,12 @@ class ilACOExerciseMemberTableGUI extends ilTable2GUI {
                 }
             }
 
-            if(!isset($member["team"]))
-            {
+            if (!isset($member["team"])) {
                 $submission = new ilExSubmission($this->ass, $member_id);
-            }
-            else
-            {
-                if(!$has_no_team_yet)
-                {
+            } else {
+                if (!$has_no_team_yet) {
                     $member_team = $this->teams[$member["team_id"]];
-                }
-                else
-                {
+                } else {
                     // ilExSubmission should not try to auto-load
                     $member_team = new ilExAssignmentTeam();
                 }
@@ -247,33 +220,27 @@ class ilACOExerciseMemberTableGUI extends ilTable2GUI {
             $file_info = $submission->getDownloadedFilesInfoForTableGUIS($this->parent_obj, $this->parent_cmd);
 
             // name and login
-            if(!isset($member["team"]))
-            {
+            if (!isset($member["team"])) {
                 $this->tpl->setVariable("TXT_NAME",
                     $member["name"]);
 
-                if(in_array("login", $this->selected))
-                {
+                if (in_array("login", $this->selected)) {
                     $this->tpl->setVariable("TXT_LOGIN",
-                        "[".$member["login"]."]");
+                        "[" . $member["login"] . "]");
                 }
 
-                if(in_array("image", $this->selected))
-                {
+                if (in_array("image", $this->selected)) {
                     // image
                     $this->tpl->setVariable("USR_IMAGE",
                         $mem_obj->getPersonalPicturePath("xxsmall"));
                     $this->tpl->setVariable("USR_ALT", $lng->txt("personal_picture"));
                 }
-            }
-            // team upload
-            else
-            {
+            } // team upload
+            else {
                 asort($member["team"]);
-                foreach($member["team"] as $team_member_id => $team_member_name) // #10749
+                foreach ($member["team"] as $team_member_id => $team_member_name) // #10749
                 {
-                    if(sizeof($member["team"]) > 1)
-                    {
+                    if (sizeof($member["team"]) > 1) {
                         $ilCtrl->setParameterByClass("ilExSubmissionTeamGUI", "id", $team_member_id);
                         $url = $ilCtrl->getLinkTargetByClass("ilExSubmissionTeamGUI", "confirmRemoveTeamMember");
                         $ilCtrl->setParameterByClass("ilExSubmissionTeamGUI", "id", "");
@@ -292,49 +259,42 @@ class ilACOExerciseMemberTableGUI extends ilTable2GUI {
                     $this->tpl->parseCurrentBlock();
                 }
 
-                if(!$has_no_team_yet)
-                {
+                if (!$has_no_team_yet) {
                     $this->tpl->setCurrentBlock("team_log");
                     $this->tpl->setVariable("HREF_LOG",
                         $ilCtrl->getLinkTargetByClass("ilExSubmissionTeamGUI", "showTeamLog"));
                     $this->tpl->setVariable("TXT_LOG", $lng->txt("exc_team_log"));
                     $this->tpl->parseCurrentBlock();
-                }
-                else
-                {
+                } else {
                     // #11957
                     $this->tpl->setCurrentBlock("team_info");
                     $this->tpl->setVariable("TXT_TEAM_INFO", $lng->txt("exc_no_team_yet"));
 
 
-                    if($file_info["files"]["count"])
-                    {
-                        $this->tpl->setVariable("TEAM_FILES_INFO", "<br />".
-                            $file_info["files"]["txt"].": ".
+                    if ($file_info["files"]["count"]) {
+                        $this->tpl->setVariable("TEAM_FILES_INFO", "<br />" .
+                            $file_info["files"]["txt"] . ": " .
                             $file_info["files"]["count"]);
                     }
                     $this->tpl->parseCurrentBlock();
                 }
             }
 
-            if(!$has_no_team_yet)
-            {
+            if (!$has_no_team_yet) {
                 $this->tpl->setVariable("VAL_LAST_SUBMISSION", $file_info["last_submission"]["value"]);
                 $this->tpl->setVariable("TXT_LAST_SUBMISSION", $file_info["last_submission"]["txt"]);
 
                 $this->tpl->setVariable("TXT_SUBMITTED_FILES", $file_info["files"]["txt"]);
                 $this->tpl->setVariable("VAL_SUBMITTED_FILES", $file_info["files"]["count"]);
 
-                if($file_info["files"]["download_url"])
-                {
+                if ($file_info["files"]["download_url"]) {
                     $this->tpl->setCurrentBlock("download_link");
                     $this->tpl->setVariable("LINK_DOWNLOAD", $file_info["files"]["download_url"]);
                     $this->tpl->setVariable("TXT_DOWNLOAD", $file_info["files"]["download_txt"]);
                     $this->tpl->parseCurrentBlock();
                 }
 
-                if($file_info["files"]["download_new_url"])
-                {
+                if ($file_info["files"]["download_new_url"]) {
                     $this->tpl->setCurrentBlock("download_link");
                     $this->tpl->setVariable("LINK_NEW_DOWNLOAD", $file_info["files"]["download_new_url"]);
                     $this->tpl->setVariable("TXT_NEW_DOWNLOAD", $file_info["files"]["download_new_txt"]);
@@ -353,14 +313,14 @@ class ilACOExerciseMemberTableGUI extends ilTable2GUI {
 
                 $lcomment_value = $member_status->getComment();
 
-                $overlay_id = "excasscomm_".$this->ass_id."_".$member_id;
-                $overlay_trigger_id = $overlay_id."_tr";
+                $overlay_id = "excasscomm_" . $this->ass_id . "_" . $member_id;
+                $overlay_trigger_id = $overlay_id . "_tr";
                 $overlay = new ilOverlayGUI($overlay_id);
                 $overlay->setAnchor($overlay_trigger_id);
                 $overlay->setTrigger($overlay_trigger_id, "click", $overlay_trigger_id);
                 $overlay->add();
 
-                $this->tpl->setVariable("LCOMMENT_ID", $overlay_id."_snip");
+                $this->tpl->setVariable("LCOMMENT_ID", $overlay_id . "_snip");
                 $this->tpl->setVariable("LCOMMENT_SNIPPET", ilUtil::shortenText($lcomment_value, 25, true));
                 $this->tpl->setVariable("COMMENT_OVERLAY_TRIGGER_ID", $overlay_trigger_id);
                 $this->tpl->setVariable("COMMENT_OVERLAY_TRIGGER_TEXT", $lng->txt("exc_comment_for_learner_edit"));
@@ -369,7 +329,7 @@ class ilACOExerciseMemberTableGUI extends ilTable2GUI {
                 $lcomment_form->setId($overlay_id);
                 $lcomment_form->setPreventDoubleSubmission(false);
 
-                $lcomment = new ilTextAreaInputGUI($lng->txt("exc_comment_for_learner"), "lcomment_".$this->ass_id."_".$member_id);
+                $lcomment = new ilTextAreaInputGUI($lng->txt("exc_comment_for_learner"), "lcomment_" . $this->ass_id . "_" . $member_id);
                 $lcomment->setInfo($lng->txt("exc_comment_for_learner_info"));
                 $lcomment->setValue($lcomment_value);
                 $lcomment->setCols(45);
@@ -383,21 +343,20 @@ class ilACOExerciseMemberTableGUI extends ilTable2GUI {
                 $this->overlay_tpl->parseCurrentBlock();
 
                 $status = $member_status->getStatus();
-                $this->tpl->setVariable("SEL_".strtoupper($status), ' selected="selected" ');
+                $this->tpl->setVariable("SEL_" . strtoupper($status), ' selected="selected" ');
                 $this->tpl->setVariable("TXT_NOTGRADED", $lng->txt("exc_notgraded"));
                 $this->tpl->setVariable("TXT_PASSED", $lng->txt("exc_passed"));
                 $this->tpl->setVariable("TXT_FAILED", $lng->txt("exc_failed"));
-                if (($sd = $member_status->getStatusTime()) > 0)
-                {
+                if (($sd = $member_status->getStatusTime()) > 0) {
                     $this->tpl->setCurrentBlock("status_date");
                     $this->tpl->setVariable("TXT_LAST_CHANGE", $lng->txt("last_change"));
                     $this->tpl->setVariable('VAL_STATUS_DATE',
-                        ilDatePresentation::formatDate(new ilDateTime($sd,IL_CAL_DATETIME)));
+                        ilDatePresentation::formatDate(new ilDateTime($sd, IL_CAL_DATETIME)));
                     $this->tpl->parseCurrentBlock();
                 }
                 $pic = $member_status->getStatusIcon();
                 $this->tpl->setVariable("IMG_STATUS", ilUtil::getImagePath($pic));
-                $this->tpl->setVariable("ALT_STATUS", $lng->txt("exc_".$status));
+                $this->tpl->setVariable("ALT_STATUS", $lng->txt("exc_" . $status));
 
                 // mark
                 $this->tpl->setVariable("TXT_MARK", $lng->txt("exc_mark"));
@@ -407,12 +366,11 @@ class ilACOExerciseMemberTableGUI extends ilTable2GUI {
                 $this->tpl->setVariable("VAL_MARK", ilUtil::prepareFormOutput($mark));
 
                 // feedback
-                if (($ft = $member_status->getFeedbackTime()) > 0)
-                {
+                if (($ft = $member_status->getFeedbackTime()) > 0) {
                     $this->tpl->setCurrentBlock("feedback_date");
                     $this->tpl->setVariable("TXT_FEEDBACK_MAIL_SENT",
                         sprintf($lng->txt("exc_sent_at"),
-                            ilDatePresentation::formatDate(new ilDateTime($ft,IL_CAL_DATETIME))));
+                            ilDatePresentation::formatDate(new ilDateTime($ft, IL_CAL_DATETIME))));
                     $this->tpl->parseCurrentBlock();
                 }
 
@@ -425,8 +383,7 @@ class ilACOExerciseMemberTableGUI extends ilTable2GUI {
 //
 
                 // peer review / rating
-                if($peer_review = $submission->getPeerReview())
-                {
+                if ($peer_review = $submission->getPeerReview()) {
                     // :TODO: validate?
                     $given = $peer_review->countGivenFeedback(true, $member_id);
                     $received = sizeof($peer_review->getPeerReviewsByPeerId($member_id, true));
@@ -436,10 +393,10 @@ class ilACOExerciseMemberTableGUI extends ilTable2GUI {
                     $this->tpl->setVariable("LINK_PEER_REVIEW_GIVEN",
                         $ilCtrl->getLinkTargetByClass("ilexpeerreviewgui", "showGivenPeerReview"));
                     $this->tpl->setVariable("TXT_PEER_REVIEW_GIVEN",
-                        $lng->txt("exc_peer_review_given")." (".$given.")");
+                        $lng->txt("exc_peer_review_given") . " (" . $given . ")");
 
                     $this->tpl->setVariable("TXT_PEER_REVIEW_RECEIVED",
-                        $lng->txt("exc_peer_review_show")." (".$received.")");
+                        $lng->txt("exc_peer_review_show") . " (" . $received . ")");
                     $this->tpl->setVariable("LINK_PEER_REVIEW_RECEIVED",
                         $ilCtrl->getLinkTargetByClass("ilexpeerreviewgui", "showReceivedPeerReview"));
 
@@ -448,9 +405,7 @@ class ilACOExerciseMemberTableGUI extends ilTable2GUI {
                 }
 
                 $this->tpl->parseCurrentBlock();
-            }
-            else
-            {
+            } else {
                 $this->tpl->touchBlock("member_has_no_team_bl");
             }
 
@@ -460,26 +415,27 @@ class ilACOExerciseMemberTableGUI extends ilTable2GUI {
         }
     }
 
-    protected function isGroupMember($member,$group_id){
+    protected function isGroupMember($member, $group_id)
+    {
         global $ilDB;
 
         $user_id = $member['usr_id'];
-        $data= array();
+        $data = array();
         $query = "select om.usr_id
         from ilias.obj_members as om
-        where om.obj_id = '".$group_id."' and om.usr_id = '".$user_id."'";
+        where om.obj_id = '" . $group_id . "' and om.usr_id = '" . $user_id . "'";
         $result = $ilDB->query($query);
-        while ($record = $ilDB->fetchAssoc($result)){
-            array_push($data,$record);
+        while ($record = $ilDB->fetchAssoc($result)) {
+            array_push($data, $record);
         }
 
-        if(empty($data)){
+        if (empty($data)) {
             return false;
         }
 
         return true;
 
-        }
+    }
 
     public function render()
     {
@@ -488,7 +444,7 @@ class ilACOExerciseMemberTableGUI extends ilTable2GUI {
         $url = $ilCtrl->getLinkTarget($this->getParentObject(), "saveCommentForLearners", "", true, false);
         $this->overlay_tpl->setVariable("AJAX_URL", $url);
 
-        return parent::render().
+        return parent::render() .
             $this->overlay_tpl->get();
     }
 

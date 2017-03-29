@@ -187,12 +187,13 @@ class ilACOGroupDisplayGUI
         foreach ($data as $row) {
             $section = new ilFormSectionHeaderGUI();
             $section->setTitle($row['title']);
+
             $form->addItem($section);
+
             $textfield_name = new ilTextInputGUI($this->pl->txt("group_name"), "group_name" . $n);
             $textfield_description = new ilTextInputGUI($this->pl->txt("group_description"), "description" . $n);
             $textfield_tutor = new ilTextInputGUI($a_options['auto_complete_name'], 'tutor' . $n);
             $textfield_tutor->setDataSource($ajax_url);
-
             $textfield_members = new ilNumberInputGUI($this->pl->txt("group_max_members"), "members" . $n);
 
             $time_limit = new ilCheckboxInputGUI($this->pl->txt('grp_reg_limited'), 'reg_limit_time' . $n);
@@ -201,25 +202,26 @@ class ilACOGroupDisplayGUI
             $dur->setStartText($this->pl->txt('cal_start'));
             $dur->setEndText($this->pl->txt('cal_end'));
             $dur->setShowTime(true);
+
             $textfield_name->setValue($row['title']);
             $textfield_name->setHiddenTitle($row['obj_id']);
             $textfield_description->setValue($row['description']);
             $textfield_tutor->setValue($row['login']);
             $textfield_members->setValue($row['registration_max_members']);
+
             $time_limit->setChecked(!$row['registration_unlimited']);
             $start_time = new ilDateTime($row['registration_start'], IL_CAL_DATETIME);
             $end_time = new ilDateTime($row['registration_end'], IL_CAL_DATETIME);
             $dur->setStart($start_time);
             $dur->setEnd($end_time);
+
             $form->addItem($textfield_name);
             $form->addItem($textfield_description);
-
             $form->addItem($textfield_tutor);
 
             $time_limit->addSubItem($dur);
             $form->addItem($textfield_members);
             $form->addItem($time_limit);
-
 
             $n = $n + 1;
 
@@ -230,8 +232,6 @@ class ilACOGroupDisplayGUI
 
     protected function saveGroups()
     {
-
-
         $this->form = $this->initForm();
         $this->form->setValuesByPost();
         $items = $this->form->getItems();
@@ -407,26 +407,23 @@ class ilACOGroupDisplayGUI
         if ($time_reg == "1") {
             $query3 = "UPDATE ilias.grp_settings as gs
 
-                  SET gs.registration_start = '" . $reg_start . "', gs.registration_unlimited = 0
+                  SET gs.registration_start = '" . $reg_start . "',gs.registration_end = '" . $reg_end . "', 
+                    gs.registration_unlimited = 0
 
-               WHERE gs.obj_id = '" . $obj_id . "'";
-
-            $query4 = "UPDATE ilias.grp_settings as gs
-               SET gs.registration_end = '" . $reg_end . "'
-              WHERE gs.obj_id = '" . $obj_id . "'";
+                    WHERE gs.obj_id = '" . $obj_id . "'";
 
             $ilDB->manipulate($query3);
-            $ilDB->manipulate($query4);
+
         } else {
             $query3 = "UPDATE ilias.grp_settings as gs
 
-                  SET gs.registration_start =  NULL, gs.registration_end = NULL, gs.registration_unlimited = 1
+                  SET gs.registration_start = NULL, gs.registration_end = NULL, gs.registration_unlimited = 1
 
                WHERE gs.obj_id = '" . $obj_id . "'";
+
             $ilDB->manipulate($query3);
 
         }
-
 
         $ilDB->manipulate($query1);
         $ilDB->manipulate($query2);
@@ -462,7 +459,6 @@ class ilACOGroupDisplayGUI
      */
     protected function doUserAutoComplete()
     {
-
 
         $a_fields = array('login', 'firstname', 'lastname', 'email');
         $result_field = 'login';

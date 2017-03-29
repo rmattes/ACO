@@ -89,22 +89,23 @@ protected - type: ilTree - Verwaltung der Tree Hierarchie
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{getAdminFolderIds()} 
-	\item[] TODO
+	\item[] Gibt alle ID's der Ordner in den aktuell per Checkbox ausgewählten Gruppen zurück die den selben Namen tragen wie der dem Objekt übergeordnete Ordner.
 \end{itemize}
 \subparagraph{Rückgabewerte}
 \begin{itemize}
-	\item[] \textbf{ids} - IDs der Ordner im Kurs, type: Array
+	\item[] \textbf{ids} - IDs der Ordner in den in der GUI ausgewählten Gruppen mit dem selben Namen des über dem Objekt liegendem Ordners, type: Array
 \end{itemize}
 
 \subsubsection*{\textit{getFolderName}}\label{getFolderNameLGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{getFolderName()} 
-	\item[] Ausgabe des Titels eines Ordners
+	\item[] Ausgabe des Titels des übergeordneten Ordners
 \end{itemize}
 \subparagraph{Rückgabewerte}
 \begin{itemize}
 	\item[] \textbf{folder['title']} - Titel des Ordners, type: String 
+	\item[] \textbf{-1} - Falls kein Ordner über dem Objekt existiert, type: Integer
 \end{itemize}
 
 \subsubsection*{\textit{getParentIds}}\label{getParentIdsLGUI}
@@ -126,7 +127,7 @@ protected - type: ilTree - Verwaltung der Tree Hierarchie
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{getGroupFolderID()} 
-	\item[] TODO
+	\item[] Gibt die ID des Ordners in der Gruppe mit einem bestimmten Namen zurück.
 \end{itemize}
 \subparagraph{Parameter-Liste}
 \begin{itemize}
@@ -136,6 +137,7 @@ protected - type: ilTree - Verwaltung der Tree Hierarchie
 \subparagraph{Rückgabewerte}
 \begin{itemize}
 	\item[] \textbf{ids} - IDs der Ordner in einer Gruppe, type: Array
+	\item[] \textbf{-2} - Falls kein solcher Ordner existiert, type: Integer
 \end{itemize}
 
 \subsubsection*{\textit{link}}\label{linkLGUI}

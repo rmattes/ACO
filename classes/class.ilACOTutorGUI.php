@@ -13,21 +13,21 @@ include_once("./Services/Form/classes/class.ilSelectInputGUI.php");
  * Time: 12:06
  * @ilCtrl_IsCalledBy ilACOTutorGUI: ilUIPluginRouterGUI
  * @ilCtrl_Calls      ilACOTutorGUI: ilObjExerciseGUI, ilExSubmissionFileGUI, ilFileSystemGUI, ilRepositorySearchGUI
- * 
+ *
  * This class implements the functionality of the groupfilter/tutor tab in the excercises.
  * The main use of this class is that you can filter the user submissions by groups
  * if the excercise is linked into the groups
- * 
+ *
  */
-
-class ilACOTutorGUI {
+class ilACOTutorGUI
+{
 
     const VIEW_ASSIGNMENT = 1;
     const VIEW_PARTICIPANT = 2;
     const VIEW_GRADES = 3;
 
-    protected $exercise; // [ilObjExercise]
-    protected $assignment; // [ilExAssignment]
+    protected $exercise;
+    protected $assignment;
 
     public $assign = array();
     protected $tree;
@@ -55,8 +55,8 @@ class ilACOTutorGUI {
         $this->tree = $tree;
         $this->lng = $lng;
         require_once "./Modules/Exercise/classes/class.ilObjExerciseGUI.php";
-        $ex_gui =& new ilObjExerciseGUI("", (int) $_GET["ref_id"], true, false);
-        $this->exercise=$ex_gui->object;
+        $ex_gui =& new ilObjExerciseGUI("", (int)$_GET["ref_id"], true, false);
+        $this->exercise = $ex_gui->object;
         $this->tabs = $ilTabs;
         $this->ctrl = $ilCtrl;
         $ilCtrl->saveParameter($this, array("vw", "member_id"));
@@ -65,22 +65,19 @@ class ilACOTutorGUI {
         $this->pl = ilACOPlugin::getInstance();
     }
 
-    protected function prepareOutput() {
+    protected function prepareOutput()
+    {
 
-        global $ilLocator, $tpl,$lng,$ilCtrl;
-
+        global $ilLocator, $tpl, $lng, $ilCtrl;
 
         $this->ctrl->setParameterByClass('ilobjexercisegui', 'ref_id', $_GET['ref_id']);
         $this->ctrl->setParameterByClass('ilexercisehandlergui', 'ref_id', $_GET['ref_id']);
 
-
-
-
         $this->ctrl->getRedirectSource();
 
-    $this->tabs->setBackTarget($this->pl->txt('back'), $this->ctrl->getLinkTargetByClass(array(
-        'ilrepositorygui',
-        'ilExerciseHandlerGUI',
+        $this->tabs->setBackTarget($this->pl->txt('back'), $this->ctrl->getLinkTargetByClass(array(
+            'ilrepositorygui',
+            'ilExerciseHandlerGUI',
         )));
         $this->setTitleAndIcon();
 
@@ -88,7 +85,8 @@ class ilACOTutorGUI {
         $tpl->setLocator();
     }
 
-    protected function setTitleAndIcon() {
+    protected function setTitleAndIcon()
+    {
         $this->tpl->setTitleIcon(ilUtil::getImagePath('icon_exc.svg'));
         $this->tpl->setTitle($this->pl->txt('obj_extu'));
         $this->tpl->setDescription($this->pl->txt('obj_extu_desc'));
@@ -97,8 +95,9 @@ class ilACOTutorGUI {
     /**
      *
      */
-    public function executeCommand() {
-        global $ilCtrl,$ilTabs,$lng;
+    public function executeCommand()
+    {
+        global $ilCtrl, $ilTabs, $lng;
         $this->checkAccess();
         $cmd = $this->ctrl->getCmd('view');
         $this->ctrl->saveParameter($this, 'ref_id');
@@ -109,12 +108,11 @@ class ilACOTutorGUI {
                 $this->view();
                 break;
             default:
-                $this->assignment=$this->getAssignment($_GET["ass_id"]);
+                $this->assignment = $this->getAssignment($_GET["ass_id"]);
                 $this->group = $_GET["grp_id"];
                 $class = $ilCtrl->getNextClass($this);
                 $cmd = $ilCtrl->getCmd("listPublicSubmissions");
-                switch($class)
-                {
+                switch ($class) {
                     case "ilfilesystemgui":
                         $ilTabs->clearTargets();
                         $ilTabs->setBackTarget($lng->txt("back"),
@@ -132,22 +130,20 @@ class ilACOTutorGUI {
 
                         include_once("./Services/User/classes/class.ilUserUtil.php");
                         $fs_title = array();
-                        foreach($noti_rec_ids as $rec_id)
-                        {
+                        foreach ($noti_rec_ids as $rec_id) {
                             $fs_title[] = ilUserUtil::getNamePresentation($rec_id, false, false, "", true);
                         }
                         $fs_title = implode(" / ", $fs_title);
 
                         include_once("./Services/FileSystem/classes/class.ilFileSystemGUI.php");
                         $fs_gui = new ilFileSystemGUI($fstorage->getFeedbackPath($feedback_id));
-                        $fs_gui->setTableId("excfbfil".$this->assignment->getId()."_".$feedback_id);
+                        $fs_gui->setTableId("excfbfil" . $this->assignment->getId() . "_" . $feedback_id);
                         $fs_gui->setAllowDirectories(false);
-                        $fs_gui->setTitle($lng->txt("exc_fb_files")." - ".
-                            $this->assignment->getTitle()." - ".
+                        $fs_gui->setTitle($lng->txt("exc_fb_files") . " - " .
+                            $this->assignment->getTitle() . " - " .
                             $fs_title);
                         $pcommand = $fs_gui->getLastPerformedCommand();
-                        if (is_array($pcommand) && $pcommand["cmd"] == "create_file")
-                        {
+                        if (is_array($pcommand) && $pcommand["cmd"] == "create_file") {
                             $this->exercise->sendFeedbackFileNotification($pcommand["name"],
                                 $noti_rec_ids, $this->assignment->getId());
                         }
@@ -158,10 +154,10 @@ class ilACOTutorGUI {
                         include_once('./Services/Search/classes/class.ilRepositorySearchGUI.php');
                         $rep_search = new ilRepositorySearchGUI();
                         $rep_search->setTitle($this->lng->txt("exc_add_participant"));
-                        $rep_search->setCallback($this,'addMembersObject');
+                        $rep_search->setCallback($this, 'addMembersObject');
 
                         // Set tabs
-                        $this->ctrl->setReturn($this,'members');
+                        $this->ctrl->setReturn($this, 'members');
 
                         $this->ctrl->forwardCommand($rep_search);
                         break;
@@ -191,7 +187,7 @@ class ilACOTutorGUI {
                         break;
 
                     default:
-                        $this->{$cmd."Object"}();
+                        $this->{$cmd . "Object"}();
                         break;
                 }
         }
@@ -199,10 +195,10 @@ class ilACOTutorGUI {
         $this->tpl->getStandardTemplate();
         $this->tpl->show();
     }
+
     protected function getViewBack()
     {
-        switch($_REQUEST["vw"])
-        {
+        switch ($_REQUEST["vw"]) {
             case self::VIEW_PARTICIPANT:
                 $back_cmd = "showParticipant";
                 break;
@@ -212,7 +208,6 @@ class ilACOTutorGUI {
                 break;
 
             default:
-                // case self::VIEW_ASSIGNMENT:
                 $back_cmd = "members";
                 break;
         }
@@ -232,63 +227,67 @@ class ilACOTutorGUI {
     }
 
 
-
     /**
      * default command
      */
-    protected function view() {
+    protected function view()
+    {
         $this->membersObject();
 
     }
 
-    protected function getAssignment($ass_id){
+    protected function getAssignment($ass_id)
+    {
         $ass = ilExAssignment::getInstancesByExercise($this->exercise->getId());
 
-        foreach ($ass as $as){
-            if ($as->getID()== $ass_id){
+        foreach ($ass as $as) {
+            if ($as->getID() == $ass_id) {
                 return $as;
             }
         }
     }
 
-    protected function isCourse($ref_id){
+    protected function isCourse($ref_id)
+    {
         global $ilDB;
 
         $data = array();
         $query = "select od.title
                     from ilias.object_data as od 
                     join ilias.object_reference as oref on oref.obj_id = od.obj_id
-                    where od.type = 'crs' and oref.ref_id = '".$ref_id."' ";
+                    where od.type = 'crs' and oref.ref_id = '" . $ref_id . "' ";
         $result = $ilDB->query($query);
-        while ($record = $ilDB->fetchAssoc($result)){
-            array_push($data,$record);
+        while ($record = $ilDB->fetchAssoc($result)) {
+            array_push($data, $record);
         }
-        if(empty($data)){
+        if (empty($data)) {
             return false;
         }
         return true;
 
     }
 
-    protected function getParentIds($id){
+    protected function getParentIds($id)
+    {
 
         global $ilDB;
 
         $ids = array();
         $data = array();
-        $query = "select tree.parent from ilias.tree as tree where child = '".$id."'";
+        $query = "select tree.parent from ilias.tree as tree where child = '" . $id . "'";
         $result = $ilDB->query($query);
-        while ($record = $ilDB->fetchAssoc($result)){
-            array_push($data,$record);
+        while ($record = $ilDB->fetchAssoc($result)) {
+            array_push($data, $record);
         }
-        foreach ($data as $folder){
-            array_push($ids,$folder['parent']);
+        foreach ($data as $folder) {
+            array_push($ids, $folder['parent']);
         }
         return $ids;
 
     }
 
-    protected function getGroups(){
+    protected function getGroups()
+    {
         global $ilUser, $ilDB;
         $user_id = $ilUser->getId();
 
@@ -297,7 +296,7 @@ class ilACOTutorGUI {
         do {
             $parent_id = $this->getParentIds($ref_id);
             $ref_id = $parent_id[0];
-        }while (!$this->isCourse($ref_id));
+        } while (!$this->isCourse($ref_id));
 
 
         $data = array();
@@ -306,30 +305,28 @@ class ilACOTutorGUI {
                     join ilias.object_reference as oref on oref.obj_id = od.obj_id
                     join ilias.crs_items citem on citem.obj_id = oref.ref_id
                     join ilias.obj_members as om on om.obj_id = oref.obj_id 
-                    where oref.deleted is null and od.`type`='grp' and citem.parent_id = '".$ref_id."' and om.usr_id = '".$user_id."' and om.admin = 1 ";
+                    where oref.deleted is null and od.`type`='grp' and citem.parent_id = '" . $ref_id . "' and om.usr_id = '" . $user_id . "' and om.admin = 1 ";
         $result = $ilDB->query($query);
-        while ($record = $ilDB->fetchAssoc($result)){
-            array_push($data,$record);
+        while ($record = $ilDB->fetchAssoc($result)) {
+            array_push($data, $record);
         }
         $output = array();
-        foreach ($data as $result){
+        foreach ($data as $result) {
 
-            $output[$result['obj_id']]= $result['title'];
+            $output[$result['obj_id']] = $result['title'];
         }
 
         return $output;
     }
 
 
+    public function membersObject()
+    {
+        global $tpl, $ilCtrl, $ilToolbar, $lng;
 
-
-    public function membersObject(){
-        global $tpl, $ilCtrl,$ilToolbar, $lng;
-
-        var_dump($this->selection);
         require_once "./Modules/Exercise/classes/class.ilObjExerciseGUI.php";
-        $ex_gui =& new ilObjExerciseGUI("", (int) $_GET["ref_id"], true, false);
-        $this->exercise=$ex_gui->object;
+        $ex_gui =& new ilObjExerciseGUI("", (int)$_GET["ref_id"], true, false);
+        $this->exercise = $ex_gui->object;
 
         $group_options = $this->getGroups();
 
@@ -347,18 +344,15 @@ class ilACOTutorGUI {
         $ass = ilExAssignment::getInstancesByExercise($this->exercise->getId());
 
 
-        if (!$this->assignment)
-        {
+        if (!$this->assignment) {
             $this->assignment = current($ass);
         }
 
         reset($ass);
 
-        if (count($ass) > 1)
-        {
+        if (count($ass) > 1) {
             $options = array();
-            foreach ($ass as $a)
-            {
+            foreach ($ass as $a) {
                 $options[$a->getId()] = $a->getTitle();
             }
             include_once("./Services/Form/classes/class.ilSelectInputGUI.php");
@@ -374,11 +368,8 @@ class ilACOTutorGUI {
             $ilToolbar->addStickyItem($button);
 
             $ilToolbar->addSeparator();
-        }
-
-        // #16165 - if only 1 assignment dropdown is not displayed;
-        else if($this->assignment)
-        {
+        } // #16165 - if only 1 assignment dropdown is not displayed;
+        else if ($this->assignment) {
             $ilCtrl->setParameter($this, "ass_id", $this->assignment->getId());
             include_once("./Services/UIComponent/Button/classes/class.ilSubmitButton.php");
             $button = ilSubmitButton::getInstance();
@@ -390,23 +381,18 @@ class ilACOTutorGUI {
         }
 
         // #16168 - no assignments
-        if (count($ass) > 0)
-        {
+        if (count($ass) > 0) {
 
             // we do not want the ilRepositorySearchGUI form action
             $ilToolbar->setFormAction($ilCtrl->getFormAction($this));
 
             $ilCtrl->setParameter($this, "ass_id", $this->assignment->getId());
 
-            if(ilExSubmission::hasAnySubmissions($this->assignment->getId()))
-            {
+            if (ilExSubmission::hasAnySubmissions($this->assignment->getId())) {
 
-                if($this->assignment->getType() == ilExAssignment::TYPE_TEXT)
-                {
+                if ($this->assignment->getType() == ilExAssignment::TYPE_TEXT) {
                     $ilToolbar->addFormButton($lng->txt("exc_list_text_assignment"), "listTextAssignment");
-                }
-                else
-                {
+                } else {
                     $ilToolbar->addFormButton($lng->txt("download_all_returned_files"), "downloadAll");
                 }
             }
@@ -415,9 +401,7 @@ class ilACOTutorGUI {
             include_once("./Modules/Exercise/classes/class.ilExerciseMemberTableGUI.php");
             $exc_tab = new ilACOExerciseMemberTableGUI($this, "members", $this->exercise, $this->assignment, $this->group);
             $tpl->setContent($exc_tab->getHTML());
-        }
-        else
-        {
+        } else {
             ilUtil::sendInfo($lng->txt("exc_no_assignments_available"));
         }
 
@@ -433,10 +417,9 @@ class ilACOTutorGUI {
         $this->assignment = $this->getAssignment($_POST['ass_id']);
         $this->group = $_POST["grp_id"];
 
-        foreach($this->exercise->members_obj->getMembers() as $member_id)
-        {
+        foreach ($this->exercise->members_obj->getMembers() as $member_id) {
 
-            if($this->isGroupMember($member_id,$this->group)) {
+            if ($this->isGroupMember($member_id, $this->group)) {
                 $submission = new ilExSubmission($this->assignment, $member_id);
                 $submission->updateTutorDownloadTime();
 
@@ -451,30 +434,32 @@ class ilACOTutorGUI {
                     $members[$member_id]["name"] = $tmp_obj->getFirstname() . " " . $tmp_obj->getLastname();
                     unset($tmp_obj);
                 }
-            }else{
+            } else {
                 $grps = $this->getGroups();
                 $grp_title = $grps[$this->group];
-                ilUtil::sendFailure($this->pl->txt("exc_no_submission_in_group")." ".$grp_title,true);
+                ilUtil::sendFailure($this->pl->txt("exc_no_submission_in_group") . " " . $grp_title, true);
                 $ilCtrl->redirect($this, $this->getViewBack());
             }
         }
 
         ilExSubmission::downloadAllAssignmentFiles($this->assignment, $members);
     }
-    protected function isGroupMember($member,$group_id){
+
+    protected function isGroupMember($member, $group_id)
+    {
         global $ilDB;
 
 
-        $data= array();
+        $data = array();
         $query = "select om.usr_id
         from ilias.obj_members as om
-        where om.obj_id = '".$group_id."' and om.usr_id = '".$member."'";
+        where om.obj_id = '" . $group_id . "' and om.usr_id = '" . $member . "'";
         $result = $ilDB->query($query);
-        while ($record = $ilDB->fetchAssoc($result)){
-            array_push($data,$record);
+        while ($record = $ilDB->fetchAssoc($result)) {
+            array_push($data, $record);
         }
 
-        if(empty($data)){
+        if (empty($data)) {
             return false;
         }
 
@@ -484,8 +469,7 @@ class ilACOTutorGUI {
 
     function saveCommentsObject()
     {
-        if(!isset($_POST['comments_value']))
-        {
+        if (!isset($_POST['comments_value'])) {
             return;
         }
 
@@ -500,16 +484,14 @@ class ilACOTutorGUI {
      */
     function saveCommentForLearnersObject()
     {
-        $res = array("result"=>false);
+        $res = array("result" => false);
 
-        if($this->ctrl->isAsynch())
-        {
+        if ($this->ctrl->isAsynch()) {
             $ass_id = (int)$_POST["ass_id"];
             $user_id = (int)$_POST["mem_id"];
             $comment = trim($_POST["comm"]);
 
-            if($ass_id && $user_id)
-            {
+            if ($ass_id && $user_id) {
                 $submission = new ilExSubmission($this->assignment, $user_id);
                 $user_ids = $submission->getUserIds();
 
@@ -517,29 +499,25 @@ class ilACOTutorGUI {
                 $all_members = $all_members->getMembers();
 
                 $reci_ids = array();
-                foreach($user_ids as $user_id)
-                {
-                    if(in_array($user_id, $all_members))
-                    {
+                foreach ($user_ids as $user_id) {
+                    if (in_array($user_id, $all_members)) {
                         $member_status = $this->assignment->getMemberStatus($user_id);
                         $member_status->setComment(ilUtil::stripSlashes($comment));
                         $member_status->update();
 
-                        if(trim($comment))
-                        {
+                        if (trim($comment)) {
                             $reci_ids[] = $user_id;
                         }
                     }
                 }
 
-                if(sizeof($reci_ids))
-                {
+                if (sizeof($reci_ids)) {
                     // send notification
                     $this->exercise->sendFeedbackFileNotification(null, $reci_ids,
                         $ass_id, true);
                 }
 
-                $res = array("result"=>true, "snippet"=>ilUtil::shortenText($comment, 25, true));
+                $res = array("result" => true, "snippet" => ilUtil::shortenText($comment, 25, true));
             }
         }
 
@@ -547,50 +525,37 @@ class ilACOTutorGUI {
         exit();
     }
 
-    //
-    // TEAM
-    //
 
     function createTeamsObject()
     {
         global $ilCtrl;
 
         $members = $this->getMultiActionUserIds(true);
-        if($members)
-        {
+        if ($members) {
             $new_members = array();
 
             include_once "Modules/Exercise/classes/class.ilExAssignmentTeam.php";
-            foreach($members as $group)
-            {
-                if(is_array($group))
-                {
+            foreach ($members as $group) {
+                if (is_array($group)) {
                     $new_members = array_merge($new_members, $group);
 
                     $first_user = $group;
                     $first_user = array_shift($first_user);
                     $team = ilExAssignmentTeam::getInstanceByUserId($this->assignment->getId(), $first_user);
-                    foreach($group as $user_id)
-                    {
+                    foreach ($group as $user_id) {
                         $team->removeTeamMember($user_id);
                     }
-                }
-                else
-                {
+                } else {
                     $new_members[] = $group;
                 }
             }
 
-            if(sizeof($new_members))
-            {
+            if (sizeof($new_members)) {
                 // see ilExSubmissionTeamGUI::addTeamMemberActionObject()
-
                 $first_user = array_shift($new_members);
                 $team = ilExAssignmentTeam::getInstanceByUserId($this->assignment->getId(), $first_user, true);
-                if(sizeof($new_members))
-                {
-                    foreach($new_members as $user_id)
-                    {
+                if (sizeof($new_members)) {
+                    foreach ($new_members as $user_id) {
                         $team->addTeamMember($user_id);
                     }
                 }
@@ -615,21 +580,17 @@ class ilACOTutorGUI {
         global $ilCtrl;
 
         $members = $this->getMultiActionUserIds(true);
-        if($members)
-        {
+        if ($members) {
             include_once "Modules/Exercise/classes/class.ilExAssignmentTeam.php";
-            foreach($members as $group)
-            {
+            foreach ($members as $group) {
                 // if single member - nothing to do
-                if(is_array($group))
-                {
+                if (is_array($group)) {
                     // see ilExSubmissionTeamGUI::removeTeamMemberObject()
 
                     $first_user = $group;
                     $first_user = array_shift($first_user);
                     $team = ilExAssignmentTeam::getInstanceByUserId($this->assignment->getId(), $first_user);
-                    foreach($group as $user_id)
-                    {
+                    foreach ($group as $user_id) {
                         $team->removeTeamMember($user_id);
                     }
 
@@ -650,32 +611,22 @@ class ilACOTutorGUI {
     protected function getMultiActionUserIds($a_keep_teams = false)
     {
         if (!is_array($_POST["member"]) ||
-            count($_POST["member"]) == 0)
-        {
+            count($_POST["member"]) == 0
+        ) {
             ilUtil::sendFailure($this->lng->txt("no_checkbox"), true);
-        }
-        else
-        {
+        } else {
             $members = array();
-            foreach(array_keys($_POST["member"]) as $user_id)
-            {
+            foreach (array_keys($_POST["member"]) as $user_id) {
                 $submission = new ilExSubmission($this->assignment, $user_id);
                 $tmembers = $submission->getUserIds();
-                if(!(bool)$a_keep_teams)
-                {
-                    foreach($tmembers as $tuser_id)
-                    {
+                if (!(bool)$a_keep_teams) {
+                    foreach ($tmembers as $tuser_id) {
                         $members[$tuser_id] = 1;
                     }
-                }
-                else
-                {
-                    if($tmembers)
-                    {
+                } else {
+                    if ($tmembers) {
                         $members[] = $tmembers;
-                    }
-                    else
-                    {
+                    } else {
                         // no team yet
                         $members[] = $user_id;
                     }
@@ -692,21 +643,16 @@ class ilACOTutorGUI {
     {
         $members = array();
 
-        if ($_GET["member_id"] != "")
-        {
+        if ($_GET["member_id"] != "") {
             $submission = new ilExSubmission($this->assignment, $_GET["member_id"]);
             $members = $submission->getUserIds();
-        }
-        else if($members = $this->getMultiActionUserIds())
-        {
+        } else if ($members = $this->getMultiActionUserIds()) {
             $members = array_keys($members);
         }
 
-        if($members)
-        {
+        if ($members) {
             $logins = array();
-            foreach($members as $user_id)
-            {
+            foreach ($members as $user_id) {
                 $member_status = $this->assignment->getMemberStatus($user_id);
                 $member_status->setFeedback(true);
                 $member_status->update();
@@ -715,9 +661,9 @@ class ilACOTutorGUI {
             $logins = implode($logins, ",");
 
             // #16530 - see ilObjCourseGUI::createMailSignature
-            $sig = chr(13).chr(10).chr(13).chr(10);
+            $sig = chr(13) . chr(10) . chr(13) . chr(10);
             $sig .= $this->lng->txt('exc_mail_permanent_link');
-            $sig .= chr(13).chr(10).chr(13).chr(10);
+            $sig .= chr(13) . chr(10) . chr(13) . chr(10);
             include_once './Services/Link/classes/class.ilLink.php';
             $sig .= ilLink::_getLink($this->exercise->getRefId());
             $sig = rawurlencode(base64_encode($sig));
@@ -734,7 +680,7 @@ class ilACOTutorGUI {
                 )
             ));
         }
-        ilUtil::sendFailure($this->lng->txt("no_checkbox"),true);
+        ilUtil::sendFailure($this->lng->txt("no_checkbox"), true);
         $this->ctrl->redirect($this, "members");
     }
 
@@ -746,10 +692,9 @@ class ilACOTutorGUI {
         global $ilCtrl;
 
         $members = $this->getMultiActionUserIds();
-        if(is_array($members))
-        {
+        if (is_array($members)) {
             $this->exercise->sendAssignment($this->assignment, $members);
-            ilUtil::sendSuccess($this->lng->txt("exc_sent"),true);
+            ilUtil::sendSuccess($this->lng->txt("exc_sent"), true);
         }
         $ilCtrl->redirect($this, "members");
     }
@@ -758,27 +703,25 @@ class ilACOTutorGUI {
     {
 
         $this->group = $_POST["grp_id"];
-        $_GET["grp_id"]=  $_POST["grp_id"];
-        var_dump($this->group);
+        $_GET["grp_id"] = $_POST["grp_id"];
         $user_ids = array();
         $data = array();
-        foreach(array_keys($_POST["id"]) as $user_id)
-        {
-            array_push($user_ids,$user_id);
+        foreach (array_keys($_POST["id"]) as $user_id) {
+            array_push($user_ids, $user_id);
             $data[-1][$user_id] = array(
                 "status" => ilUtil::stripSlashes($_POST["status"][$user_id])
-            ,"notice" => ilUtil::stripSlashes($_POST["notice"][$user_id])
-            ,"mark" => ilUtil::stripSlashes($_POST["mark"][$user_id])
+            , "notice" => ilUtil::stripSlashes($_POST["notice"][$user_id])
+            , "mark" => ilUtil::stripSlashes($_POST["mark"][$user_id])
             );
 
         }
 
-        $this->saveStatus($data,$user_ids);
+        $this->saveStatus($data, $user_ids);
 
     }
 
 
-    protected function saveStatus(array $a_data,$user_ids = '')
+    protected function saveStatus(array $a_data, $user_ids = '')
     {
         global $ilCtrl;
 
@@ -787,22 +730,18 @@ class ilACOTutorGUI {
         $saved_for = array();
 
 
-
-        foreach($a_data as $ass_id => $users)
-        {
+        foreach ($a_data as $ass_id => $users) {
             $ass = ($ass_id < 0)
                 ? $this->assignment
                 : new ilExAssignment($ass_id);
 
 
-            foreach($users as $user_id => $values)
-            {
+            foreach ($users as $user_id => $values) {
                 // this will add team members if available
                 $submission = new ilExSubmission($ass, $user_id);
-                foreach($submission->getUserIds() as $sub_user_id)
-                {
+                foreach ($submission->getUserIds() as $sub_user_id) {
                     $uname = ilObjUser::_lookupName($sub_user_id);
-                    $saved_for[$sub_user_id] = $uname["lastname"].", ".$uname["firstname"];
+                    $saved_for[$sub_user_id] = $uname["lastname"] . ", " . $uname["firstname"];
 
                     $member_status = $ass->getMemberStatus($sub_user_id);
                     $member_status->setStatus($values["status"]);
@@ -813,69 +752,70 @@ class ilACOTutorGUI {
             }
         }
 
-        if (count($saved_for) > 0)
-        {
-            $save_for_str = "(".implode($saved_for, " - ").")";
+        if (count($saved_for) > 0) {
+            $save_for_str = "(" . implode($saved_for, " - ") . ")";
         }
 
 
-        if(!empty($user_ids)){
+        if (!empty($user_ids)) {
             global $ilDB;
             $ass = ilExAssignment::getInstancesByExercise($this->exercise->getId());
             $exercise_id = $this->exercise->getId();
             $ass_ids = array();
-            foreach ($ass as $assignment){
-                array_push($ass_ids,$assignment->getId());
+            foreach ($ass as $assignment) {
+                array_push($ass_ids, $assignment->getId());
             }
 
             foreach ($user_ids as $usr_id) {
                 $data = array();
-                $query = 'SELECT ilias.exc_mem_ass_status.mark from ilias.exc_mem_ass_status where ilias.exc_mem_ass_status.ass_id in (' . implode(",", $ass_ids) . ') and ilias.exc_mem_ass_status.usr_id = '.$usr_id.'';
+                $query = 'SELECT ilias.exc_mem_ass_status.mark from ilias.exc_mem_ass_status where ilias.exc_mem_ass_status.ass_id in (' . implode(",", $ass_ids) . ') and ilias.exc_mem_ass_status.usr_id = ' . $usr_id . '';
                 $res = $ilDB->query($query);
-                while ($record = $ilDB->fetchAssoc($res)){
-                    array_push($data,$record);
+                while ($record = $ilDB->fetchAssoc($res)) {
+                    array_push($data, $record);
                 }
-                $totalmark=0;
-                foreach ($data as $ass_mark){
-                    $totalmark+=$ass_mark['mark'];
+                $totalmark = 0;
+                foreach ($data as $ass_mark) {
+                    $totalmark += $ass_mark['mark'];
                 }
-                $query='UPDATE ilias.ut_lp_marks
-                    SET  ilias.ut_lp_marks.mark = '.$totalmark.'
-                    WHERE ilias.ut_lp_marks.obj_id = '.$exercise_id.' AND ilias.ut_lp_marks.usr_id = '.$usr_id.'';
+                $query = 'UPDATE ilias.ut_lp_marks
+                    SET  ilias.ut_lp_marks.mark = ' . $totalmark . '
+                    WHERE ilias.ut_lp_marks.obj_id = ' . $exercise_id . ' AND ilias.ut_lp_marks.usr_id = ' . $usr_id . '';
                 $ilDB->manipulate($query);
             }
         }
-        ilUtil::sendSuccess($this->lng->txt("exc_status_saved")." ".$save_for_str, true);
+        ilUtil::sendSuccess($this->lng->txt("exc_status_saved") . " " . $save_for_str, true);
         $ilCtrl->redirect($this, $this->getViewBack());
     }
 
 
-    public function selectAssignmentObject(){
+    public function selectAssignmentObject()
+    {
 
-            global $ilTabs;
+        global $ilTabs;
 
         $_GET["grp_id"] = ilUtil::stripSlashes($_POST["grp_id"]);
         $this->group = ilUtil::stripSlashes($_POST["grp_id"]);
 
-        $this->selection['group']=ilUtil::stripSlashes($_POST["grp_id"]);
+        $this->selection['group'] = ilUtil::stripSlashes($_POST["grp_id"]);
 
         $_GET["ass_id"] = ilUtil::stripSlashes($_POST["ass_id"]);
         $this->selected_assignment = ilUtil::stripSlashes($_POST["ass_id"]);
-        $this->selection['assignment']= ilUtil::stripSlashes($_POST["ass_id"]);
+        $this->selection['assignment'] = ilUtil::stripSlashes($_POST["ass_id"]);
 
         $ass = ilExAssignment::getInstancesByExercise($this->exercise->getId());
 
-        foreach ($ass as $as){
-          if ($as->getID()== $this->selected_assignment){
-               $this->assignment = $as;
-               $this->assign[0] = $as;
-          }
-          }
+        foreach ($ass as $as) {
+            if ($as->getID() == $this->selected_assignment) {
+                $this->assignment = $as;
+                $this->assign[0] = $as;
+            }
+        }
         $this->membersObject();
 
     }
 
-    protected function checkAccess() {
+    protected function checkAccess()
+    {
         global $ilAccess, $ilErr;
         if (!$ilAccess->checkAccess("write", "", $_GET['ref_id'])) {
             $ilErr->raiseError($this->lng->txt("no_permission"), $ilErr->WARNING);

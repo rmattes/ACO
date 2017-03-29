@@ -258,8 +258,6 @@ class ilACOGroupGUI
         $userID = $ilUser->getId();
         $form = $this->initForm();
         $form->setValuesByPost();
-        var_dump($this->loadDate('start'));
-        //var_dump($this->loadDate('end'));
         $reg_start = $this->loadDate('start');
         $reg_end = $this->loadDate('end');
         $created = false;
@@ -292,8 +290,6 @@ class ilACOGroupGUI
 
             //adminFolder is created in every existing group which hasn't had such a folder yet
             foreach ($folder_title as $forGroupFolderTitle) {
-
-                //var_dump($forGroupFolderTitle);
 
                 if ($_POST['group_folder_name_checkbox'] AND
                     !($this->folderAlreadyExistingGroup($forGroupFolderTitle, $groupsInCourse['ref_id']))

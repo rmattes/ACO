@@ -37,14 +37,8 @@ class ilACOTutorGUI
     protected $tpl;
     protected $ctrl;
     protected $pl;
-    protected $assignment_list;
     protected $selected_assignment;
     protected $group;
-    protected $group_marks;
-    protected $si;
-    protected $groups_si;
-    protected $selInputAss;
-    protected $selection = array();
 
     /**
      * ilACOTutorGUI constructor.
@@ -796,11 +790,9 @@ class ilACOTutorGUI
         $_GET["grp_id"] = ilUtil::stripSlashes($_POST["grp_id"]);
         $this->group = ilUtil::stripSlashes($_POST["grp_id"]);
 
-        $this->selection['group'] = ilUtil::stripSlashes($_POST["grp_id"]);
 
         $_GET["ass_id"] = ilUtil::stripSlashes($_POST["ass_id"]);
         $this->selected_assignment = ilUtil::stripSlashes($_POST["ass_id"]);
-        $this->selection['assignment'] = ilUtil::stripSlashes($_POST["ass_id"]);
 
         $ass = ilExAssignment::getInstancesByExercise($this->exercise->getId());
 

@@ -5,15 +5,15 @@ blabla
 
 \subsection*{Klassenvariablen}
 \subparagraph{VIEW\_ASSIGNMENT}
-protected - type: Integer - 
+protected - type: Integer - Konstante
 \subparagraph{VIEW\_PARTICIPANT}
-protected - type: Integer - 
+protected - type: Integer - Konstante
 \subparagraph{VIEW\_GRADES}
-protected - type: Integer - 
+protected - type: Integer - Konstante
 \subparagraph{exercise}
-protected - type: ilObjExercise - 
+protected - type: ilObjExercise - Exercise Objekt
 \subparagraph{assignment}
-protected - type: ilExAssignment - 
+protected - type: ilExAssignment - Ausgewähltes Assignment
 \subparagraph{ctrl}
 protected - type: ilCtrl - Steuerung Zugriffsrechte
 \subparagraph{tpl}
@@ -28,24 +28,9 @@ protected - type: ilLocatorGUI - Darstellung in der Tree Hierarchie
 protected - type: ilLanguage - Einbindung der Language-File von ILIAS
 \subparagraph{tree}
 protected - type: ilTree - Verwaltung der Tree Hierarchie
-\subparagraph{assign}
-public - type: Array - 
-\subparagraph{assignment\_list}
-protected - type:  - 
-\subparagraph{selected\_assignment}
-protected - type:  - 
 \subparagraph{group}
-protected - type:  - 
-\subparagraph{group\_marks}
-protected - type:  - 
-\subparagraph{si}
-protected - type:  - 
-\subparagraph{group\_si}
-protected - type:  - 
-\subparagraph{selInputAss}
-protected - type:  - 
-\subparagraph{selection}
-protected - type: Array - 
+protected - type:  - Gruppen-ID der selektierten Gruppe
+
 
 
 \subsection*{Funktions-Liste}
@@ -110,22 +95,22 @@ protected - type: Array -
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{getViewBack()}
-	\item[] 
+	\item[] Gibt das letztes Command für eine Ansicht zurück
 \end{itemize}
 \subparagraph{Rückgabewerte}
 \begin{itemize}
-	\item[] \textbf{back\_cmd} - , type: String
+	\item[] \textbf{back\_cmd} - Command , type: String
 \end{itemize}
 
 \subsubsection*{\textit{initSubmission}}\label{initSubmissionTGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{initSubmission()}
-	\item[] 
+	\item[] Erstellt eine leere neue Abgabe für einen Benutzer
 \end{itemize}
 \subparagraph{Rückgabewerte}
 \begin{itemize}
-	\item[] \textbf{new ilExSubmission} - , type: ilExSubmission
+	\item[] \textbf{new ilExSubmission} - Neue Abgabe für den User , type: ilExSubmission
 \end{itemize}
 
 \subsubsection*{\textit{view}}\label{viewTGUI}
@@ -139,56 +124,56 @@ protected - type: Array -
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{getAssignment(\$ass\_id)}
-	\item[] 
+	\item[] Gibt das Assignment mit der übergebenen ID der aktuellen Exercise zurück
 \end{itemize}
 \subparagraph{Parameter-Liste}
 \begin{itemize}
-	\item[] \textbf{as\_id} - , type: 
+	\item[] \textbf{as\_id} - Assignment ID , type: Integer
 \end{itemize}
 \subparagraph{Rückgabewerte}
 \begin{itemize}
-	\item[] \textbf{as} - , type: 
+	\item[] \textbf{as} - Assignment mit übergebener ID, type: ilExAssignment
 \end{itemize}
 
 \subsubsection*{\textit{isCourse}}\label{isCourseTGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{isCourse(\$ref\_id)}
-	\item[] 
+	\item[] Überprüft ob das Object mit der ID \$ref\_id vom Typ Kurs ist
 \end{itemize}
 \subparagraph{Parameter-Liste}
 \begin{itemize}
-	\item[] \textbf{ref\_id} - , type: Integer
+	\item[] \textbf{ref\_id} - ID des zu überprüfenden Objekts, type: Integer
 \end{itemize}
 \subparagraph{Rückgabewerte}
 \begin{itemize}
-	\item[] \textbf{(true,false)} - , type: Boolean
+	\item[] \textbf{TRUE}, falls das Objekt ein Kurs ist, \textbf{FALSE} sonst, type: Boolean
 \end{itemize}
 
 \subsubsection*{\textit{getParentIds}}\label{getParentIdsTGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{getParentIds(\$id)}
-	\item[]  
+	\item[]  Gibt alle IDs der Objekte zurück in denen das Objekt mit der ID \$id liegt.
 \end{itemize}
 \subparagraph{Parameter-Liste}
 \begin{itemize}
-	\item[] \textbf{id} - , type: 
+	\item[] \textbf{id} - ID des zu überprüfenden Objekts , type: Integer
 \end{itemize}
 \subparagraph{Rückgabewerte}
 \begin{itemize}
-	\item[] \textbf{ids} - , type: 
+	\item[] \textbf{ids} - IDs aller Übergeordneter Objekte , type: Array
 \end{itemize}
 
 \subsubsection*{\textit{getGroups}}\label{getGroupsTGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{getGroups()}
-	\item[] 
+	\item[] Gibt alle Gruppen des Kurses zurück
 \end{itemize}
 \subparagraph{Rückgabewerte}
 \begin{itemize}
-	\item[] \textbf{output} - , type: 
+	\item[] \textbf{output} - Alle Gruppen des Kurses als mehrdimensionales Array , type: Array
 \end{itemize}
 
 
@@ -196,73 +181,67 @@ protected - type: Array -
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{membersObject()}
-	\item[] 
+	\item[] Erstellt die Standardansicht mit Toolbar und Buttons, ruft die Tabelle auf und übergibt die nötigen Parameter
 \end{itemize}
-\subparagraph{Rückgabewerte}
-\begin{itemize}
-	\item[] \textbf{} - , type: 
-\end{itemize}
+
 
 \subsubsection*{\textit{downloadAllObject}}\label{downloadAllObjectTGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{downloadAllObject()}
-	\item[] 
+	\item[] Lädt alle Abgegebenen Dateien des Aktuellen Gruppenfilter herunter
 \end{itemize}
 
 \subsubsection*{\textit{isGroupMember}}\label{isGroupMemberTGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{isGroupMember(\$member,\$group\_id)}
-	\item[]  
+	\item[]  Überprüft ob ein Benutzer Mitglied in einer Gruppe ist
 \end{itemize}
 \subparagraph{Parameter-Liste}
 \begin{itemize}
-	\item[] \textbf{member} - , type: 
-	\item[] \textbf{group\_id} - , type:
+	\item[] \textbf{member} - Benutzer ID des zu überprüfenden Benutzers , type: Integer 
+	\item[] \textbf{group\_id} - Gruppen ID der zu überprüfenden Gruppe , type: Integer
 \end{itemize}
 \subparagraph{Rückgabewerte}
 \begin{itemize}
-	\item[] \textbf{(true,false)} - , type: Boolean
+	\item[] \textbf{TRUE}, falls der Benutzer Mitglied in der Gruppe ist, \textbf{FALSE} sonst - , type: Boolean
 \end{itemize}
 
 \subsubsection*{\textit{saveCommentsObject}}\label{saveCommentsObjectTGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{saveCommentsObject()}
-	\item[]  
+	\item[] Speichert die eingegebene Notiz für Tutoren
 \end{itemize}
-\subparagraph{Rückgabewerte}
-\begin{itemize}
-	\item[] \textbf{} - , type: 
-\end{itemize}
+
 
 \subsubsection*{\textit{saveCommentForLearnersObject}}\label{saveCommentForLearnersObjectTGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{saveCommentForLearnersObject()}
-	\item[]  
+	\item[] Speichert den eingegebenen Kommentar für den Benutzer
 \end{itemize}
 
 \subsubsection*{\textit{createTeamsObject}}\label{createTeamsObjectTGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{createTeamsObject()}
-	\item[]  
+	\item[] Erstellt ein Team aus allen selektierten Benutzern
 \end{itemize}
 
 \subsubsection*{\textit{dissolveTeamsObject}}\label{dissolveTeamsObjectTGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{dissolveTeamsObject()}
-	\item[]  
+	\item[] löst alle ausgewählten Teams auf
 \end{itemize}
 
 \subsubsection*{\textit{getMultiActionUserIds}}\label{getMultiActionUserIdsTGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{getMultiActionUserIds(\$a\_keep\_teams)}
-	\item[]  
+	\item[] Gibt die Benutzer-IDs aller selektierten Benutzer zurück
 \end{itemize}
 \subparagraph{Parameter-Liste}
 \begin{itemize}
@@ -270,47 +249,47 @@ protected - type: Array -
 \end{itemize}
 \subparagraph{Rückgabewerte}
 \begin{itemize}
-	\item[] \textbf{members} - , type: 
+	\item[] \textbf{members} - Array mit Benutzer IDs , type: Array
 \end{itemize}
 
 \subsubsection*{\textit{redirectFeedbackMailObject}}\label{redirectFeedbackMailObjectTGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{redirectFeedbackMailObject()}
-	\item[]  
+	\item[]  Setzt den Feedback Status des Benutzers und leitet zum Email Fenster weiter
 \end{itemize}
 
 \subsubsection*{\textit{sendMembersObject}}\label{sendMembersObjectTGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{sendMembersObject()}
-	\item[]  
+	\item[]  Sendet das Assignment per Mail an alle ausgewählten Benutzer
 \end{itemize}
 
 \subsubsection*{\textit{saveStatusAllObject}}\label{saveStatusAllObjectTGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{saveStatusAllObject()}
-	\item[]  
+	\item[]  Ließt alle Daten aus der Tabelle aus
 \end{itemize}
 
 \subsubsection*{\textit{saveStatus}}\label{saveStatusTGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{saveStatus(array \$a\_data,\$user\_ids)}
-	\item[]  
+	\item[]  Speichert alle veränderten Daten aus der Tabelle in die Datenbank. Berechnet die Gesamtpunkte eines Arbeitsblatts neu
 \end{itemize}
 \subparagraph{Parameter-Liste}
 \begin{itemize}
-	\item[] \textbf{a\_data} - , type: 
-	\item[] \textbf{user\_id} - , type: 
+	\item[] \textbf{a\_data} - Daten die gespeichert werden , type: Array
+	\item[] \textbf{user\_id} - Benutzer IDs aller veränderten Benutzer , type: Array
 \end{itemize}
 
 \subsubsection*{\textit{selectAssignmentObject}}\label{selectAssignmentObjectTGUI}
 \subparagraph{Beschreibung}
 \begin{itemize}
 	\item[] \noindent\fbox{selectAssignmentObject()}
-	\item[]  
+	\item[]  Generiert die Tabellenansicht für die ausgewählte Gruppe und das ausgewählte Assignment
 \end{itemize}
 
 \subsubsection*{\textit{checkAccess}}\label{checkAccessTGUI}

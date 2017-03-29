@@ -1,3 +1,4 @@
+no_tutor_in_group#:#Each groups must have a tutor.
 select_member#:#Select user
 mgs_objects_linked_to_the_following_folders#:#objects successfully linked
 some_folders_already_linked#:#some objects already linked, these were not linked again 

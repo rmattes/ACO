@@ -1,3 +1,4 @@
+no_tutor_in_group#:#Jeder Gruppe muss ein Tutor zugeordnet sein. 
 select_member#:#Benutzer ausw&auml;hlen
 mgs_objects_linked_to_the_following_folders#:#Objekte erfolgreich verlinkt
 some_folders_already_linked#:#Manche Objekte wurden schon verlinkt, diese wurden nicht erneut verlinkt

@@ -258,7 +258,12 @@ class ilACOGroupDisplayGUI
                 $reg_end = $reg_start;
             }
 
-            $this->updateGroup($ref_id, $title, $description, $tutor, $members, $reg_start, $reg_end, $time_reg_enabled);
+            if (!(empty($tutor))){
+                $this->updateGroup($ref_id, $title, $description, $tutor, $members, $reg_start, $reg_end, $time_reg_enabled);
+            } else {
+                ilUtil::sendFailure($this->pl->txt('no_tutor_in_group'));
+            }
+
             $n = $n + 1;
         }
 

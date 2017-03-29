@@ -58,15 +58,15 @@ grp_reg_direct_info_screen#:# Direkter Gruppenbeitritt
 member_edit#:#Mitglieder verschieben
 move_member#:#Verschieben
 member_login#:#Benutzername
-member_description#:#Geben Sie hier den Benutzername des Benutzers sowie den Namen der Gruppe in die der Benutzer verschoben werden soll an.
+member_description#:#Geben Sie hier den Benutzername des Benutzers, sowie den Namen der Gruppe an, in die der Benutzer verschoben werden soll.
 save_settings#:#Speichern
 name_input#:#Titel
 id_input#:#Kurs-ID
-back#:#Zurück
+back#:#Zur&uuml;ck
 form_title#:#Excel-/XML-Kursimport
 form_title_management#:#Kurs-Administration
 file_input#:#Excel-/XML-Datei Hochladen
-import_courses#:#Kurse Importieren
+import_courses#:#Kurse importieren
 error_xsd#:#XSD Validierung: <br>%s<br>Line: %s<br><br>
 error_ilias#:#ILIAS Validierung: <br>
 error_admin#:#Admin nicht gefunden: %s<br>
@@ -74,23 +74,23 @@ error_ref_id#:#Ref-ID nicht gefunden: %s<br>
 error_obj_type#:#Falscher Objekttyp der Ref-ID: %s, %s<br>
 error_parent#:#Parent Ref-ID (hierarchy) nicht gefunden: %s<br>
 error_parent_ref#:#Parent Ref-ID (references) nicht gefunden: %s<br>
-error_timeframe#:#Aktivierungszeitfenster unvollständig bei Kurs: %s<br>
-error_inscription#:#Anmeldungszeitfenster unvollständig bei Kurs: %s<br>
+error_timeframe#:#Aktivierungszeitfenster unvollst&auml;ndig bei Kurs: %s<br>
+error_inscription#:#Anmeldungszeitfenster unvollst&auml;ndig bei Kurs: %s<br>
 error_not_category#:#Objekt mit Ref-ID (hierarchy) ist nicht vom Typ "Kategorie": %s<br>
 error_container_ref#:#Objekt mit Ref-ID (references) ist nicht vom Typ "Container": %s<br>
-error_large_file#:#Die hochgeladene Datei ist ungewöhnlich gross. Bitte überprüfen Sie, ob sich nach den gefüllte Zeilen der Excel-Datei noch leere Zeilen befinden und löschen Sie diese gegebenfalls.
-import_succeeded#:#Kurse neu angelegt:<br>%s<br>Kurse aktualisiert:<br>%s<br>Kurs-Referenzen angelegt:<br>%s<br>Kurs-Referenzen gelöscht:<br>%s
+error_large_file#:#Die hochgeladene Datei ist ungew&�uml;hnlich gro&szlig;. Bitte &Uuml;berpr&uuml;fen Sie, ob sich nach den gef&uuml;llten Zeilen der Excel-Datei noch leere Zeilen befinden und l&ouml;schen Sie diese gegebenfalls.
+import_succeeded#:#Kurse neu angelegt:<br>%s<br>Kurse aktualisiert:<br>%s<br>Kurs-Referenzen angelegt:<br>%s<br>Kurs-Referenzen gel&ouml;scht:<br>%s
 import_failed#:#Importieren der Kurse fehlgeschlagen. Die Validierung ergab folgende Fehlermeldungen:<br><br>
 creation_succeeded#:#Gruppen neu angelegt:<br>%s<br>
-creation_failed#:#Erstellen der Gruppen fehlgeschlagen, überprüfen Sie ihre Eingaben.
+creation_failed#:#Erstellen der Gruppen fehlgeschlagen, &Uuml;berpr&uuml;fen Sie ihre Eingaben.
 obj_acop#:#AdminContainer Plugin
-obj_acop_desc#:#Hier können sie einfach Gruppen erstellen und bearbeiten.
-obj_extu_desc#:#Hier können sie Abgaben nach Gruppen und Übung filtern, sowie Punkte eintragen und Abgaben herunterladen.
+obj_acop_desc#:#Hier k&ouml;nnen Sie einfach Gruppen erstellen und bearbeiten.
+obj_extu_desc#:#Hier k&ouml;nnen Sie Abgaben nach Gruppen und &Uuml;bung filtern, sowie Punkte eintragen und Abgaben herunterladen.
 obj_extu#:#Abgaben und Noten
-exc_select_ass_grp#:#Gruppe und Übungseinheit anzeigen
+exc_select_ass_grp#:#Gruppe und &Uuml;bungseinheit anzeigen
 tab_tutor#:#Gruppenfilter
 obj_link#:#Objekt Verlinken
-obj_link_desc#:#Wählen sie die Gruppen in die das Objekt verlinkt werden soll.
+obj_link_desc#:#W&auml;hlen Sie die Gruppen, in die das Objekt verlinkt werden soll.
 exc_no_submission_in_group#:#Keine Abgabe in Gruppe: 
-exc_save_all_and_total#:#Alle Speichern und Gesamtnote aktualisieren
+exc_save_all_and_total#:#Alle speichern und Gesamtnote aktualisieren
 only_in#:#Benutzer existiert nur in Gruppe(n): 

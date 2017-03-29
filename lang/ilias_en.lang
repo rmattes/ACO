@@ -25,13 +25,13 @@ save_groups#:#Save changes
 group_name#:#Group name
 destination_title#:#New group
 password#:#Password
-grp_reg_period#:#Self-Registration Period
+grp_reg_period#:#Self-Registration period
 cal_start#:#Start
 cal_end#:#End
-grp_reg_limited#:#Limited Registration Period
-grp_reg_passwd_info_screen#:#Public Group
-grp_reg_direct_info_screen#:#Closed Group
-grp_registration_type#:#Group Type
+grp_reg_limited#:#Limited registration period
+grp_reg_passwd_info_screen#:#Public group
+grp_reg_direct_info_screen#:#Closed group
+grp_registration_type#:#Group type
 userInGroupNotExistent#:#User doesn't exist in selected group.
 userInGroupExistent#:#User already exists in the group you try to move the user.
 groupNotExistent#:#Group is not existing.
@@ -45,14 +45,14 @@ group_create#:#Create groups
 group_create_title#:#Create groups
 create_groups#:#Create
 group_count#:#Number of groups
-members#:#Limited Number of Members
+members#:#Limited number of members
 group_title#:#Current group
 group_description#:#Room and time
 group_tutor#:#Tutor
-group_max_members#:#Limited Number of Members
+group_max_members#:#Limited number of members
 group_password#:#Group password
-grp_reg_passwd_info_screen#:#Join With Group Password
-grp_reg_direct_info_screen#:#Direct Registration
+grp_reg_passwd_info_screen#:#Join with group password
+grp_reg_direct_info_screen#:#Direct registration
 member_edit#:#Move a group member
 move_member#:#Move
 member_login#:#Username
@@ -64,7 +64,7 @@ back#:#Back
 form_title#:#Excel-/XML-Course-Import
 form_title_management#:#Course administration
 file_input#:#Upload Excel-/XML-file
-import_courses#:#Import Courses
+import_courses#:#Import courses
 error_xsd#:#XSD validation: <br>%s<br>Line: %s<br><br>
 error_ilias#:#ILIAS validation: <br>
 error_admin#:#Admin not found: %s<br>
@@ -81,14 +81,14 @@ import_succeeded#:#Courses created:<br>%s<br>Courses updated:<br>%s<br>Course-re
 import_failed#:#Course import failed. The validation exited with the following error messages:<br><br>
 creation_succeeded#:#Groups created successfully:<br>%s<br>
 creation_failed#:#Creating groups has failed. Please check your input.
-obj_acop#:#AdminContainer Plugin
+obj_acop#:#AdminContainer plugin
 obj_acop_desc#:#Here you can easily create or modifiy groups.
 obj_extu_desc#:#Here you can filter for groups and assignments
-obj_extu#:#Submissions and Grades
-exc_select_ass_grp#:#Select Group and Assignment
+obj_extu#:#Submissions and grades
+exc_select_ass_grp#:#Select group and assignment
 tab_tutor#:#Groupfilter
 obj_link#:#Link object
 obj_link_desc#:#Select groups you want to link the object.
 exc_no_submission_in_group#:#No submission in selected group: 
-exc_save_all_and_total#:#Save all and update Total Mark
+exc_save_all_and_total#:#Save all and update total mark
 only_in#:#User only exists in group(s): 

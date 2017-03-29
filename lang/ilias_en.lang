@@ -1,3 +1,5 @@
+inf_group_no_named_folder#:#In the group a folder with the following name does not exist:&nbsp;
+msg_linked_to_group_directory#:#&nbsp;object was instead linked drectly into the group.
 no_tutor_in_group#:#Each groups must have a tutor.
 select_member#:#Select user
 mgs_objects_linked_to_the_following_folders#:#objects successfully linked

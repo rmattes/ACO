@@ -182,7 +182,8 @@ class ilACOLinkGUI
                 array_push($group_ids, $grid);
                 $folder_id = $this->getGroupFolderID($group_id, $folder_name);
                 if ($folder_id == -2) {
-                    ilUtil::sendInfo('inf_group_no_named_folder' . "'.$folder_name.'" . 'msg_linked_to_group_directory');
+                    ilUtil::sendInfo($this->pl->txt('inf_group_no_named_folder') . "'.$folder_name.'" .
+                        $this->pl->txt('msg_linked_to_group_directory'));
                     $folder_id = array();
                     $folder_id[0] = $group_id;
                     array_push($ids, $folder_id);

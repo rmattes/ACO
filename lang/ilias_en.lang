@@ -5,7 +5,7 @@ select_member#:#Select user
 mgs_objects_linked_to_the_following_folders#:#objects successfully linked
 some_folders_already_linked#:#some objects already linked, these were not linked again 
 info_group_folder#:#Creation of several folders possible, e.g. folder1;folder2;folder3 etc.
-inf_parent_no_folder#:#Object was linked directly to the groups.
+inf_parent_no_folder#:#No parent folder found
 obj_link#:#Link
 link_desc#:#Here it is possible to link several objects into groups
 link_selected#:#link in selected groups

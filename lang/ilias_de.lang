@@ -5,9 +5,9 @@ select_member#:#Benutzer ausw&auml;hlen
 mgs_objects_linked_to_the_following_folders#:#Objekte erfolgreich verlinkt
 some_folders_already_linked#:#Manche Objekte wurden schon verlinkt, diese wurden nicht erneut verlinkt
 info_group_folder#:#Erstellung mehrerer Ordner m&ouml;glich, z.B. Ordner1;Ordner2;Ordner3 usw.
-inf_parent_no_folder#:#Objekt wurde direkt in die Gruppen verlinkt
+inf_parent_no_folder#:#Es wurde kein &uuml;bergeordneter Ordner gefunden
 obj_link#:#Verlinkung
-link_desc#:#Hier k�nnen Objekte in Gruppen verlinkt werden
+link_desc#:#Hier k&ouml;nnen Objekte in Gruppen verlinkt werden
 link_selected#:#in bestimmte Gruppen verlinken
 link_all#:#in alle Gruppen verlinken
 link_type#:#Verlinkungsoptionen

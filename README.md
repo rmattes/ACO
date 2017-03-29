@@ -41,12 +41,12 @@ Dieser Tab existiert innerhalb von Übungen und Tests / This tab exists inside o
 
 Dabei lassen sich über diesen Übungen oder Tests in die einzelnen Gruppen verlinken, wahlweise von einem Admin Ordner in einen Ordner in den Gruppen. 
 
-### Gruppenfilter/groupfilter tab
+### Gruppenfilter/Groupfilter tab
 Dieser Tab existiert innerhalb von Übungen / This tab exists inside of excercises
 
 Hiermit lassen sich in Übungen Abgaben nach Gruppen gefiltert anzeigen und herunterladen.  
 
-**Eine genauere Beschreibung der Funktionen bzw. Dokumentation und ein Manual finden sie hier**
+**Eine genauere Beschreibung der Funktionen bzw. Dokumentation und ein Manual finden sie unter folgendem Link**
 
 https://github.com/Ilias-fmi/ACO/blob/master/doc/Dokumentation.pdf
 

@@ -12,10 +12,6 @@ require_once './Services/Form/classes/class.ilDateTimeInputGUI.php';
 require_once './Modules/Folder/classes/class.ilObjFolder.php';
 
 /**
- * Created by PhpStorm.
- * User: Manuel
- * Date: 05.12.2016
- * Time: 15:54
  * @ilCtrl_IsCalledBy ilACOGroupGUI: ilUIPluginRouterGUI
  * @ilCtrl_Calls      ilACOGroupGUI: ilObjCourseAdministrationGUI
  *
@@ -213,6 +209,15 @@ class ilACOGroupGUI
         return $form;
     }
 
+    /**
+     * loads the date from the date input field
+     * the format is new since ilias 5.2.2 
+     * 
+     * @global type $ilUser
+     * @param type $a_field
+     * @return \ilDateTime
+     */
+    
     protected function loadDate($a_field)
     {
 
@@ -226,13 +231,22 @@ class ilACOGroupGUI
         return $date;
     }
 
+    
+     /**  counts the groups in the course and @return the result
+     *    we have to look in the tree table on the field child because
+     *    the same value in crs_item as obj_id is not immediately updated
+     * 
+     * @global type $ilDB
+     * @param type $parent_id
+     * @return type
+     */
     protected function countGroups($parent_id)
     {
 
         global $ilDB;
 
         $group_number = array();
-
+        
         $query = "select od.title as 'Übungsruppe'
                   from ilias.object_data od
                   join ilias.object_reference obr on od.obj_id = obr.obj_id
@@ -249,7 +263,12 @@ class ilACOGroupGUI
 
     }
 
-
+    /**
+    * 
+    * @global type $ilDB
+    * @global type $ilUser
+    * @global type $rbacadmin
+    */
     protected function createGroups()
     {
 
@@ -405,6 +424,12 @@ class ilACOGroupGUI
         return $group_id;
     }
 
+    /**
+     * 
+     * @global type $ilDB
+     * @param type $folder_name
+     * @return boolean
+     */
     protected function folderAlreadyExistingCourse($folder_name)
     {
         global $ilDB;
@@ -431,6 +456,13 @@ class ilACOGroupGUI
 
     }
 
+    /**
+     * 
+     * @global type $ilDB
+     * @param type $folder_name
+     * @param type $group_ref_id
+     * @return boolean
+     */
     protected function folderAlreadyExistingGroup($folder_name, $group_ref_id)
     {
         global $ilDB;
@@ -457,7 +489,13 @@ class ilACOGroupGUI
         }
     }
 
-
+    /**
+     * @global type $ilAccess
+     * @global type $ilErr
+     * 
+     * checks the access rights of the user
+     * should be redundant if the checkAccess in ilACOUIHookGUI works 
+     */ 
     protected function checkAccess()
     {
         global $ilAccess, $ilErr;

@@ -8,7 +8,7 @@ Der Haken bedeutet, dass das Istresultat dem Sollresultat entsprochen hat. \\
 \begin{table}[]
 	\centering
 	\caption{Testfälle}
-	\label{my-label}
+	\label{table1}
 	\begin{tabular}{p{6cm}p{7cm}p{3cm}llll}
 	\textbf{\large{Testfälle Plugin ACO } }                                                                                                              &                                                                                                          &             &  &  &  \\
 		&                                                                                                                                                                  &             &  &  &  \\
@@ -68,7 +68,7 @@ Teste mit einem User ob dieser Zugriff auf die Plugin Tabs hat&      User hat ke
 \begin{table}[]
 	\centering
 	\caption{Testfälle}
-	\label{my-label}
+	\label{table2}
 	\begin{tabular}{p{6cm}p{7cm}p{3cm}llll}
 		Bearbeite Gruppe mit Anmeldezeitraumende vor Anmeldezeitraumstart                                                                    & Gruppe wird mit Anmeldezeitraumstart und Anmeldezeitraumende + 2 Tage übernommen                                                                                 & \checkmark            &  &  &  \\
 		
@@ -100,7 +100,7 @@ Teste mit einem User ob dieser Zugriff auf die Plugin Tabs hat&      User hat ke
 \begin{table}[]
 	\centering
 	\caption{Testfälle}
-	\label{my-label}
+	\label{table3}
 	\begin{tabular}{p{6cm}p{7cm}p{3cm}llll}Verschiebe User der Gruppenadmin ist in eine andere Gruppe                                                                           & bleibt Gruppenadmin in Ausgangsgruppe und ist neues Gruppenmitglied in neuer Gruppe                                                                              & \checkmark          &  &  &  \\
 		&                                                                                                                                                                  &             &  &  &  \\
 		\textbf{	Tab Verlinkung  }                                                                                                                     &                                                                                                                                                                  &             &  &  &  \\
@@ -126,9 +126,19 @@ Teste mit einem User ob dieser Zugriff auf die Plugin Tabs hat&      User hat ke
 \begin{table}[]
 	\centering
 	\caption{Testfälle}
-	\label{my-label}
-	\begin{tabular}{p{6cm}p{7cm}p{3cm}llll}
-			\textbf{Gruppenfilter }                                                                                                                     &                                                                                                                                                                  &             &  &  &  \\
+	\label{table4}
+	\begin{tabular}{p{6cm}p{7cm}p{3cm}}
+			\textbf{Gruppenfilter}  &   &   \\
+		    Öffne Tab Gruppenfilter	& Eine leere Tabelle wird angezeigt, in der Toolbar können alle Gruppen in denen man Schreibrechte besitzt ausgewählt werden, alle Übungseinheiten der Übung können ausgewählt werden &\checkmark \\
+			Wähle eine Gruppe und eine Übungseinheit aus & Es werden in der Tabelle nur die Benutzer der ausgewählten Gruppe angezeigt. Alle abgegebenen Dateien werden angezeigt, die eingestellten Noten, Bewertungen, Notizen und Kommentare werden in der Tabelle angezeigt &\checkmark \\
+			Speichere Eingaben & Alle Eingaben werden in die Datenbank geschrieben, die Gesamtnote der Übung wird neu berechnet &\checkmark \\
+			& &\checkmark \\
+			& &\checkmark \\
+			& &\checkmark \\
+			& &\checkmark \\
+			& &\checkmark \\
+			& &\checkmark \\
+			
 
 	\end{tabular}
 \end{table}

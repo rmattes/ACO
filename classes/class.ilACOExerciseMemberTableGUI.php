@@ -126,7 +126,6 @@ class ilACOExerciseMemberTableGUI extends ilTable2GUI
         $this->setSelectAllCheckbox("member");
 
         $this->addMultiCommand("redirectFeedbackMail", $lng->txt("exc_send_mail"));
-        $this->addMultiCommand("sendMembers", $lng->txt("exc_send_assignment"));
 
         if ($this->ass->hasTeam()) {
             $this->addMultiCommand("createTeams", $lng->txt("exc_team_multi_create"));

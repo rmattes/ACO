@@ -382,14 +382,14 @@ class ilACOTutorGUI
 
             $ilCtrl->setParameter($this, "ass_id", $this->assignment->getId());
 
-            if (ilExSubmission::hasAnySubmissions($this->assignment->getId())) {
-
-                if ($this->assignment->getType() == ilExAssignment::TYPE_TEXT) {
-                    $ilToolbar->addFormButton($lng->txt("exc_list_text_assignment"), "listTextAssignment");
-                } else {
-                    $ilToolbar->addFormButton($lng->txt("download_all_returned_files"), "downloadAll");
-                }
-            }
+//            if (ilExSubmission::hasAnySubmissions($this->assignment->getId())) {
+//
+//                if ($this->assignment->getType() == ilExAssignment::TYPE_TEXT) {
+//                    $ilToolbar->addFormButton($lng->txt("exc_list_text_assignment"), "listTextAssignment");
+//                } else {
+//                    $ilToolbar->addFormButton($lng->txt("download_all_returned_files"), "downloadAll");
+//                }
+//            }
             $this->ctrl->setParameter($this, "vw", self::VIEW_ASSIGNMENT);
 
             include_once("./Modules/Exercise/classes/class.ilExerciseMemberTableGUI.php");

@@ -16,7 +16,7 @@
 *.aux
 *.glo
 *.idx
-*.pdf
+main.pdf
 *.log
 *.toc
 *.ist

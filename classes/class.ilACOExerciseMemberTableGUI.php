@@ -248,8 +248,8 @@ class ilACOExerciseMemberTableGUI extends ilTable2GUI
 
                         $this->tpl->setCurrentBlock("team_member_removal_bl");
                         $this->tpl->setVariable("URL_TEAM_MEMBER_REMOVAL", $url);
-                        $this->tpl->setVariable("TXT_TEAM_MEMBER_REMOVAL",
-                            ilGlyphGUI::get(ilGlyphGUI::CLOSE, $lng->txt("remove")));
+                       // $this->tpl->setVariable("TXT_TEAM_MEMBER_REMOVAL",
+                         //   ilGlyphGUI::get(ilGlyphGUI::CLOSE, $lng->txt("remove")));
                         $this->tpl->parseCurrentBlock();
                     }
 
@@ -259,11 +259,11 @@ class ilACOExerciseMemberTableGUI extends ilTable2GUI
                 }
 
                 if (!$has_no_team_yet) {
-                    $this->tpl->setCurrentBlock("team_log");
-                    $this->tpl->setVariable("HREF_LOG",
-                        $ilCtrl->getLinkTargetByClass("ilExSubmissionTeamGUI", "showTeamLog"));
-                    $this->tpl->setVariable("TXT_LOG", $lng->txt("exc_team_log"));
-                    $this->tpl->parseCurrentBlock();
+//                    $this->tpl->setCurrentBlock("team_log");
+//                    $this->tpl->setVariable("HREF_LOG",
+//                        $ilCtrl->getLinkTargetByClass("ilExSubmissionTeamGUI", "showTeamLog"));
+//                    $this->tpl->setVariable("TXT_LOG", $lng->txt("exc_team_log"));
+//                    $this->tpl->parseCurrentBlock();
                 } else {
                     // #11957
                     $this->tpl->setCurrentBlock("team_info");

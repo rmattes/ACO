@@ -9,6 +9,13 @@
 	\includegraphics[width=1\textwidth]{img/gruppenverwalten.jpg}
 	\caption{Ansicht Tab Gruppen verwalten im jeweiligen Kurs}
 \end{figure}
+
+~\\ In einem Kurs erscheint für alle Benutzer mit Schreibzugriff der neue Tab \textit{Gruppen verwalten}. In diesem Tab stehen drei Subtabs zur Auswahl. 
+\begin{itemize}
+	\item \textit{Gruppen erstellen} bietet die Funktionalität mehrere Gruppen auf einmal zu erstellen. Dabei sind verschiedene Pflichtfelder und optionale Felder verfügbar.
+	\item \textit{Kurs bearbeiten} bietet die Möglichkeit Einstellungen mehrerer Gruppen auf einer Seite übersichtlich zu bearbeiten.
+	\item \textit{Mitglieder verschieben} bietet die Möglichkeit Mitglieder zwischen Gruppen hin- und herzuschieben. Voraussetzung dafür ist, das der Benutzer bereits Mitglied in einer Gruppe ist. Um Tutoren zu verschieben benutzen Sie bitte den Tab \textit{Kurs bearbeiten}. Tutoren bleiben der bisherigen Gruppe als Administator erhalten, und werden der Ziel-Gruppe als Mitglied hinzugefügt.
+\end{itemize} 
 \clearpage
 
 
@@ -29,10 +36,11 @@ In diesem Reiter/Tab lassen sich beliebig viele Gruppen erstellen.
 \subsection*{Vorgehen - Pflichtfelder}
 
 \begin{itemize}
-	\item Eingeben eines Namenspräfix im Textfeld "Gruppennamen"  
-	\item Eingeben einer Zahl größer Null im Textfeld "Anzahl der Gruppen"
-	\item Eingeben einer Zahl im Textfeld "Maximale Mitgliederanzahl" für die maximale Anzahl der Gruppenmitglieder 
+	\item Eingeben eines Namenspräfix im Textfeld \textit{Gruppennamen} 
+	\item Eingeben einer Zahl größer Null im Textfeld \textit{Anzahl der Gruppen}
+	\item Eingeben einer Zahl im Textfeld \textit{Maximale Mitgliederanzahl} für die maximale Anzahl der Gruppenmitglieder 
 \end{itemize}
+(Versehentlich eingegebene Buchstaben werden bei Zahleneingaben ignoriert)
 
 
 
@@ -41,8 +49,8 @@ In diesem Reiter/Tab lassen sich beliebig viele Gruppen erstellen.
 
 \subsubsection*{Beitritts - Typ}
 \begin{itemize}
-	\item[1] Radiobutton auf  'Gruppenbeitritt mit Passwort'   setzen um die Gruppen mit einem Passwort zu schützen. 
-	\item[2] Ein weiteres Textfeld taucht auf, bei dem das gewünschte Passwort einzugeben ist. (Passwort ist für alle in dieser Session erzeugten Gruppen dasselbe)
+	\item[1] Radiobutton auf  \textit{Gruppenbeitritt mit Passwort}   setzen um die Gruppen mit einem Passwort zu schützen. 
+	\item[2] Ein weiteres Textfeld taucht auf, bei dem das gewünschte Passwort einzugeben ist. (Passwort ist für alle Gruppen dasselbe)
 \end{itemize}
 
 \subsubsection*{Zeitlich begrenzter Beitritt}
@@ -56,7 +64,7 @@ In diesem Reiter/Tab lassen sich beliebig viele Gruppen erstellen.
 \subsubsection*{Ordnerstruktur für Aufgabenverteilung}
 \begin{itemize}
 	\item[1] Checkbox setzen 
-	\item[2] Ein Textfeld taucht auf bei dem man einen oder mehrere Ordnernamen (durch ";" getrennt) eingeben kann. Dadurch werden im Kurs als auch in allen zu erstellenden Gruppen diese Ordner mit den bzw. dem Namen erzeugt.
+	\item[2] Ein Textfeld taucht auf bei dem man einen oder mehrere Ordnernamen (durch ";" getrennt) eingeben kann. Dadurch werden im Kurs als auch in allen zu erstellenden Gruppen diese Ordner mit den bzw. dem Namen erzeugt. Dies dient der vereinfachten Verteilung von Übungen bzw. Tests. (siehe auch \nameref{linkUebung} und \nameref{linkTest})
 	
 \end{itemize}
 \clearpage
@@ -74,11 +82,11 @@ In diesem Reiter/Tab lassen sich beliebig viele Gruppen erstellen.
 \end{figure}
 
 
-~\\In diesem Reiter/Tab erhält man eine Übersicht aller im Kurs vorhandenen Gruppen mit folgenden Feldern. (n aus den natürlichen Zahlen)
+~\\In diesem Reiter/Tab erhält man eine Übersicht aller im Kurs vorhandenen Gruppen mit folgenden Feldern.
 \newpage
 \subsection*{Gruppen}
 Die Felder können einzelnen und unabhängig voneinander bearbeitet werden. Felder zeigen den aktuellen Wert/Zustand der Gruppe an. 
-Mit einem klick auf den "Änderung speichern" Knopf werden die Änderungen übernommen. 
+Mit einem klick auf den \textit{Änderung speichern} Knopf werden die Änderungen übernommen. 
 
 \subsubsection{Gruppenname}
 \begin{itemize}
@@ -93,14 +101,13 @@ Mit einem klick auf den "Änderung speichern" Knopf werden die Änderungen über
 \subsubsection{Tutor}
 \begin{itemize}
 	\item Um der aus der Gruppe einem Mitglieder die Tutor bzw. Gruppenadministrationsrechte zuzuweisen bzw. zu entziehen. 
-	\item[hinzufügen] Ilias Benutzernamen eingeben. Nach dem dritten Buchstaben funktioniert springt die Auto-Complete Funktion an und hilft beim vervollständigen. 
-	\item[löschen] Sollte ein zuvor gefülltes Feld leer hinterlassen werden, werden dem Benutzer hinter dem entfernten Text die Adminrechte entzogen.
+	\item[hinzufügen] Um den Gruppenadministrator zu ändern gibt man hier den Benutzernamen des neuen Administrators ein. Eine Auto-Complete Funktion hilft beim vervollständigen der Benutzernamen. Dem alten eingetragenen Benutzer werden damit die Adminrechte in der Gruppe entzogen, außer es handelt sich um einen Kursadministrator dann wird der neue Admin zusätzlich angelegt.
 \end{itemize}
 
 \subsubsection{Max Mitglieder}
 Um den angezeigten Wert für die Gruppe zu verändern
 \begin{itemize}
-	\item Eingeben einer Zahl im Textfeld "Maximale Mitgliederanzahl" für die maximale Anzahl der Gruppenmitglieder 
+	\item Eingeben einer Zahl im Textfeld \textit{Maximale Mitgliederanzahl} für die maximale Anzahl der Gruppenmitglieder 
 \end{itemize}
 
 
@@ -143,14 +150,14 @@ Falls schon ausgewählt und man nur das Datum verändern will, Schritt 1 übersp
 \subsubsection*{Benutzer auswählen}
 \begin{itemize}
 	\item Benutzernamen eingeben, ab dem dritten Buchstaben hilft die Auto-Complete Funktion beim vervollständigen. (Pflichtfeld, darf nicht leer sein)
-	\item Auf "Benutzer auswählen" klicken
+	\item Auf \textit{Benutzer auswählen} klicken
 \end{itemize}
 \subsubsection*{Benutzer wurde ausgewählt}
 \begin{itemize}
-	\item Auf der neuen Seite wird in dem Drop-down Menü unter "bisherige Gruppe" angezeigt in welchen Gruppen sich der Benutzer befindet, darunter unter "neue Gruppe" 
-	\item Auswählen aus welcher Gruppe (Achtung im Drop-down von bisherige Gruppe Menü können mehrere Gruppen angezeigt werden, da sich Benutzer möglicherweise in mehreren Gruppen befindet)
-	\item Auswählen in welche "neue Gruppe" man den Benutzer verschieben will
-	\item Mit dem Klicken auf "Verschieben" die Eingabe bestätigen und den Benutzer verschieben
+	\item Auf der neuen Seite wird in dem Drop-down Menü unter \textit{bisherige Gruppe} angezeigt in welchen Gruppen sich der Benutzer befindet, darunter unter \textit{neue Gruppe} die Möglichen Gruppen zum verschieben.
+	\item Auswählen aus welcher Gruppe (Achtung im Drop-down von bisherige Gruppe Menü können mehrere Gruppen angezeigt werden, da sich Benutzer möglicherweise in mehreren Gruppen befindet) der Benutzer verschoben werden soll.
+	\item Auswählen in welche \textit{neue Gruppe} man den Benutzer verschieben will
+	\item Mit dem Klicken auf \textit{Verschieben} die Eingabe bestätigen und den Benutzer verschieben
 \end{itemize}
 
 

@@ -53,7 +53,7 @@ https://github.com/Ilias-fmi/ACO/blob/master/doc/Dokumentation.pdf
 
 ### Kontakt/Contact
 
-Manuel Mergel  merglml@studi.informatik.uni-stuttgart.de 
+Manuel Mergl  merglml@studi.informatik.uni-stuttgart.de 
     
 Kai Durst durstrl@studi.informatik.uni-stuttgart.de
     

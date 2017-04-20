@@ -49,7 +49,7 @@ class ilACOTutorGUI
         $this->tree = $tree;
         $this->lng = $lng;
         require_once "./Modules/Exercise/classes/class.ilObjExerciseGUI.php";
-        $ex_gui =& new ilObjExerciseGUI("", (int)$_GET["ref_id"], true, false);
+        $ex_gui = new ilObjExerciseGUI("", (int)$_GET["ref_id"], true, false);
         $this->exercise = $ex_gui->object;
         $this->tabs = $ilTabs;
         $this->ctrl = $ilCtrl;
@@ -319,7 +319,7 @@ class ilACOTutorGUI
         global $tpl, $ilCtrl, $ilToolbar, $lng;
 
         require_once "./Modules/Exercise/classes/class.ilObjExerciseGUI.php";
-        $ex_gui =& new ilObjExerciseGUI("", (int)$_GET["ref_id"], true, false);
+        $ex_gui = new ilObjExerciseGUI("", (int)$_GET["ref_id"], true, false);
         $this->exercise = $ex_gui->object;
 
         $group_options = $this->getGroups();

@@ -309,7 +309,7 @@ class ilACOGroupDisplayGUI
         global $ilDB;
         $logins = array();
         $data = array();
-        $query = 'Select ilias.usr_data.login from ilias.usr_data where ilias.usr_data.usr_id in (' . implode(",", $ids) . ') ';
+        $query = 'Select usr_data.login from ilias.usr_data where usr_data.usr_id in (' . implode(",", $ids) . ') ';
         $result = $ilDB->query($query);
         while ($record = $ilDB->fetchAssoc($result)) {
             array_push($data, $record);

@@ -247,8 +247,8 @@ class ilACOTutorGUI
 
         $data = array();
         $query = "select od.title
-                    from ilias.object_data as od 
-                    join ilias.object_reference as oref on oref.obj_id = od.obj_id
+                    from object_data as od
+                    join object_reference as oref on oref.obj_id = od.obj_id
                     where od.type = 'crs' and oref.ref_id = '" . $ref_id . "' ";
         $result = $ilDB->query($query);
         while ($record = $ilDB->fetchAssoc($result)) {
@@ -268,7 +268,7 @@ class ilACOTutorGUI
 
         $ids = array();
         $data = array();
-        $query = "select tree.parent from ilias.tree as tree where child = '" . $id . "'";
+        $query = "select tree.parent from tree as tree where child = '" . $id . "'";
         $result = $ilDB->query($query);
         while ($record = $ilDB->fetchAssoc($result)) {
             array_push($data, $record);
@@ -295,10 +295,10 @@ class ilACOTutorGUI
 
         $data = array();
         $query = "select od.title, od.obj_id
-                    from ilias.object_data as od
-                    join ilias.object_reference as oref on oref.obj_id = od.obj_id
-                    join ilias.crs_items citem on citem.obj_id = oref.ref_id
-                    join ilias.obj_members as om on om.obj_id = oref.obj_id 
+                    from object_data as od
+                    join object_reference as oref on oref.obj_id = od.obj_id
+                    join crs_items citem on citem.obj_id = oref.ref_id
+                    join obj_members as om on om.obj_id = oref.obj_id
                     where oref.deleted is null and od.`type`='grp' and citem.parent_id = '" . $ref_id . "' and om.usr_id = '" . $user_id . "' and om.admin = 1 ";
         $result = $ilDB->query($query);
         while ($record = $ilDB->fetchAssoc($result)) {
@@ -446,7 +446,7 @@ class ilACOTutorGUI
 
         $data = array();
         $query = "select om.usr_id
-        from ilias.obj_members as om
+        from obj_members as om
         where om.obj_id = '" . $group_id . "' and om.usr_id = '" . $member . "'";
         $result = $ilDB->query($query);
         while ($record = $ilDB->fetchAssoc($result)) {
@@ -762,7 +762,7 @@ class ilACOTutorGUI
 
             foreach ($user_ids as $usr_id) {
                 $data = array();
-                $query = 'SELECT ilias.exc_mem_ass_status.mark from ilias.exc_mem_ass_status where ilias.exc_mem_ass_status.ass_id in (' . implode(",", $ass_ids) . ') and ilias.exc_mem_ass_status.usr_id = ' . $usr_id . '';
+                $query = 'SELECT exc_mem_ass_status.mark from exc_mem_ass_status where exc_mem_ass_status.ass_id in (' . implode(",", $ass_ids) . ') and exc_mem_ass_status.usr_id = ' . $usr_id . '';
                 $res = $ilDB->query($query);
                 while ($record = $ilDB->fetchAssoc($res)) {
                     array_push($data, $record);
@@ -772,8 +772,8 @@ class ilACOTutorGUI
                     $totalmark += $ass_mark['mark'];
                 }
                 $query = 'UPDATE ilias.ut_lp_marks
-                    SET  ilias.ut_lp_marks.mark = ' . $totalmark . '
-                    WHERE ilias.ut_lp_marks.obj_id = ' . $exercise_id . ' AND ilias.ut_lp_marks.usr_id = ' . $usr_id . '';
+                    SET  ut_lp_marks.mark = ' . $totalmark . '
+                    WHERE ut_lp_marks.obj_id = ' . $exercise_id . ' AND ut_lp_marks.usr_id = ' . $usr_id . '';
                 $ilDB->manipulate($query);
             }
         }
@@ -814,4 +814,3 @@ class ilACOTutorGUI
         }
     }
 }
-

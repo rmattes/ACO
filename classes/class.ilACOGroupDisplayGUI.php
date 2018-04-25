@@ -252,7 +252,7 @@ class ilACOGroupDisplayGUI
             $reg_end = $reg_end->get(IL_CAL_DATETIME);
 
             //if reg_end before reg_start, we set the reg_start on the reg_end
-            //maybe not the best solution 
+            //maybe not the best solution
             if ($reg_end < $reg_start) {
 
                 $reg_end = $reg_start;
@@ -278,8 +278,8 @@ class ilACOGroupDisplayGUI
     {
         global $ilDB;
         $data = array();
-        $query = "select ud.usr_id 
-        from ilias.usr_data as ud
+        $query = "select ud.usr_id
+        from usr_data as ud
         where ud.login = '" . $user_login . "'";
         $res = $ilDB->query($query);
         while ($record = $ilDB->fetchAssoc($res)) {
@@ -296,7 +296,7 @@ class ilACOGroupDisplayGUI
         $description = "Groupadmin group obj_no." . $obj_id;
         global $ilDB;
         $role_id = array();
-        $query = "SELECT od.obj_id FROM ilias.object_data as od WHERE od.description = '" . $description . "'";
+        $query = "SELECT od.obj_id FROM object_data as od WHERE od.description = '" . $description . "'";
         $result = $ilDB->query($query);
         while ($record = $ilDB->fetchAssoc($result)) {
             array_push($role_id, $record);
@@ -309,7 +309,7 @@ class ilACOGroupDisplayGUI
         global $ilDB;
         $logins = array();
         $data = array();
-        $query = 'Select usr_data.login from ilias.usr_data where usr_data.usr_id in (' . implode(",", $ids) . ') ';
+        $query = 'Select usr_data.login from usr_data where usr_data.usr_id in (' . implode(",", $ids) . ') ';
         $result = $ilDB->query($query);
         while ($record = $ilDB->fetchAssoc($result)) {
             array_push($data, $record);
@@ -325,8 +325,8 @@ class ilACOGroupDisplayGUI
         global $ilDB;
         $ids = array();
         $data = array();
-        $query = "select om.usr_id from ilias.obj_members as om
-                    join ilias.object_reference as oref on oref.obj_id = om.obj_id
+        $query = "select om.usr_id from obj_members as om
+                    join object_reference as oref on oref.obj_id = om.obj_id
                     where om.admin = 1 and oref.ref_id = '" . $ref_id . "'";
 
         $result = $ilDB->query($query);
@@ -396,23 +396,23 @@ class ilACOGroupDisplayGUI
         }
 
 
-        $query1 = "UPDATE ilias.object_data as od
-                           
+        $query1 = "UPDATE object_data as od
+
                 SET od.title = '" . $title . "' , od.description = '" . $description . "'
-                             
+
                 WHERE od.obj_id = '" . $obj_id . "'";
 
-        $query2 = "UPDATE ilias.grp_settings as gs
-        
+        $query2 = "UPDATE grp_settings as gs
+
                    SET gs.registration_max_members ='" . $members . "'
-        
+
                  WHERE gs.obj_id = '" . $obj_id . "'";
 
 
         if ($time_reg == "1") {
-            $query3 = "UPDATE ilias.grp_settings as gs
+            $query3 = "UPDATE grp_settings as gs
 
-                  SET gs.registration_start = '" . $reg_start . "',gs.registration_end = '" . $reg_end . "', 
+                  SET gs.registration_start = '" . $reg_start . "',gs.registration_end = '" . $reg_end . "',
                     gs.registration_unlimited = 0
 
                     WHERE gs.obj_id = '" . $obj_id . "'";
@@ -420,7 +420,7 @@ class ilACOGroupDisplayGUI
             $ilDB->manipulate($query3);
 
         } else {
-            $query3 = "UPDATE ilias.grp_settings as gs
+            $query3 = "UPDATE grp_settings as gs
 
                   SET gs.registration_start = NULL, gs.registration_end = NULL, gs.registration_unlimited = 1
 
@@ -443,12 +443,12 @@ class ilACOGroupDisplayGUI
 
         $data = array();
         $query = "select od.title, gs.registration_max_members, ud.login, od.description, gs.registration_start, gs.registration_end, od.obj_id, gs.registration_unlimited
-                    from ilias.object_data as od
-                    join ilias.object_reference as oref on oref.obj_id = od.obj_id 
-                    join ilias.grp_settings gs on gs.obj_id = oref.obj_id
-                    join ilias.tree citem on citem.child = oref.ref_id
-                    left join (select * from ilias.obj_members om where om.admin = 1) as obm on obm.obj_id = oref.obj_id
-                    left join ilias.usr_data ud on ud.usr_id = obm.usr_id
+                    from object_data as od
+                    join object_reference as oref on oref.obj_id = od.obj_id
+                    join grp_settings gs on gs.obj_id = oref.obj_id
+                    join tree citem on citem.child = oref.ref_id
+                    left join (select * from obj_members om where om.admin = 1) as obm on obm.obj_id = oref.obj_id
+                    left join usr_data ud on ud.usr_id = obm.usr_id
                     where oref.deleted is null and od.`type`='grp' and citem.parent = '" . $ref_id . "'";
         $result = $ilDB->query($query);
         while ($record = $ilDB->fetchAssoc($result)) {

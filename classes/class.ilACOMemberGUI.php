@@ -270,7 +270,7 @@ class ilACOMemberGUI
     {
         global $ilDB;
         $role_id = array();
-        $query = "SELECT od.obj_id FROM ilias.object_data as od WHERE od.description = '" . $description . "'";
+        $query = "SELECT od.obj_id FROM object_data as od WHERE od.description = '" . $description . "'";
         $result = $ilDB->query($query);
         while ($record = $ilDB->fetchAssoc($result)) {
             array_push($role_id, $record);
@@ -289,12 +289,12 @@ class ilACOMemberGUI
         $res = $ilDB->manipulate($query);
 
         //delete OLD from RBAC
-        $query = "DELETE FROM rbac_ua 
+        $query = "DELETE FROM rbac_ua
             WHERE usr_id = " . $member_id . "
             AND rol_id = " . $role_id_source . " ";
         $res = $ilDB->manipulate($query);
 
-        $query = "UPDATE ilias.obj_members as om
+        $query = "UPDATE obj_members as om
         SET om.obj_id = '" . $destination_id . "' WHERE om.usr_id = '" . $member_id . "' AND om.obj_id = '"
             . $source_id . "' AND om.member = 1";
         $ilDB->manipulate($query);
@@ -310,10 +310,10 @@ class ilACOMemberGUI
         global $ilDB;
         $group_id = array();
 
-        $query = "select oref.obj_id from ilias.crs_items as citem
-                  join ilias.object_reference as oref on oref.ref_id = citem.obj_id
-                  join ilias.object_data as od on oref.obj_id = od.obj_id                  
-                  join ilias.crs_items as ci on oref.ref_id = ci.obj_id
+        $query = "select oref.obj_id from crs_items as citem
+                  join object_reference as oref on oref.ref_id = citem.obj_id
+                  join object_data as od on oref.obj_id = od.obj_id
+                  join crs_items as ci on oref.ref_id = ci.obj_id
                   where od.title='" . $group_title . "' and ci.parent_id='" . $_GET['ref_id'] . "' and oref.deleted is null";
         $result = $ilDB->queryF($query, array('text', 'integer'), array($group_title, $course_id));
         while ($record = $ilDB->fetchAssoc($result)) {
@@ -328,7 +328,7 @@ class ilACOMemberGUI
         global $ilDB;
 
         $member_id = array();
-        $query = "select usr_id from ilias.usr_data as ud where (ud.login='" . $member_login . "')";
+        $query = "select usr_id from usr_data as ud where (ud.login='" . $member_login . "')";
         $result = $ilDB->query($query);
         while ($record = $ilDB->fetchAssoc($result)) {
             array_push($member_id, $record);
@@ -345,9 +345,9 @@ class ilACOMemberGUI
 
         $queryResult = array();
 
-        $query = "SELECT COUNT(*) FROM ilias.object_data as od 
-                  join ilias.object_reference as obr on obr.obj_id = od.obj_id 
-                  join ilias.obj_members as om on obr.obj_id = om.obj_id
+        $query = "SELECT COUNT(*) FROM object_data as od
+                  join object_reference as obr on obr.obj_id = od.obj_id
+                  join obj_members as om on obr.obj_id = om.obj_id
                   WHERE obr.deleted is null and od.obj_id = '" . $group_id . "' and om.usr_id = '" . $member_id . "'";
 
         $result = $ilDB->query($query);
@@ -371,9 +371,9 @@ class ilACOMemberGUI
 
         $queryResult = array();
 
-        $query = "SELECT COUNT(*) FROM ilias.object_data as od 
-                  join ilias.object_reference as obr on obr.obj_id = od.obj_id 
-                  join ilias.obj_members as om on obr.obj_id = om.obj_id
+        $query = "SELECT COUNT(*) FROM object_data as od
+                  join object_reference as obr on obr.obj_id = od.obj_id
+                  join obj_members as om on obr.obj_id = om.obj_id
                   WHERE obr.deleted is null and od.obj_id = '" . $group_id . "' and om.usr_id = '" . $member_id . "'";
 
         $result = $ilDB->query($query);
@@ -398,8 +398,8 @@ class ilACOMemberGUI
 
         $queryResult = array();
 
-        $query = "SELECT COUNT(*) FROM ilias.object_data as od 
-                  join ilias.object_reference as obr on obr.obj_id = od.obj_id 
+        $query = "SELECT COUNT(*) FROM object_data as od
+                  join object_reference as obr on obr.obj_id = od.obj_id
                   WHERE obr.deleted is null and od.obj_id = '" . $group_id . "'";
 
         $result = $ilDB->query($query);
@@ -422,9 +422,9 @@ class ilACOMemberGUI
 
         $data = array();
         $query = "select od.title as 'title'
-                    from ilias.object_data as od
-                    join ilias.object_reference as oref on oref.obj_id = od.obj_id
-                    join ilias.tree tree on tree.child = oref.ref_id
+                    from object_data as od
+                    join object_reference as oref on oref.obj_id = od.obj_id
+                    join tree tree on tree.child = oref.ref_id
                     where oref.deleted is null and od.`type`='grp' and tree.parent = '" . $_GET['ref_id'] . "'";
         $result = $ilDB->query($query);
         while ($record = $ilDB->fetchAssoc($result)) {
@@ -447,12 +447,12 @@ class ilACOMemberGUI
 
         $data = array();
         $query = "select od.title as 'title'
-                    from ilias.object_data as od
-                    join ilias.object_reference as oref on oref.obj_id = od.obj_id
-                    join ilias.crs_items citem on citem.obj_id = oref.ref_id
-                    join ilias.obj_members as om on om.obj_id = oref.obj_id
-                    join ilias.usr_data as ud on ud.usr_id = om.usr_id
-                    where oref.deleted is null and od.`type`='grp' and 
+                    from object_data as od
+                    join object_reference as oref on oref.obj_id = od.obj_id
+                    join crs_items citem on citem.obj_id = oref.ref_id
+                    join obj_members as om on om.obj_id = oref.obj_id
+                    join usr_data as ud on ud.usr_id = om.usr_id
+                    where oref.deleted is null and od.`type`='grp' and
                       citem.parent_id = '" . $_GET['ref_id'] . "' and om.usr_id='" . $usr_id . "'";
         $result = $ilDB->query($query);
         while ($record = $ilDB->fetchAssoc($result)) {
@@ -476,12 +476,12 @@ class ilACOMemberGUI
 
         $data1 = array();
         $query1 = "select od.obj_id as 'obj_id'
-                    from ilias.object_data as od
-                    join ilias.object_reference as oref on oref.obj_id = od.obj_id
-                    join ilias.crs_items citem on citem.obj_id = oref.ref_id
-                    join ilias.obj_members as om on om.obj_id = oref.obj_id
-                    join ilias.usr_data as ud on ud.usr_id = om.usr_id
-                    where oref.deleted is null and od.`type`='grp' and 
+                    from object_data as od
+                    join object_reference as oref on oref.obj_id = od.obj_id
+                    join crs_items citem on citem.obj_id = oref.ref_id
+                    join obj_members as om on om.obj_id = oref.obj_id
+                    join usr_data as ud on ud.usr_id = om.usr_id
+                    where oref.deleted is null and od.`type`='grp' and
                       citem.parent_id = '" . $_GET['ref_id'] . "' and om.usr_id='" . $usr_id . "'";
         $result1 = $ilDB->query($query1);
         while ($record1 = $ilDB->fetchAssoc($result1)) {
@@ -499,12 +499,12 @@ class ilACOMemberGUI
         $data = array();
 
         $query = "select distinct od.title as 'title'
-                    from ilias.object_data as od
-                    join ilias.object_reference as oref on oref.obj_id = od.obj_id
-                    join ilias.crs_items citem on citem.obj_id = oref.ref_id
-                    join ilias.obj_members as om on om.obj_id = oref.obj_id
-                    join ilias.usr_data as ud on ud.usr_id = om.usr_id
-                    where oref.deleted is null and od.`type`='grp' and 
+                    from object_data as od
+                    join object_reference as oref on oref.obj_id = od.obj_id
+                    join crs_items citem on citem.obj_id = oref.ref_id
+                    join obj_members as om on om.obj_id = oref.obj_id
+                    join usr_data as ud on ud.usr_id = om.usr_id
+                    where oref.deleted is null and od.`type`='grp' and
                       citem.parent_id = '" . $_GET['ref_id'] . "' and om.obj_id not in (" . $groupsIDWhereMember . ")";
         $result = $ilDB->query($query);
 

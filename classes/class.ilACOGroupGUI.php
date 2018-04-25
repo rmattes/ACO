@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 include_once("./Services/UIComponent/classes/class.ilUIHookPluginGUI.php");
 include_once("./Services/UIComponent/Explorer2/classes/class.ilExplorerBaseGUI.php");
 require_once './Services/Form/classes/class.ilPropertyFormGUI.php';
@@ -211,13 +211,13 @@ class ilACOGroupGUI
 
     /**
      * loads the date from the date input field
-     * the format is new since ilias 5.2.2 
-     * 
+     * the format is new since ilias 5.2.2
+     *
      * @global type $ilUser
      * @param type $a_field
      * @return \ilDateTime
      */
-    
+
     protected function loadDate($a_field)
     {
 
@@ -231,11 +231,11 @@ class ilACOGroupGUI
         return $date;
     }
 
-    
+
      /**  counts the groups in the course and @return the result
      *    we have to look in the tree table on the field child because
      *    the same value in crs_item as obj_id is not immediately updated
-     * 
+     *
      * @global type $ilDB
      * @param type $parent_id
      * @return type
@@ -246,10 +246,10 @@ class ilACOGroupGUI
         global $ilDB;
 
         $group_number = array();
-        
+
         $query = "select od.title as 'Übungsruppe'
-                  from ilias.object_data od
-                  join ilias.object_reference obr on od.obj_id = obr.obj_id
+                  from object_data od
+                  join object_reference obr on od.obj_id = obr.obj_id
                   join ilias.tree crsi on obr.ref_id = crsi.child
                   where (od.type = 'grp') and (obr.deleted is null) and (crsi.parent = '" . $parent_id . "') ";
 
@@ -264,7 +264,7 @@ class ilACOGroupGUI
     }
 
     /**
-    * 
+    *
     * @global type $ilDB
     * @global type $ilUser
     * @global type $rbacadmin
@@ -371,7 +371,7 @@ class ilACOGroupGUI
             $admin_role = $group->getDefaultAdminRole();
             $rbacadmin->assignUser($admin_role, $userID);
 
-            $query = "UPDATE ilias.obj_members as om
+            $query = "UPDATE obj_members as om
                     SET  om.contact = 1, om.notification = 1
                     WHERE om.obj_id = '" . $group->getId() . "' AND om.usr_id = '" . $userID . "' ";
             $ilDB->manipulate($query);
@@ -411,10 +411,10 @@ class ilACOGroupGUI
         global $ilDB;
         $group_id = array();
 
-        $query = "select oref.ref_id from ilias.crs_items as citem
-                  join ilias.object_reference as oref on oref.ref_id = citem.obj_id
-                  join ilias.object_data as od on oref.obj_id = od.obj_id                  
-                  join ilias.crs_items as ci on oref.ref_id = ci.obj_id
+        $query = "select oref.ref_id from crs_items as citem
+                  join object_reference as oref on oref.ref_id = citem.obj_id
+                  join object_data as od on oref.obj_id = od.obj_id
+                  join crs_items as ci on oref.ref_id = ci.obj_id
                   where od.type='grp' and ci.parent_id='" . $_GET['ref_id'] . "' and oref.deleted is null";
         $result = $ilDB->query($query);
         while ($record = $ilDB->fetchAssoc($result)) {
@@ -425,7 +425,7 @@ class ilACOGroupGUI
     }
 
     /**
-     * 
+     *
      * @global type $ilDB
      * @param type $folder_name
      * @return boolean
@@ -436,10 +436,10 @@ class ilACOGroupGUI
         $folderCourse = array();
 
         //check if the folder already exists in the course
-        $query = "select COUNT(*) from ilias.crs_items as citem
-                  join ilias.object_reference as oref on oref.ref_id = citem.obj_id
-                  join ilias.object_data as od on oref.obj_id = od.obj_id                  
-                  join ilias.crs_items as ci on oref.ref_id = ci.obj_id
+        $query = "select COUNT(*) from crs_items as citem
+                  join object_reference as oref on oref.ref_id = citem.obj_id
+                  join object_data as od on oref.obj_id = od.obj_id
+                  join crs_items as ci on oref.ref_id = ci.obj_id
                   where od.type='fold' and ci.parent_id='" . $_GET['ref_id'] . "' and od.title='" . $folder_name . "' and oref.deleted is null";
         $result = $ilDB->query($query);
         while ($record = $ilDB->fetchAssoc($result)) {
@@ -457,7 +457,7 @@ class ilACOGroupGUI
     }
 
     /**
-     * 
+     *
      * @global type $ilDB
      * @param type $folder_name
      * @param type $group_ref_id
@@ -469,10 +469,10 @@ class ilACOGroupGUI
         $folderGroup = array();
 
         //check if folder exists in a group
-        $query = "select COUNT(*) from ilias.crs_items as citem
-                  join ilias.object_reference as oref on oref.ref_id = citem.obj_id
-                  join ilias.object_data as od on oref.obj_id = od.obj_id                  
-                  join ilias.crs_items as ci on oref.ref_id = ci.obj_id
+        $query = "select COUNT(*) from crs_items as citem
+                  join object_reference as oref on oref.ref_id = citem.obj_id
+                  join object_data as od on oref.obj_id = od.obj_id
+                  join crs_items as ci on oref.ref_id = ci.obj_id
                   where od.type='fold' and ci.parent_id='" . $group_ref_id . "' and od.title='" . $folder_name . "' and oref.deleted is null";
         $result = $ilDB->query($query);
         while ($record = $ilDB->fetchAssoc($result)) {
@@ -492,10 +492,10 @@ class ilACOGroupGUI
     /**
      * @global type $ilAccess
      * @global type $ilErr
-     * 
+     *
      * checks the access rights of the user
-     * should be redundant if the checkAccess in ilACOUIHookGUI works 
-     */ 
+     * should be redundant if the checkAccess in ilACOUIHookGUI works
+     */
     protected function checkAccess()
     {
         global $ilAccess, $ilErr;

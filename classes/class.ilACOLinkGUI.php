@@ -207,8 +207,8 @@ class ilACOLinkGUI
 
         //get Name of Parent Folder from Exercise
         $data = array();
-        $query = "select od.title from ilias.object_data as od 
-                  join ilias.object_reference as oref on od.obj_id = oref.obj_id
+        $query = "select od.title from object_data as od
+                  join object_reference as oref on od.obj_id = oref.obj_id
                   where oref.ref_id = '" . $folder_id[0] . "' and od.type = 'fold' ";
         $result = $ilDB->query($query);
         while ($record = $ilDB->fetchAssoc($result)) {
@@ -230,7 +230,7 @@ class ilACOLinkGUI
 
         $ids = array();
         $data = array();
-        $query = "select tree.parent from ilias.tree as tree where child = '" . $id . "'";
+        $query = "select tree.parent from tree as tree where child = '" . $id . "'";
         $result = $ilDB->query($query);
         while ($record = $ilDB->fetchAssoc($result)) {
             array_push($data, $record);
@@ -254,9 +254,9 @@ class ilACOLinkGUI
         $data = array();
         $query = "select folds.ref_id from (
         select tree.parent, oref.ref_id, od.title
-        from ilias.object_data as od 
-        join ilias.object_reference as oref on od.obj_id = oref.obj_id
-        join ilias.tree as tree on tree.child = oref.ref_id
+        from object_data as od
+        join object_reference as oref on od.obj_id = oref.obj_id
+        join tree as tree on tree.child = oref.ref_id
         where od.type = 'fold') as folds
         where folds.parent = '" . $group_id . "' and folds.title = '" . $folder_name . "'";
         $result = $ilDB->query($query);
@@ -359,9 +359,9 @@ class ilACOLinkGUI
 
         $data = array();
         $query = "select od.title, oref.ref_id
-                    from ilias.object_data as od
-                    join ilias.object_reference as oref on oref.obj_id = od.obj_id 
-                    join ilias.crs_items citem on citem.obj_id = oref.ref_id
+                    from object_data as od
+                    join object_reference as oref on oref.obj_id = od.obj_id
+                    join crs_items citem on citem.obj_id = oref.ref_id
                     where oref.deleted is null and od.`type`='grp' and citem.parent_id = '" . $ref_id . "'";
         $result = $ilDB->query($query);
         while ($record = $ilDB->fetchAssoc($result)) {
@@ -376,8 +376,8 @@ class ilACOLinkGUI
 
         $data = array();
         $query = "select od.title
-                    from ilias.object_data as od 
-                    join ilias.object_reference as oref on oref.obj_id = od.obj_id
+                    from object_data as od
+                    join object_reference as oref on oref.obj_id = od.obj_id
                     where od.type = 'crs' and oref.ref_id = '" . $ref_id . "' ";
         $result = $ilDB->query($query);
         while ($record = $ilDB->fetchAssoc($result)) {
@@ -398,8 +398,8 @@ class ilACOLinkGUI
         $data = array();
 
         $query = "select oref.obj_id
-                  from ilias.tree as tr
-                  join ilias.object_reference as oref on oref.ref_id = tr.child
+                  from tree as tr
+                  join object_reference as oref on oref.ref_id = tr.child
                   where tr.parent = '" . $folder_ref_id . "'
                   and oref.obj_id = '" . $obj_id . "'
                   and oref.deleted is null";

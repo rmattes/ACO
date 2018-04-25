@@ -421,7 +421,7 @@ class ilACOExerciseMemberTableGUI extends ilTable2GUI
         $user_id = $member['usr_id'];
         $data = array();
         $query = "select om.usr_id
-        from ilias.obj_members as om
+        from obj_members as om
         where om.obj_id = '" . $group_id . "' and om.usr_id = '" . $user_id . "'";
         $result = $ilDB->query($query);
         while ($record = $ilDB->fetchAssoc($result)) {
